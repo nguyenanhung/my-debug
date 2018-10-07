@@ -25,7 +25,7 @@ class Debug implements ProjectInterface, DebugInterface
     private $loggerFilename = 'app.log';
 
     /**
-     * Debug constructor.
+     * BaseDebug constructor.
      */
     public function __construct()
     {
