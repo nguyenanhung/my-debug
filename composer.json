@@ -1,0 +1,35 @@
+{
+    "name": "nguyenanhung/my-debug",
+    "type": "library",
+    "description": "My Requests Library",
+    "keywords": [
+        "debug",
+        "logger",
+        "log"
+    ],
+    "homepage": "https://github.com/nguyenanhung/my-debug",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Nguyen An Hung",
+            "email": "dev@nguyenanhung.com",
+            "homepage": "https://nguyenanhung.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-iconv": "*",
+        "ext-openssl": "*",
+        "ext-mbstring": "*",
+        "monolog/monolog": "^1.23",
+        "cocur/slugify": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "nguyenanhung\\MyDebug\\": "src/"
+        }
+    }
+}
