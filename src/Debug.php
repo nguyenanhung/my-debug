@@ -6,7 +6,7 @@
  * Time: 18:31
  */
 
-namespace nguyenanhung\MyDebug\Helpers;
+namespace nguyenanhung\MyDebug;
 if (!interface_exists('nguyenanhung\MyDebug\Interfaces\ProjectInterface')) {
     include_once __DIR__ . DIRECTORY_SEPARATOR . 'Interfaces' . DIRECTORY_SEPARATOR . 'ProjectInterface.php';
 }

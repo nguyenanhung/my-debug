@@ -11,7 +11,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'funct
  * Time: 17:30
  */
 
-use nguyenanhung\MyRequests\Helpers\Debug;
+use nguyenanhung\MyDebug\Debug;
 
 // Test Content
 $logPath     = __DIR__ . DIRECTORY_SEPARATOR . '../logs/';

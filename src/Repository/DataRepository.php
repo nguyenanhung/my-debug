@@ -7,12 +7,12 @@
  * Time: 14:47
  */
 
-namespace nguyenanhung\MyRequests\Repository;
-if (!interface_exists('nguyenanhung\MyRequests\Interfaces\ProjectInterface')) {
+namespace nguyenanhung\MyDebug\Repository;
+if (!interface_exists('nguyenanhung\MyDebug\Interfaces\ProjectInterface')) {
     include_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Interfaces' . DIRECTORY_SEPARATOR . 'ProjectInterface.php';
 }
 
-use nguyenanhung\MyRequests\Interfaces\ProjectInterface;
+use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
 
 class DataRepository implements ProjectInterface
 {
