@@ -29,3 +29,4 @@ interface UtilsInterface
      */
     public static function slugify($str = '');
 }
+

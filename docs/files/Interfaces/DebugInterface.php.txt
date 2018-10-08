@@ -243,3 +243,4 @@ interface DebugInterface
      */
     public function emergency($name = 'log', $msg = '', $context = []);
 }
+

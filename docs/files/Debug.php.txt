@@ -417,3 +417,4 @@ class Debug implements ProjectInterface, DebugInterface
         return $this->log('emergency', $name, $msg, $context);
     }
 }
+

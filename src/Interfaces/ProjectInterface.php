@@ -11,15 +11,17 @@ namespace nguyenanhung\MyDebug\Interfaces;
 /**
  * Interface ProjectInterface
  *
- * @package nguyenanhung\MyDebug\Interfaces
- * @author  713uk13m <dev@nguyenanhung.com>
+ * @category  Interface
+ * @package   nguyenanhung\MyDebug\Interfaces
+ * @author    713uk13m <dev@nguyenanhung.com>
+ * @copyright 713uk13m <dev@nguyenanhung.com>
  */
 interface ProjectInterface
 {
     /**
      * Base version of Project
      */
-    const VERSION = '0.1.0';
+    const VERSION = '0.1.1';
 
     /**
      * Function getVersion
