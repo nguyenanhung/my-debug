@@ -14,10 +14,22 @@ if (!interface_exists('nguyenanhung\MyDebug\Interfaces\ProjectInterface')) {
 
 use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
 
+/**
+ * Class DataRepository
+ *
+ * @package nguyenanhung\MyDebug\Repository
+ * @author  713uk13m <dev@nguyenanhung.com>
+ */
 class DataRepository implements ProjectInterface
 {
+    /**
+     * Config Path
+     */
     const CONFIG_PATH = 'config';
-    const CONFIG_EXT  = '.php';
+    /**
+     * File config extension
+     */
+    const CONFIG_EXT = '.php';
 
     /**
      * Function getVersion
@@ -25,7 +37,7 @@ class DataRepository implements ProjectInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/7/18 01:07
      *
-     * @return mixed|string
+     * @return mixed|string Current Version of Package
      */
     public function getVersion()
     {
@@ -38,9 +50,9 @@ class DataRepository implements ProjectInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/7/18 01:07
      *
-     * @param $configName
+     * @param $configName  file config from /config path
      *
-     * @return array|mixed
+     * @return array|mixed Array content config if available, empty array if unavailable
      */
     public static function getData($configName)
     {

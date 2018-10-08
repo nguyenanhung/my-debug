@@ -17,11 +17,37 @@ if (!interface_exists('nguyenanhung\MyDebug\Interfaces\DebugInterface')) {
 use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
 use nguyenanhung\MyDebug\Interfaces\DebugInterface;
 
+/**
+ * Class Debug
+ *
+ * @package nguyenanhung\MyDebug
+ * @author  713uk13m <dev@nguyenanhung.com>
+ */
 class Debug implements ProjectInterface, DebugInterface
 {
-    private $DEBUG          = FALSE;
-    private $loggerPath     = 'logs';
-    private $loggerSubPath  = NULL;
+    /**
+     * Set Debug Status
+     *
+     * @var bool
+     */
+    private $DEBUG = FALSE;
+    /**
+     * Main Folder save Log
+     *
+     * @var string
+     */
+    private $loggerPath = 'logs';
+    /**
+     * Main Folder save Log
+     *
+     * @var null|string
+     */
+    private $loggerSubPath = NULL;
+    /**
+     * Filename to save Log
+     *
+     * @var string
+     */
     private $loggerFilename = 'app.log';
 
     /**
@@ -37,7 +63,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/27/18 18:32
      *
-     * @return string
+     * @return string Current Version of Package
      */
     public function getVersion()
     {
@@ -63,7 +89,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/27/18 18:33
      *
-     * @param bool $debug
+     * @param bool $debug Set TRUE if Enabled Debug
      */
     public function setDebugStatus($debug = FALSE)
     {
@@ -102,7 +128,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/27/18 18:40
      *
-     * @param string $logger_path
+     * @param string $logger_path /your/to/path
      */
     public function setLoggerPath($logger_path = '')
     {
@@ -117,9 +143,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/27/18 19:04
      *
-     * @param string $sub_path
-     *
-     * @return mixed|void
+     * @param string $sub_path /your/to/sub_path
      */
     public function setLoggerSubPath($sub_path = '')
     {
@@ -134,7 +158,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/27/18 18:49
      *
-     * @return string
+     * @return mixed Get Logger filename
      */
     public function getLoggerFilename()
     {
@@ -147,7 +171,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/27/18 18:49
      *
-     * @param string $logger_filename
+     * @param string $logger_filename Set Log Filename, example app.log
      */
     public function setLoggerFilename($logger_filename = '')
     {
@@ -163,12 +187,12 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/6/18 23:35
      *
-     * @param string $level
-     * @param string $name
-     * @param string $msg
-     * @param array  $context
+     * @param string $level   Level Debug: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY
+     * @param string $name    Log Name
+     * @param string $msg     Log Message
+     * @param array  $context Log Context
      *
-     * @return bool|mixed|null
+     * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
     public function log($level = '', $name = 'log', $msg = 'My Message', $context = [])
     {
@@ -250,11 +274,11 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/6/18 23:35
      *
-     * @param string $name
-     * @param string $msg
-     * @param array  $context
+     * @param string $name    Log Name
+     * @param string $msg     Log Message
+     * @param array  $context Log Context
      *
-     * @return bool|mixed|null
+     * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
     public function debug($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -269,11 +293,11 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/6/18 23:36
      *
-     * @param string $name
-     * @param string $msg
-     * @param array  $context
+     * @param string $name    Log Name
+     * @param string $msg     Log Message
+     * @param array  $context Log Context
      *
-     * @return bool|mixed|null
+     * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
     public function info($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -287,11 +311,11 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/6/18 23:37
      *
-     * @param string $name
-     * @param string $msg
-     * @param array  $context
+     * @param string $name    Log Name
+     * @param string $msg     Log Message
+     * @param array  $context Log Context
      *
-     * @return bool|mixed|null
+     * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
     public function notice($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -306,11 +330,11 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/6/18 23:37
      *
-     * @param string $name
-     * @param string $msg
-     * @param array  $context
+     * @param string $name    Log Name
+     * @param string $msg     Log Message
+     * @param array  $context Log Context
      *
-     * @return bool|mixed|null
+     * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
     public function warning($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -324,11 +348,11 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/6/18 23:37
      *
-     * @param string $name
-     * @param string $msg
-     * @param array  $context
+     * @param string $name    Log Name
+     * @param string $msg     Log Message
+     * @param array  $context Log Context
      *
-     * @return bool|mixed|null
+     * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
     public function error($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -343,11 +367,11 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/6/18 23:38
      *
-     * @param string $name
-     * @param string $msg
-     * @param array  $context
+     * @param string $name    Log Name
+     * @param string $msg     Log Message
+     * @param array  $context Log Context
      *
-     * @return bool|mixed|null
+     * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
     public function critical($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -362,11 +386,11 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/6/18 23:38
      *
-     * @param string $name
-     * @param string $msg
-     * @param array  $context
+     * @param string $name    Log Name
+     * @param string $msg     Log Message
+     * @param array  $context Log Context
      *
-     * @return bool|mixed|null
+     * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
     public function alert($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -380,11 +404,11 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/6/18 23:38
      *
-     * @param string $name
-     * @param string $msg
-     * @param array  $context
+     * @param string $name    Log Name
+     * @param string $msg     Log Message
+     * @param array  $context Log Context
      *
-     * @return bool|mixed|null
+     * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
     public function emergency($name = 'log', $msg = 'My Message', $context = [])
     {

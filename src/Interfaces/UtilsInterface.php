@@ -7,8 +7,12 @@
  */
 
 namespace nguyenanhung\MyDebug\Interfaces;
-
-
+/**
+ * Interface UtilsInterface
+ *
+ * @package nguyenanhung\MyDebug\Interfaces
+ * @author  713uk13m <dev@nguyenanhung.com>
+ */
 interface UtilsInterface
 {
     /**
@@ -17,9 +21,9 @@ interface UtilsInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/7/18 03:16
      *
-     * @param string $str
+     * @param string $str String to Slug
      *
-     * @return mixed
+     * @return mixed String as Slug
      */
     public static function slugify($str = '');
 }

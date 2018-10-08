@@ -17,6 +17,12 @@ if (!interface_exists('nguyenanhung\MyDebug\Interfaces\UtilsInterface')) {
 use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
 use nguyenanhung\MyDebug\Interfaces\UtilsInterface;
 
+/**
+ * Class Utils
+ *
+ * @package nguyenanhung\MyDebug
+ * @author  713uk13m <dev@nguyenanhung.com>
+ */
 class Utils implements ProjectInterface, UtilsInterface
 {
     /**
@@ -32,7 +38,7 @@ class Utils implements ProjectInterface, UtilsInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/21/18 00:21
      *
-     * @return string
+     * @return string Current Version of Package
      */
     public function getVersion()
     {
@@ -43,11 +49,11 @@ class Utils implements ProjectInterface, UtilsInterface
      * Function slugify
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/7/18 03:17
+     * @time  : 10/9/18 00:31
      *
-     * @param string $str
+     * @param string $str String to Slug
      *
-     * @return mixed|null|string
+     * @return mixed|null|string String as Slug
      */
     public static function slugify($str = '')
     {

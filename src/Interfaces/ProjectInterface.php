@@ -8,19 +8,26 @@
  */
 
 namespace nguyenanhung\MyDebug\Interfaces;
-
-
+/**
+ * Interface ProjectInterface
+ *
+ * @package nguyenanhung\MyDebug\Interfaces
+ * @author  713uk13m <dev@nguyenanhung.com>
+ */
 interface ProjectInterface
 {
+    /**
+     * Base version of Project
+     */
     const VERSION = '0.1.0';
 
     /**
      * Function getVersion
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/7/18 20:27
+     * @time  : 10/9/18 00:17
      *
-     * @return mixed
+     * @return mixed Current Version of Package
      */
     public function getVersion();
 }
