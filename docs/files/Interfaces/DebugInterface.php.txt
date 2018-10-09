@@ -106,15 +106,39 @@ interface DebugInterface
     public function setLoggerFilename($logger_filename = '');
 
     /**
-     * Function log
+     * Function getGlobalLoggerLevel
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/6/18 23:30
+     * @time  : 10/9/18 09:57
+     *
+     * @return mixed
+     */
+    public function getGlobalLoggerLevel();
+
+    /**
+     * Function setGlobalLoggerLevel
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/9/18 09:55
+     *
+     * @param null $globalLoggerLevel or Key Level to Debug
+     *                                debug, info, notice, warning, error, critical, alert, emergency
+     */
+    public function setGlobalLoggerLevel($globalLoggerLevel = NULL);
+
+    /**
+     * Function log
+     * Add Log into Monolog
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:35
      *
      * @param string $level   Level Debug: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY
-     * @param string $name    Log Name
-     * @param string $msg     Log Message
-     * @param array  $context Log Context
+     * @param string $name    Log Name: log, etc...
+     * @param string $msg     Log Message write to Log
+     * @param array  $context Log Context aka Log Message Array format
+     *
+     * @example log('info', 'test', 'Log Test', [])
      *
      * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
@@ -122,14 +146,15 @@ interface DebugInterface
 
     /**
      * Function debug
-     * DEBUG (100): Detailed debug information.
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/6/18 23:33
+     * @example DEBUG (100): Detailed debug information.
      *
-     * @param string $name    Log Name
-     * @param string $msg     Log Message
-     * @param array  $context Log Context
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:33
+     *
+     * @param string $name    Log Name: log, etc...
+     * @param string $msg     Log Message write to Log
+     * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
@@ -137,14 +162,15 @@ interface DebugInterface
 
     /**
      * Function info
-     * INFO (200): Interesting events. Examples: User logs in, SQL logs.
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/6/18 23:33
+     * @example INFO (200): Interesting events. Examples: User logs in, SQL logs.
      *
-     * @param string $name    Log Name
-     * @param string $msg     Log Message
-     * @param array  $context Log Context
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:33
+     *
+     * @param string $name    Log Name: log, etc...
+     * @param string $msg     Log Message write to Log
+     * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
@@ -152,14 +178,15 @@ interface DebugInterface
 
     /**
      * Function notice
-     * NOTICE (250): Normal but significant events.
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/6/18 23:33
+     * @example NOTICE (250): Normal but significant events.
      *
-     * @param string $name    Log Name
-     * @param string $msg     Log Message
-     * @param array  $context Log Context
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:37
+     *
+     * @param string $name    Log Name: log, etc...
+     * @param string $msg     Log Message write to Log
+     * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
@@ -167,15 +194,16 @@ interface DebugInterface
 
     /**
      * Function warning
-     * WARNING (300): Exceptional occurrences that are not errors.
-     * Examples: Use of deprecated APIs, poor use of an API, undesirable things that are not necessarily wrong.
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/6/18 23:33
+     * @example : WARNING (300): Exceptional occurrences that are not errors. - Use of deprecated APIs, poor use of an API, undesirable
+     *          things that are not necessarily wrong.
      *
-     * @param string $name    Log Name
-     * @param string $msg     Log Message
-     * @param array  $context Log Context
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:37
+     *
+     * @param string $name    Log Name: log, etc...
+     * @param string $msg     Log Message write to Log
+     * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
@@ -183,14 +211,15 @@ interface DebugInterface
 
     /**
      * Function error
-     * ERROR (400): Runtime errors that do not require immediate action but should typically be logged and monitored.
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/6/18 23:33
+     * @example ERROR (400): Runtime errors that do not require immediate action but should typically be logged and monitored.
      *
-     * @param string $name    Log Name
-     * @param string $msg     Log Message
-     * @param array  $context Log Context
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:37
+     *
+     * @param string $name    Log Name: log, etc...
+     * @param string $msg     Log Message write to Log
+     * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
@@ -198,15 +227,15 @@ interface DebugInterface
 
     /**
      * Function critical
-     * CRITICAL (500): Critical conditions.
-     * Example: Application component unavailable, unexpected exception.
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/6/18 23:33
+     * @example : CRITICAL (500): Critical conditions. - Application component unavailable, unexpected exception.
      *
-     * @param string $name    Log Name
-     * @param string $msg     Log Message
-     * @param array  $context Log Context
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:38
+     *
+     * @param string $name    Log Name: log, etc...
+     * @param string $msg     Log Message write to Log
+     * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
@@ -214,15 +243,16 @@ interface DebugInterface
 
     /**
      * Function alert
-     * ALERT (550): Action must be taken immediately.
-     * Example: Entire website down, database unavailable, etc. This should trigger the SMS alerts and wake you up.
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/6/18 23:33
+     * @example : ALERT (550): Action must be taken immediately. - Entire website down, database unavailable, etc. This should trigger the
+     *          SMS alerts and wake you up.
      *
-     * @param string $name    Log Name
-     * @param string $msg     Log Message
-     * @param array  $context Log Context
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:38
+     *
+     * @param string $name    Log Name: log, etc...
+     * @param string $msg     Log Message write to Log
+     * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
@@ -230,14 +260,15 @@ interface DebugInterface
 
     /**
      * Function emergency
-     * EMERGENCY (600): Emergency: system is unusable.
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/6/18 23:33
+     * @example EMERGENCY (600): Emergency: system is unusable.
      *
-     * @param string $name    Log Name
-     * @param string $msg     Log Message
-     * @param array  $context Log Context
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:38
+     *
+     * @param string $name    Log Name: log, etc...
+     * @param string $msg     Log Message write to Log
+     * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE if Success, FALSE if not, NULL if Error
      */
