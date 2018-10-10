@@ -40,6 +40,27 @@ interface DebugInterface
     public function setDebugStatus($debug = FALSE);
 
     /**
+     * Function getGlobalLoggerLevel
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/9/18 09:57
+     *
+     * @return mixed
+     */
+    public function getGlobalLoggerLevel();
+
+    /**
+     * Function setGlobalLoggerLevel
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/9/18 09:55
+     *
+     * @param null $globalLoggerLevel or Key Level to Debug
+     *                                debug, info, notice, warning, error, critical, alert, emergency
+     */
+    public function setGlobalLoggerLevel($globalLoggerLevel = NULL);
+
+    /**
      * Function getLoggerPath
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
@@ -106,25 +127,49 @@ interface DebugInterface
     public function setLoggerFilename($logger_filename = '');
 
     /**
-     * Function getGlobalLoggerLevel
+     * Function getLoggerDateFormat
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/9/18 09:57
+     * @time  : 10/10/18 10:07
      *
-     * @return mixed
+     * @return null|string Get Logger Date Format
      */
-    public function getGlobalLoggerLevel();
+    public function getLoggerDateFormat();
 
     /**
-     * Function setGlobalLoggerLevel
+     * Function setLoggerDateFormat
+     *
+     * Quy định kiểu dữ liệu thời gian cho file Log
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/9/18 09:55
+     * @time  : 10/10/18 10:08
      *
-     * @param null $globalLoggerLevel or Key Level to Debug
-     *                                debug, info, notice, warning, error, critical, alert, emergency
+     * @param null $loggerDateFormat Set Logger Date Format, example: Y-m-d H:i:s u
      */
-    public function setGlobalLoggerLevel($globalLoggerLevel = NULL);
+    public function setLoggerDateFormat($loggerDateFormat = NULL);
+
+    /**
+     * Function getLoggerLineFormat
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/10/18 10:08
+     *
+     * @return null|string  Get Logger Line Format
+     */
+    public function getLoggerLineFormat();
+
+    /**
+     * Function setLoggerLineFormat
+     *
+     * Quy định kiểu dữ liệu lưu log, những tham số nào ...
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/10/18 10:09
+     *
+     * @param null $loggerLineFormat Line Format Input, example: [%datetime%] %channel%.%level_name%: %message%
+     *                               %context% %extra%\n
+     */
+    public function setLoggerLineFormat($loggerLineFormat = NULL);
 
     /**
      * Function log
@@ -195,8 +240,8 @@ interface DebugInterface
     /**
      * Function warning
      *
-     * @example : WARNING (300): Exceptional occurrences that are not errors. - Use of deprecated APIs, poor use of an API, undesirable
-     *          things that are not necessarily wrong.
+     * @example : WARNING (300): Exceptional occurrences that are not errors. - Use of deprecated APIs, poor use of an
+     *          API, undesirable things that are not necessarily wrong.
      *
      * @author  : 713uk13m <dev@nguyenanhung.com>
      * @time    : 10/6/18 23:37
@@ -212,7 +257,8 @@ interface DebugInterface
     /**
      * Function error
      *
-     * @example ERROR (400): Runtime errors that do not require immediate action but should typically be logged and monitored.
+     * @example ERROR (400): Runtime errors that do not require immediate action but should typically be logged and
+     *          monitored.
      *
      * @author  : 713uk13m <dev@nguyenanhung.com>
      * @time    : 10/6/18 23:37
@@ -244,8 +290,8 @@ interface DebugInterface
     /**
      * Function alert
      *
-     * @example : ALERT (550): Action must be taken immediately. - Entire website down, database unavailable, etc. This should trigger the
-     *          SMS alerts and wake you up.
+     * @example : ALERT (550): Action must be taken immediately. - Entire website down, database unavailable, etc. This
+     *          should trigger the SMS alerts and wake you up.
      *
      * @author  : 713uk13m <dev@nguyenanhung.com>
      * @time    : 10/6/18 23:38

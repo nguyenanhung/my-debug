@@ -27,12 +27,20 @@ use nguyenanhung\MyDebug\Interfaces\DebugInterface;
  */
 class Debug implements ProjectInterface, DebugInterface
 {
+    const LOG_BUBBLE      = TRUE;
+    const FILE_PERMISSION = 0777;
     /**
      * Set Debug Status
      *
      * @var bool
      */
     private $DEBUG = FALSE;
+    /**
+     * Set Global Logger Level
+     *
+     * @var null
+     */
+    private $globalLoggerLevel = NULL;
     /**
      * Main Folder save Log
      *
@@ -52,11 +60,13 @@ class Debug implements ProjectInterface, DebugInterface
      */
     private $loggerFilename = 'app.log';
     /**
-     * Set Global Logger Level
-     *
-     * @var null
+     * @var null|string Logger Date Format
      */
-    private $globalLoggerLevel = NULL;
+    private $loggerDateFormat = NULL;
+    /**
+     * @var null|string Logger Line Format
+     */
+    private $loggerLineFormat = NULL;
 
     /**
      * BaseDebug constructor.
@@ -102,6 +112,35 @@ class Debug implements ProjectInterface, DebugInterface
     public function setDebugStatus($debug = FALSE)
     {
         $this->DEBUG = $debug;
+    }
+
+    /**
+     * Function getGlobalLoggerLevel
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/9/18 09:55
+     *
+     * @return null
+     */
+    public function getGlobalLoggerLevel()
+    {
+        return $this->globalLoggerLevel;
+    }
+
+    /**
+     * Function setGlobalLoggerLevel
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/9/18 09:55
+     *
+     * @param null $globalLoggerLevel or Key Level to Debug
+     *                                debug, info, notice, warning, error, critical, alert, emergency
+     */
+    public function setGlobalLoggerLevel($globalLoggerLevel = NULL)
+    {
+        if (!empty($logger_filename) && is_string($globalLoggerLevel)) {
+            $this->globalLoggerLevel = strtolower($globalLoggerLevel);
+        }
     }
 
     /**
@@ -189,31 +228,63 @@ class Debug implements ProjectInterface, DebugInterface
     }
 
     /**
-     * Function getGlobalLoggerLevel
+     * Function getLoggerDateFormat
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/9/18 09:55
+     * @time  : 10/10/18 10:07
      *
-     * @return null
+     * @return null|string Get Logger Date Format
      */
-    public function getGlobalLoggerLevel()
+    public function getLoggerDateFormat()
     {
-        return $this->globalLoggerLevel;
+        return $this->loggerDateFormat;
     }
 
     /**
-     * Function setGlobalLoggerLevel
+     * Function setLoggerDateFormat
+     *
+     * Quy định kiểu dữ liệu thời gian cho file Log
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/9/18 09:55
+     * @time  : 10/10/18 10:08
      *
-     * @param null $globalLoggerLevel or Key Level to Debug
-     *                                debug, info, notice, warning, error, critical, alert, emergency
+     * @param null $loggerDateFormat Set Logger Date Format, example: Y-m-d H:i:s u
      */
-    public function setGlobalLoggerLevel($globalLoggerLevel = NULL)
+    public function setLoggerDateFormat($loggerDateFormat = NULL)
     {
-        if (!empty($logger_filename) && is_string($globalLoggerLevel)) {
-            $this->globalLoggerLevel = strtolower($globalLoggerLevel);
+        if (!empty($loggerDateFormat) && is_string($loggerDateFormat)) {
+            $this->loggerDateFormat = $loggerDateFormat;
+        }
+    }
+
+    /**
+     * Function getLoggerLineFormat
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/10/18 10:08
+     *
+     * @return null|string  Get Logger Line Format
+     */
+    public function getLoggerLineFormat()
+    {
+        return $this->loggerLineFormat;
+    }
+
+    /**
+     * Function setLoggerLineFormat
+     *
+     * Quy định kiểu dữ liệu lưu log, những tham số nào ...
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/10/18 10:09
+     *
+     * @param null $loggerLineFormat Line Format Input, example: [%datetime%] %channel%.%level_name%: %message%
+     *                               %context% %extra%\n
+     */
+    public function setLoggerLineFormat($loggerLineFormat = NULL)
+    {
+        if (!empty($loggerLineFormat) && is_string($loggerLineFormat)) {
+            $this->loggerLineFormat = $loggerLineFormat;
         }
     }
 
@@ -248,15 +319,7 @@ class Debug implements ProjectInterface, DebugInterface
                 $listLevel = [
                     'debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency'
                 ];
-                if ($this->globalLoggerLevel && in_array($listLevel, $listLevel)) {
-                    $useLevel = strtolower($this->globalLoggerLevel);
-                } else {
-                    if (in_array($level, $listLevel)) {
-                        $useLevel = $level;
-                    } else {
-                        $useLevel = 'info';
-                    }
-                }
+                $useLevel  = $this->globalLoggerLevel && in_array($listLevel, $listLevel) ? strtolower($this->globalLoggerLevel) : (in_array($level, $listLevel) ? $level : 'info');
                 switch ($useLevel) {
                     case 'debug':
                         $keyLevel = \Monolog\Logger::DEBUG;
@@ -286,10 +349,10 @@ class Debug implements ProjectInterface, DebugInterface
                         $keyLevel = \Monolog\Logger::WARNING;
                 }
                 $loggerFilename = $this->loggerPath . DIRECTORY_SEPARATOR . $loggerSubPath . DIRECTORY_SEPARATOR . $this->loggerFilename;
-                $dateFormat     = "Y-m-d H:i:s u";
-                $output         = "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
+                $dateFormat     = $this->loggerDateFormat ? $this->loggerDateFormat : "Y-m-d H:i:s u";
+                $output         = $this->loggerLineFormat ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
                 $formatter      = new \Monolog\Formatter\LineFormatter($output, $dateFormat);
-                $stream         = new \Monolog\Handler\StreamHandler($loggerFilename, $keyLevel, TRUE, 0777);
+                $stream         = new \Monolog\Handler\StreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
                 $stream->setFormatter($formatter);
                 $logger = new \Monolog\Logger(trim($name));
                 $logger->pushHandler($stream);
@@ -303,7 +366,9 @@ class Debug implements ProjectInterface, DebugInterface
                 }
             }
             catch (\Exception $e) {
-                return FALSE;
+                $message = 'Error File: ' . $e->getFile() . ' - Line: ' . $e->getLine() . ' - Code: ' . $e->getCode() . ' - Message: ' . $e->getMessage();
+
+                return $message;
             }
         }
 
@@ -370,8 +435,8 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function warning
      *
-     * @example : WARNING (300): Exceptional occurrences that are not errors. - Use of deprecated APIs, poor use of an API, undesirable
-     *          things that are not necessarily wrong.
+     * @example : WARNING (300): Exceptional occurrences that are not errors. - Use of deprecated APIs, poor use of an
+     *          API, undesirable things that are not necessarily wrong.
      *
      * @author  : 713uk13m <dev@nguyenanhung.com>
      * @time    : 10/6/18 23:37
@@ -390,7 +455,8 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function error
      *
-     * @example ERROR (400): Runtime errors that do not require immediate action but should typically be logged and monitored.
+     * @example ERROR (400): Runtime errors that do not require immediate action but should typically be logged and
+     *          monitored.
      *
      * @author  : 713uk13m <dev@nguyenanhung.com>
      * @time    : 10/6/18 23:37
@@ -428,8 +494,8 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function alert
      *
-     * @example : ALERT (550): Action must be taken immediately. - Entire website down, database unavailable, etc. This should trigger the
-     *          SMS alerts and wake you up.
+     * @example : ALERT (550): Action must be taken immediately. - Entire website down, database unavailable, etc. This
+     *          should trigger the SMS alerts and wake you up.
      *
      * @author  : 713uk13m <dev@nguyenanhung.com>
      * @time    : 10/6/18 23:38
