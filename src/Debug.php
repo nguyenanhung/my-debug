@@ -138,7 +138,7 @@ class Debug implements ProjectInterface, DebugInterface
      */
     public function setGlobalLoggerLevel($globalLoggerLevel = NULL)
     {
-        if (!empty($logger_filename) && is_string($globalLoggerLevel)) {
+        if (!empty($globalLoggerLevel) && is_string($globalLoggerLevel)) {
             $this->globalLoggerLevel = strtolower($globalLoggerLevel);
         }
     }
