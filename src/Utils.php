@@ -16,6 +16,7 @@ if (!interface_exists('nguyenanhung\MyDebug\Interfaces\UtilsInterface')) {
 
 use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
 use nguyenanhung\MyDebug\Interfaces\UtilsInterface;
+use nguyenanhung\MyDebug\Repository\DataRepository;
 
 /**
  * Class Utils
@@ -60,7 +61,7 @@ class Utils implements ProjectInterface, UtilsInterface
     public static function slugify($str = '')
     {
         if (!class_exists('\Cocur\Slugify\Slugify')) {
-            return NULL;
+            return self::convert_vi_to_en($str);
         }
         try {
             $options = [
@@ -71,7 +72,41 @@ class Utils implements ProjectInterface, UtilsInterface
             return $slug->slugify($str);
         }
         catch (\Exception $e) {
-            return trim($str);
+            return self::convert_vi_to_en($str);
         }
+    }
+
+    /**
+     * Function convert_vi_to_en
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/13/18 01:17
+     *
+     * @param string $str
+     *
+     * @return mixed|string
+     */
+    private static function convert_vi_to_en($str = '')
+    {
+        $str = trim($str);
+        if (function_exists('mb_strtolower')) {
+            $str = mb_strtolower($str);
+        } else {
+            $str = strtolower($str);
+        }
+        $data = DataRepository::getData('convert_vi_to_en');
+        if (!empty($str)) {
+            $str = str_replace($data['vn_array'], $data['en_array'], $str);
+            $str = str_replace($data['special_array'], $data['separator'], $str);
+            $str = str_replace(' ', $data['separator'], $str);
+            while (strpos($str, '--') > 0) {
+                $str = str_replace('--', $data['separator'], $str);
+            }
+            while (strpos($str, '--') === 0) {
+                $str = str_replace('--', $data['separator'], $str);
+            }
+        }
+
+        return $str;
     }
 }
