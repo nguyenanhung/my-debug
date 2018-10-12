@@ -25,7 +25,9 @@
         "ext-openssl": "*",
         "ext-mbstring": "*",
         "monolog/monolog": "^1.23",
-        "cocur/slugify": "^3.1",
+        "cocur/slugify": "^3.1"
+    },
+    "require-dev": {
         "kint-php/kint": "^3.0"
     },
     "autoload": {

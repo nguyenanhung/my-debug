@@ -18,7 +18,7 @@ $logPath     = testLogPath();
 $logSubPath  = 'tests-debug-2';
 $logFilename = 'Log-' . date('Y-m-d') . '.log';
 $name        = 'Test';
-$msg         = 'Test Log';
+$msg         = 'Test Log lan 2';
 $context     = [
     'name'  => 'Nguyen An Hung',
     'email' => 'dev@nguyenanhung.com'
@@ -26,10 +26,11 @@ $context     = [
 // Call
 $debug = new Debug();
 $debug->setDebugStatus(TRUE);
+$debug->setGlobalLoggerLevel('error');
 $debug->setLoggerPath($logPath);
 $debug->setLoggerSubPath($logSubPath);
 $debug->setLoggerFilename($logFilename);
-
+$debug->__construct();
 echo "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 echo "\n getVersion: " . $debug->getVersion() . "\n";
 echo "\n setDebugStatus: " . $debug->getDebugStatus() . "\n";

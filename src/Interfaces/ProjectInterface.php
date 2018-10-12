@@ -21,7 +21,7 @@ interface ProjectInterface
     /**
      * Base version of Project
      */
-    const VERSION = '0.1.2.2';
+    const VERSION = '0.1.2.3';
 
     /**
      * Function getVersion

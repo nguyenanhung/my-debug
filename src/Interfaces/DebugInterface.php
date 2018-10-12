@@ -120,11 +120,11 @@ interface DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/27/18 18:52
      *
-     * @param string $logger_filename Set Log Filename, example app.log
+     * @param string $loggerFilename Set Log Filename, example app.log
      *
      * @return mixed
      */
-    public function setLoggerFilename($logger_filename = '');
+    public function setLoggerFilename($loggerFilename = '');
 
     /**
      * Function getLoggerDateFormat

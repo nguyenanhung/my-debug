@@ -138,7 +138,7 @@ class Debug implements ProjectInterface, DebugInterface
      */
     public function setGlobalLoggerLevel($globalLoggerLevel = NULL)
     {
-        if (!empty($logger_filename) && is_string($globalLoggerLevel)) {
+        if (!empty($globalLoggerLevel) && is_string($globalLoggerLevel)) {
             $this->globalLoggerLevel = strtolower($globalLoggerLevel);
         }
     }
@@ -218,12 +218,12 @@ class Debug implements ProjectInterface, DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/27/18 18:49
      *
-     * @param string $logger_filename Set Log Filename, example app.log
+     * @param string $loggerFilename Set Log Filename, example app.log
      */
-    public function setLoggerFilename($logger_filename = '')
+    public function setLoggerFilename($loggerFilename = '')
     {
-        if (!empty($logger_filename)) {
-            $this->loggerFilename = trim($logger_filename);
+        if (!empty($loggerFilename)) {
+            $this->loggerFilename = trim($loggerFilename);
         }
     }
 
@@ -319,7 +319,16 @@ class Debug implements ProjectInterface, DebugInterface
                 $listLevel = [
                     'debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency'
                 ];
-                $useLevel  = $this->globalLoggerLevel && in_array($listLevel, $listLevel) ? strtolower($this->globalLoggerLevel) : (in_array($level, $listLevel) ? $level : 'info');
+                if (
+                    isset($this->globalLoggerLevel) &&
+                    is_string($this->globalLoggerLevel) &&
+                    in_array($this->globalLoggerLevel, $listLevel)
+                ) {
+                    // If valid globalLoggerLevel -> use globalLoggerLevel
+                    $useLevel = strtolower($this->globalLoggerLevel);
+                } else {
+                    $useLevel = in_array($level, $listLevel) ? trim($level) : trim('info');
+                }
                 switch ($useLevel) {
                     case 'debug':
                         $keyLevel = \Monolog\Logger::DEBUG;
@@ -360,9 +369,9 @@ class Debug implements ProjectInterface, DebugInterface
                     $msg = 'My Log Message is Empty';
                 }
                 if (is_array($context)) {
-                    return $logger->$useLevel($msg, $context);
+                    return $logger->$level($msg, $context);
                 } else {
-                    return $logger->$useLevel($msg . json_encode($context));
+                    return $logger->$level($msg . json_encode($context));
                 }
             }
             catch (\Exception $e) {
