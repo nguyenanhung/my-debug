@@ -28,4 +28,21 @@ interface UtilsInterface
      * @return mixed String as Slug
      */
     public static function slugify($str = '');
+
+    /**
+     * Function convert_vi_to_en
+     *
+     * Hàm chuyển đổi ký tự từ tiếng Việt,
+     * và các ký tự đặc biệt sang ký tự không dấu
+     *
+     * Sử dụng trong trường hợp class slugify nó không chạy
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/13/18 01:17
+     *
+     * @param string $str Chuỗi ký tự đầu vào
+     *
+     * @return mixed|string Đầu ra rà 1 chuỗi ký tự
+     */
+    public static function convert_vi_to_en($str = '');
 }

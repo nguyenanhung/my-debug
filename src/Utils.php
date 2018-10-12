@@ -51,12 +51,15 @@ class Utils implements ProjectInterface, UtilsInterface
     /**
      * Function slugify
      *
+     * Hàm chuyển đổi ký tự từ tiếng Việt,
+     * và các ký tự đặc biệt sang ký tự không dấu
+     *
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/9/18 00:31
      *
-     * @param string $str String to Slug
+     * @param string $str Chuỗi ký tự đầu vào
      *
-     * @return mixed|null|string String as Slug
+     * @return mixed|null|string Đầu ra rà 1 chuỗi ký tự
      */
     public static function slugify($str = '')
     {
@@ -79,14 +82,19 @@ class Utils implements ProjectInterface, UtilsInterface
     /**
      * Function convert_vi_to_en
      *
+     * Hàm chuyển đổi ký tự từ tiếng Việt,
+     * và các ký tự đặc biệt sang ký tự không dấu
+     *
+     * Sử dụng trong trường hợp class slugify nó không chạy
+     *
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/13/18 01:17
      *
-     * @param string $str
+     * @param string $str Chuỗi ký tự đầu vào
      *
-     * @return mixed|string
+     * @return mixed|string Đầu ra rà 1 chuỗi ký tự
      */
-    private static function convert_vi_to_en($str = '')
+    public static function convert_vi_to_en($str = '')
     {
         $str = trim($str);
         if (function_exists('mb_strtolower')) {
