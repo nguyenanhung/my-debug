@@ -7,6 +7,7 @@
  */
 
 namespace nguyenanhung\MyDebug\Interfaces;
+
 /**
  * Interface DebugInterface
  *
