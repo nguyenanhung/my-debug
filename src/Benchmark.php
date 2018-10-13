@@ -32,13 +32,6 @@ use nguyenanhung\MyDebug\Interfaces\BenchmarkInterface;
 class Benchmark implements ProjectInterface, BenchmarkInterface
 {
     /**
-     * List of all benchmark markers
-     *
-     * @var    array
-     */
-    public $marker = [];
-
-    /**
      * Benchmark constructor.
      */
     public function __construct()
@@ -57,6 +50,13 @@ class Benchmark implements ProjectInterface, BenchmarkInterface
     {
         return self::VERSION;
     }
+    /***************************** SIMPLE BENCHMARKING BY CI *****************************/
+    /**
+     * List of all benchmark markers
+     *
+     * @var    array
+     */
+    public $marker = [];
 
     /**
      * Set a benchmark marker

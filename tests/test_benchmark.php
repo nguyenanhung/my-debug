@@ -14,6 +14,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'funct
 use nguyenanhung\MyDebug\Benchmark;
 
 $benchmark = new Benchmark();
+/***************************** SIMPLE BENCHMARKING BY CI *****************************/
 $benchmark->mark('code_start');
 $mathFunctions = ["abs", "acos", "asin", "atan", "bindec", "floor", "exp", "sin", "tan", "pi", "is_finite", "is_nan",
                   "sqrt"];
@@ -29,3 +30,4 @@ $benchmark->mark('code_end');
 d($benchmark->getVersion());
 d($benchmark->elapsed_time('code_start', 'code_end'));
 d($benchmark->memory_usage());
+/***************************** SIMPLE BENCHMARKING BY CI *****************************/
