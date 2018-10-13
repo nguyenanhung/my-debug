@@ -26,7 +26,7 @@ $context     = [
 // Call
 $debug = new Debug();
 $debug->setDebugStatus(TRUE);
-$debug->setGlobalLoggerLevel('error');
+$debug->setGlobalLoggerLevel(NULL);
 $debug->setLoggerPath($logPath);
 $debug->setLoggerSubPath($logSubPath);
 $debug->setLoggerFilename($logFilename);

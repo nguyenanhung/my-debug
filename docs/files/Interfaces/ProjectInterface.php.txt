@@ -8,6 +8,7 @@
  */
 
 namespace nguyenanhung\MyDebug\Interfaces;
+
 /**
  * Interface ProjectInterface
  *
@@ -21,7 +22,7 @@ interface ProjectInterface
     /**
      * Base version of Project
      */
-    const VERSION = '0.1.2.3';
+    const VERSION = '0.1.2.4';
 
     /**
      * Function getVersion

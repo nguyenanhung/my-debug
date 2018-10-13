@@ -144,37 +144,37 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1184505167"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1448230415"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1184505167" class="accordion-body collapse in">
+            <div id="namespace-1448230415" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1530850975"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-635519118"></a>
                                 <a href="../namespaces/nguyenanhung.html" style="margin-left: 30px; padding-left: 0">nguyenanhung</a>
             </div>
-            <div id="namespace-1530850975" class="accordion-body collapse ">
+            <div id="namespace-635519118" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-696852279"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1350969722"></a>
                                 <a href="../namespaces/nguyenanhung.MyDebug.html" style="margin-left: 30px; padding-left: 0">MyDebug</a>
             </div>
-            <div id="namespace-696852279" class="accordion-body collapse ">
+            <div id="namespace-1350969722" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-447037597"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-295119303"></a>
                                 <a href="../namespaces/nguyenanhung.MyDebug.Interfaces.html" style="margin-left: 30px; padding-left: 0">Interfaces</a>
             </div>
-            <div id="namespace-447037597" class="accordion-body collapse ">
+            <div id="namespace-295119303" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -192,10 +192,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1394001683"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-958102846"></a>
                                 <a href="../namespaces/nguyenanhung.MyDebug.Repository.html" style="margin-left: 30px; padding-left: 0">Repository</a>
             </div>
-            <div id="namespace-1394001683" class="accordion-body collapse ">
+            <div id="namespace-958102846" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -245,8 +245,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\nguyenanhung\MyDebug\Interfaces</small>UtilsInterface</h1>
-                    <p><em>Interface UtilsInterface</em></p>
+                    <h1><small>\nguyenanhung\MyDebug\Interfaces</small>BenchmarkInterface</h1>
+                    <p><em>Interface BenchmarkInterface</em></p>
                     
 
                     <section id="summary">
@@ -261,8 +261,9 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span6">
-                                                                    <a href="../classes/nguyenanhung.MyDebug.Interfaces.UtilsInterface.html#method_slugify">slugify()</a><br />
-                                                                    <a href="../classes/nguyenanhung.MyDebug.Interfaces.UtilsInterface.html#method_convert_vi_to_en">convert_vi_to_en()</a><br />
+                                                                    <a href="../classes/nguyenanhung.MyDebug.Interfaces.BenchmarkInterface.html#method_mark">mark()</a><br />
+                                                                    <a href="../classes/nguyenanhung.MyDebug.Interfaces.BenchmarkInterface.html#method_elapsed_time">elapsed_time()</a><br />
+                                                                    <a href="../classes/nguyenanhung.MyDebug.Interfaces.BenchmarkInterface.html#method_memory_usage">memory_usage()</a><br />
                                                             </section>
                             <section class="span6">
                                                                     <em>No constants found</em>
@@ -290,7 +291,7 @@
                                         <dl>
                         <dt>File</dt>
                             <dd>
-                                <a href="../files/Interfaces.UtilsInterface.html"><div class="path-wrapper">Interfaces/UtilsInterface.php</div></a>
+                                <a href="../files/Interfaces.BenchmarkInterface.html"><div class="path-wrapper">Interfaces/BenchmarkInterface.php</div></a>
                             </dd>
                                                 <dt>Package</dt>
                             <dd><div class="namespace-wrapper">\nguyenanhung\MyDebug\Interfaces</div></dd>
@@ -330,88 +331,111 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_slugify" name="method_slugify" class="anchor"></a>
+            <a id="method_mark" name="method_mark" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">slugify()</h3>
+                <h3 class="public ">mark()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">slugify(string  <span class="argument">$str = &#039;&#039;</span>) : mixed</pre>
-                <p><em>Function slugify</em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">mark(string  <span class="argument">$name</span>) : void</pre>
+                <p><em>Set a benchmark marker</em></p>
+                <p>Multiple calls to this function can be made so that several
+execution points can be timed.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$str </td>
-                                <td><p>String to Slug</p></td>
+                                <td>$name </td>
+                                <td><p>Marker name</p></td>
                             </tr>
                                             </table>
                 
                 
-                                    <h4>Returns</h4>
-                    mixed
-                                            &mdash; <p>String as Slug</p>
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            author
-                        </th>
-                        <td>
-                                                                                            <p>: 713uk13m <a href="mailto:dev@nguyenanhung.com">dev@nguyenanhung.com</a></p>
-                                                    </td>
-                    </tr>
-                                    <tr>
-                        <th>
-                            time
-                        </th>
-                        <td>
-                                                                                            <p>: 10/7/18 03:16</p>
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_convert_vi_to_en" name="method_convert_vi_to_en" class="anchor"></a>
+            <a id="method_elapsed_time" name="method_elapsed_time" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">convert_vi_to_en()</h3>
+                <h3 class="public ">elapsed_time()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">convert_vi_to_en(string  <span class="argument">$str = &#039;&#039;</span>) : mixed|string</pre>
-                <p><em>Function convert_vi_to_en</em></p>
-                <p>Hàm chuyển đổi ký tự từ tiếng Việt,
-và các ký tự đặc biệt sang ký tự không dấu</p>
-<p>Sử dụng trong trường hợp class slugify nó không chạy</p>
+                <pre class="signature" style="margin-right: 54px;">elapsed_time(string  <span class="argument">$point1 = &#039;&#039;</span>, string  <span class="argument">$point2 = &#039;&#039;</span>, integer  <span class="argument">$decimals = 4</span>) : string</pre>
+                <p><em>Elapsed time</em></p>
+                <p>Calculates the time difference between two marked points.</p>
+<p>If the first parameter is empty this function instead returns the
+{elapsed_time} pseudo-variable. This permits the full system
+execution time to be shown in a template. The output class will
+swap the real value for this variable.</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$str </td>
-                                <td><p>Chuỗi ký tự đầu vào</p></td>
+                                <td>$point1 </td>
+                                <td><p>A particular marked point</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$point2 </td>
+                                <td><p>A particular marked point</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$decimals </td>
+                                <td><p>Number of decimal places</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    mixed|string
-                                            &mdash; <p>Đầu ra rà 1 chuỗi ký tự</p>
+                    string
+                                            &mdash; <p>Calculated elapsed time on success,
+an '{elapsed_string}' if $point1 is empty
+or an empty string if $point1 is not found.</p>
                                     				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_memory_usage" name="method_memory_usage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">memory_usage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">memory_usage() : string</pre>
+                <p><em>Function memory_usage</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -429,7 +453,7 @@ và các ký tự đặc biệt sang ký tự không dấu</p>
                             time
                         </th>
                         <td>
-                                                                                            <p>: 10/13/18 01:17</p>
+                                                                                            <p>: 10/13/18 10:52</p>
                                                     </td>
                     </tr>
                             </table>
@@ -442,10 +466,10 @@ và các ký tự đặc biệt sang ký tự không dấu</p>
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">UtilsInterface.php</h3>
+            <h3 id="source-view-label">BenchmarkInterface.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Interfaces/UtilsInterface.php.txt" class="language-php"></pre>
+            <pre data-src="../files/Interfaces/BenchmarkInterface.php.txt" class="language-php"></pre>
         </div>
     </div>
 
