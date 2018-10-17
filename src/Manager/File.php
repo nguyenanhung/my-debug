@@ -134,7 +134,8 @@ class File extends Filesystem
     {
         $getDir             = $this->directoryScanner($path, $this->scanInclude, $this->scanExclude);
         $result             = [];
-        $result['scanPath'] = $path;
+        $result['time']     = date('Y-m-d H:i:s');
+        $result['listFile'] = [];
         foreach ($getDir as $fileName) {
             $SplFileInfo = new \SplFileInfo($fileName);
             $filename    = $SplFileInfo->getPathname();
@@ -197,6 +198,7 @@ class File extends Filesystem
         $result['timeToZip']   = $dateTime->format('Y-m-d H:i:s');
         $result['zipPath']     = $zipPath;
         $result['zipFilePath'] = $zipPathFilename;
+        $result['listFile']    = [];
         foreach ($getDir as $fileName) {
             $SplFileInfo = new \SplFileInfo($fileName);
             $filename    = $SplFileInfo->getPathname();
