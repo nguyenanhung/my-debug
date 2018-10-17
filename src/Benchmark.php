@@ -28,6 +28,8 @@ use nguyenanhung\MyDebug\Interfaces\BenchmarkInterface;
  * @package    nguyenanhung\MyDebug
  * @author     713uk13m <dev@nguyenanhung.com>
  * @copyright  713uk13m <dev@nguyenanhung.com>
+ * @since      2018-10-17
+ * @version    0.1.2.5
  */
 class Benchmark implements ProjectInterface, BenchmarkInterface
 {
