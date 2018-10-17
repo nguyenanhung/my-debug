@@ -26,6 +26,8 @@ use nguyenanhung\MyDebug\Repository\DataRepository;
  * @package    nguyenanhung\MyDebug
  * @author     713uk13m <dev@nguyenanhung.com>
  * @copyright  713uk13m <dev@nguyenanhung.com>
+ * @since      2018-10-17
+ * @version    0.1.2.5
  */
 class Utils implements ProjectInterface, UtilsInterface
 {
@@ -37,12 +39,12 @@ class Utils implements ProjectInterface, UtilsInterface
     }
 
     /**
-     * Function getVersion
+     * Hàm lấy thông tin phiên bản Packages
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 9/21/18 00:21
+     * @time  : 9/27/18 18:32
      *
-     * @return string Current Version of Package
+     * @return string Phiên bản hiện tại của Packages, VD: 0.1.1
      */
     public function getVersion()
     {
