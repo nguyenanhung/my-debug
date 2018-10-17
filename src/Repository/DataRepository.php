@@ -35,12 +35,12 @@ class DataRepository implements ProjectInterface
     const CONFIG_EXT = '.php';
 
     /**
-     * Function getVersion
+     * Hàm lấy thông tin phiên bản Packages
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/7/18 01:07
+     * @time  : 9/27/18 18:32
      *
-     * @return mixed|string Current Version of Package
+     * @return string Phiên bản hiện tại của Packages, VD: 0.1.1
      */
     public function getVersion()
     {
@@ -48,20 +48,39 @@ class DataRepository implements ProjectInterface
     }
 
     /**
-     * Function getData
+     * Hàm lấy nội dung config được quy định trong thư mục config
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/7/18 01:07
+     * @time  : 9/28/18 14:47
      *
-     * @param string $configName file config from /config path
+     * @param string $configName Tên file config
      *
-     * @return array|mixed Array content config if available, empty array if unavailable
+     * @return array|mixed
      */
     public static function getData($configName)
     {
         $path = __DIR__ . DIRECTORY_SEPARATOR . self::CONFIG_PATH . DIRECTORY_SEPARATOR . $configName . self::CONFIG_EXT;
         if (is_file($path) && file_exists($path)) {
-            return require($path);
+            return require_once $path;
+        }
+
+        return [];
+    }
+
+    /**
+     * Hàm lấy nội dung Data từ 1 file bất kỳ trong hệ thống
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 09:25
+     *
+     * @param string $filename Đường dẫn file config
+     *
+     * @return array|mixed
+     */
+    public static function getDataContent($filename)
+    {
+        if (is_file($filename) && file_exists($filename)) {
+            return require_once $filename;
         }
 
         return [];
