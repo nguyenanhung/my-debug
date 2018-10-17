@@ -48,8 +48,8 @@ class Debug implements ProjectInterface, DebugInterface
     private $loggerPath = 'logs';
     /** @var null|string Tương tự với $loggerPath, mặc định dùng để lưu tên class phát sinh log */
     private $loggerSubPath = NULL;
-    /** @var string Filename lưu log, khuyến nghị theo chuẩn Log-Y-m-d.log, VD: Log-2018-10-17.log */
-    private $loggerFilename = 'app.log';
+    /** @var null|string Filename lưu log, khuyến nghị theo chuẩn Log-Y-m-d.log, VD: Log-2018-10-17.log */
+    private $loggerFilename = NULL;
     /** @var null|string Logger Date Format, VD: Y-m-d H:i:s u */
     private $loggerDateFormat = NULL;
     /** @var null|string Logger Line Format, VD: "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n" */
@@ -315,12 +315,18 @@ class Debug implements ProjectInterface, DebugInterface
                 if (!empty($loggerSubPath)) {
                     $loggerSubPath = Utils::slugify($loggerSubPath);
                 }
+                if (empty($this->loggerFilename)) {
+                    $this->loggerFilename = 'Log-' . date('Y-m-d') . '.log';
+                }
                 $listLevel = [
                     'debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency'
                 ];
                 if (
+                    // Tồn tại Global Logger Level
                     isset($this->globalLoggerLevel) &&
+                    // Là 1 string
                     is_string($this->globalLoggerLevel) &&
+                    // Và thuộc list Level được quy định
                     in_array($this->globalLoggerLevel, $listLevel)
                 ) {
                     // If valid globalLoggerLevel -> use globalLoggerLevel

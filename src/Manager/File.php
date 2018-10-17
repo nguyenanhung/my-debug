@@ -31,13 +31,13 @@ class File extends Filesystem
     const VERSION = '1.0.0';
 
     /** @var null|array Mảng dữ liệu chứa các thuộc tính cần quét */
-    private $removeLogInclude = [
+    private $scanInclude = [
         '*.log',
         '*.txt'
     ];
 
     /** @var null|array Mảng dữ liệu chứa các thuộc tính bỏ qua không quét */
-    private $removeLogExclude;
+    private $scanExclude;
 
     /**
      * File constructor.
@@ -100,7 +100,7 @@ class File extends Filesystem
      */
     public function setInclude($include = [])
     {
-        $this->removeLogInclude = $include;
+        $this->scanInclude = $include;
     }
 
     /**
@@ -113,7 +113,7 @@ class File extends Filesystem
      */
     public function setExclude($exclude = [])
     {
-        $this->removeLogExclude = $exclude;
+        $this->scanExclude = $exclude;
     }
 
     /**
@@ -127,9 +127,9 @@ class File extends Filesystem
      *
      * @return array Mảng thông tin về các file đã xóa
      */
-    public function clean($path = '', $dayToDel = 3)
+    public function cleanLog($path = '', $dayToDel = 3)
     {
-        $getDir = $this->directoryScanner($path, $this->removeLogInclude, $this->removeLogExclude);
+        $getDir = $this->directoryScanner($path, $this->scanInclude, $this->scanExclude);
         $result = [];
         foreach ($getDir as $fileName) {
             $SplFileInfo = new \SplFileInfo($fileName);
@@ -145,6 +145,39 @@ class File extends Filesystem
                 $this->chmod($filename, 0777);
                 $this->remove($filename);
                 $result[] .= "Delete file: " . $filename;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Hàm quét thư mục và zip toàn bộ các file thỏa mãn điều kiện
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 10:51
+     *
+     * @param string $path     Thư mục cần quét file và zip
+     * @param int    $dayToZip Số ngày bỏ qua không zip
+     *
+     * @return array Mảng thông tin về các file đã Zip được
+     */
+    public function scanAndZip($path = '', $dayToZip = 3)
+    {
+        $getDir = $this->directoryScanner($path, $this->scanInclude, $this->scanExclude);
+        $result = [];
+        foreach ($getDir as $fileName) {
+            $SplFileInfo = new \SplFileInfo($fileName);
+            $filename    = $SplFileInfo->getPathname();
+            $format      = 'YmdHis';
+            // Lấy thời gian xác định sẽ Zip file
+            $dateTime   = new \DateTime("-" . $dayToZip . " days");
+            $deleteTime = $dateTime->format($format);
+            // Lấy modifyTime của file
+            $getfileTime = filemtime($filename);
+            $fileTime    = date($format, $getfileTime);
+            if ($fileTime < $deleteTime) {
+                $result[] .= "Zip file: " . $filename;
             }
         }
 
