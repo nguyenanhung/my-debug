@@ -17,6 +17,8 @@ use TheSeer\DirectoryScanner\DirectoryScanner;
  *
  * Class File được kế thừa từ class Filesystem của Symfony và bổ sung thêm 1 số phương thức khác
  *
+ * @see        https://symfony.com/doc/current/components/filesystem.html
+ *
  * @category   Class
  * @package    nguyenanhung\MyDebug
  * @author     713uk13m <dev@nguyenanhung.com>
@@ -27,10 +29,14 @@ use TheSeer\DirectoryScanner\DirectoryScanner;
 class File extends Filesystem
 {
     const VERSION = '1.0.0';
+
+    /** @var null|array Mảng dữ liệu chứa các thuộc tính cần quét */
     private $removeLogInclude = [
         '*.log',
         '*.txt'
     ];
+
+    /** @var null|array Mảng dữ liệu chứa các thuộc tính bỏ qua không quét */
     private $removeLogExclude;
 
     /**
