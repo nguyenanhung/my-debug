@@ -19,18 +19,15 @@ namespace nguyenanhung\MyDebug\Interfaces;
  */
 interface ProjectInterface
 {
-    /**
-     * Base version of Project
-     */
     const VERSION = '0.1.2.4';
 
     /**
-     * Function getVersion
+     * Hàm lấy thông tin phiên bản Packages
      *
      * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/9/18 00:17
+     * @time  : 9/27/18 18:32
      *
-     * @return mixed Current Version of Package
+     * @return string Phiên bản hiện tại của Packages, VD: 0.1.1
      */
     public function getVersion();
 }

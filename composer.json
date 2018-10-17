@@ -1,7 +1,7 @@
 {
     "name": "nguyenanhung/my-debug",
     "type": "library",
-    "description": "My Requests Library",
+    "description": "My Debug, Logger Library",
     "keywords": [
         "debug",
         "logger",
