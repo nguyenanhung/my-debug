@@ -21,6 +21,8 @@ spl_autoload_register(function ($className) {
         $fileName = str_replace('nguyenanhung\MyDebug\Repository', 'src\Repository', $fileName);
     } elseif (strpos($fileName, 'nguyenanhung\MyDebug\Helpers') !== FALSE) {
         $fileName = str_replace('nguyenanhung\MyDebug\Helpers', 'src\Helpers', $fileName);
+    } elseif (strpos($fileName, 'nguyenanhung\MyDebug\Manager') !== FALSE) {
+        $fileName = str_replace('nguyenanhung\MyDebug\Manager', 'src\Manager', $fileName);
     } else {
         $fileName = str_replace('nguyenanhung\MyDebug', 'src', $fileName);
     }
