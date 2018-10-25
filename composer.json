@@ -46,5 +46,12 @@
         "psr-4": {
             "Tests\\": "tests/"
         }
+    },
+    "config": {
+        "process-timeout": 0
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 -t public",
+        "test": "phpunit"
     }
 }

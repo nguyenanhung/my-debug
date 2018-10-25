@@ -10,12 +10,18 @@
 namespace Tests\Functional;
 
 use nguyenanhung\MyDebug\Utils;
+
 class UtilsTest extends BaseTestCase
 {
+    /**
+     * Function testUtilsSlugify
+     *
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/25/18 11:45
+     *
+     */
     public function testUtilsSlugify()
     {
-        $str    = 'Nguyễn An Hưng';
-        $needle = 'nguyen-an-hung';
-        $this->assertContains($needle, Utils::slugify($str), 'Test Ok Utils slugify');
+        $this->assertContains('nguyen-an-hung', Utils::slugify('nguyễn an hưng'), 'false');
     }
 }
