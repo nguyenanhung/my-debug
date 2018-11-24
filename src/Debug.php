@@ -190,7 +190,7 @@ class Debug implements ProjectInterface, DebugInterface
     public function setLoggerSubPath($sub_path = '')
     {
         if (!empty($sub_path)) {
-            $this->loggerSubPath = trim($sub_path) . DIRECTORY_SEPARATOR;
+            $this->loggerSubPath = trim($sub_path);
         }
     }
 
@@ -314,6 +314,8 @@ class Debug implements ProjectInterface, DebugInterface
                 $loggerSubPath = trim($this->loggerSubPath);
                 if (!empty($loggerSubPath)) {
                     $loggerSubPath = Utils::slugify($loggerSubPath);
+                } else {
+                    $loggerSubPath = 'Default-Sub-Path';
                 }
                 if (empty($this->loggerFilename)) {
                     $this->loggerFilename = 'Log-' . date('Y-m-d') . '.log';
