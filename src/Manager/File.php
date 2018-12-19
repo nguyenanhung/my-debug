@@ -129,6 +129,7 @@ class File extends Filesystem
      * @param int    $dayToDel Số ngày cần giữ lại file
      *
      * @return array Mảng thông tin về các file đã xóa
+     * @throws \Exception
      */
     public function cleanLog($path = '', $dayToDel = 3)
     {
@@ -177,6 +178,7 @@ class File extends Filesystem
      *               'zipFilePath' => Tên file nén
      *
      *               'listFile' => Mảng dữ liệu chứa danh sách file đã nén, trống biến này nghĩa là ko tìm thấy file nào
+     * @throws \Exception
      */
     public function scanAndZip($scanPath = '', $dayToZip = 3, $zipPath = '')
     {

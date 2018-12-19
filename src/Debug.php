@@ -8,13 +8,6 @@
 
 namespace nguyenanhung\MyDebug;
 
-if (!interface_exists('nguyenanhung\MyDebug\Interfaces\ProjectInterface')) {
-    include_once __DIR__ . DIRECTORY_SEPARATOR . 'Interfaces' . DIRECTORY_SEPARATOR . 'ProjectInterface.php';
-}
-if (!interface_exists('nguyenanhung\MyDebug\Interfaces\DebugInterface')) {
-    include_once __DIR__ . DIRECTORY_SEPARATOR . 'Interfaces' . DIRECTORY_SEPARATOR . 'DebugInterface.php';
-}
-
 use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
 use nguyenanhung\MyDebug\Interfaces\DebugInterface;
 
