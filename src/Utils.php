@@ -70,12 +70,9 @@ class Utils implements ProjectInterface, UtilsInterface
             return self::convert_vi_to_en($str);
         }
         try {
-            $options = [
-                'separator' => '-'
-            ];
-            $slug    = new \Cocur\Slugify\Slugify($options);
+            $slugify = new \Cocur\Slugify\Slugify();
 
-            return $slug->slugify($str);
+            return $slugify->slugify($str);
         }
         catch (\Exception $e) {
             return self::convert_vi_to_en($str);
