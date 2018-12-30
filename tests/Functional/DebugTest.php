@@ -7,7 +7,7 @@
  * Time: 11:37
  */
 
-namespace Tests\Functional;
+namespace MyDebugTests\Functional;
 
 use nguyenanhung\MyDebug\Debug;
 

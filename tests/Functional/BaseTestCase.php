@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Functional;
+namespace MyDebugTests\Functional;
 
 /**
  * This is an example class that shows how you could set up a method that
