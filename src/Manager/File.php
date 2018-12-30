@@ -30,17 +30,10 @@ use Alchemy\Zippy\Zippy;
 class File extends Filesystem
 {
     const VERSION = '1.0.0';
-
     /** @var null|array Mảng dữ liệu chứa các thuộc tính cần quét */
-    private $scanInclude = [
-        '*.log',
-        '*.txt'
-    ];
-
+    private $scanInclude = ['*.log', '*.txt'];
     /** @var null|array Mảng dữ liệu chứa các thuộc tính bỏ qua không quét */
-    private $scanExclude = [
-        '*/Zip-Archive/*.zip'
-    ];
+    private $scanExclude = ['*/Zip-Archive/*.zip'];
 
     /**
      * File constructor.

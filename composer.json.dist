@@ -45,7 +45,14 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "MyDebugTests\\": "tests/"
+            "Tests\\": "tests/"
         }
+    },
+    "config": {
+        "process-timeout": 0
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 -t public",
+        "test": "phpunit"
     }
 }

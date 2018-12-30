@@ -8,8 +8,6 @@
 
 namespace nguyenanhung\MyDebug;
 
-use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
-use nguyenanhung\MyDebug\Interfaces\UtilsInterface;
 use nguyenanhung\MyDebug\Repository\DataRepository;
 
 /**
@@ -24,24 +22,13 @@ use nguyenanhung\MyDebug\Repository\DataRepository;
  */
 class Utils implements ProjectInterface, UtilsInterface
 {
+    use Version;
+
     /**
      * Utils constructor.
      */
     public function __construct()
     {
-    }
-
-    /**
-     * Hàm lấy thông tin phiên bản Packages
-     *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 9/27/18 18:32
-     *
-     * @return string Phiên bản hiện tại của Packages, VD: 0.1.1
-     */
-    public function getVersion()
-    {
-        return self::VERSION;
     }
 
     /**
@@ -89,12 +76,8 @@ class Utils implements ProjectInterface, UtilsInterface
      */
     public static function convert_vi_to_en($str = '')
     {
-        $str = trim($str);
-        if (function_exists('mb_strtolower')) {
-            $str = mb_strtolower($str);
-        } else {
-            $str = strtolower($str);
-        }
+        $str  = trim($str);
+        $str  = function_exists('mb_strtolower') ? mb_strtolower($str) : strtolower($str);
         $data = DataRepository::getData('convert_vi_to_en');
         if (!empty($str)) {
             $str = str_replace($data['vn_array'], $data['en_array'], $str);

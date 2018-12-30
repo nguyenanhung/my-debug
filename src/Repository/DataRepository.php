@@ -9,7 +9,8 @@
 
 namespace nguyenanhung\MyDebug\Repository;
 
-use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
+use nguyenanhung\MyDebug\ProjectInterface;
+use nguyenanhung\MyDebug\Version;
 
 /**
  * Class DataRepository
@@ -21,27 +22,9 @@ use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
  */
 class DataRepository implements ProjectInterface
 {
-    /**
-     * Config Path
-     */
+    use Version;
     const CONFIG_PATH = 'config';
-    /**
-     * File config extension
-     */
-    const CONFIG_EXT = '.php';
-
-    /**
-     * Hàm lấy thông tin phiên bản Packages
-     *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 9/27/18 18:32
-     *
-     * @return string Phiên bản hiện tại của Packages, VD: 0.1.1
-     */
-    public function getVersion()
-    {
-        return self::VERSION;
-    }
+    const CONFIG_EXT  = '.php';
 
     /**
      * Hàm lấy nội dung config được quy định trong thư mục config
