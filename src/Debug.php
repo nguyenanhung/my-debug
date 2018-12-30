@@ -8,9 +8,6 @@
 
 namespace nguyenanhung\MyDebug;
 
-use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
-use nguyenanhung\MyDebug\Interfaces\DebugInterface;
-
 /**
  * Class Debug
  *
@@ -28,14 +25,12 @@ use nguyenanhung\MyDebug\Interfaces\DebugInterface;
  */
 class Debug implements ProjectInterface, DebugInterface
 {
+    use Version;
     const LOG_BUBBLE      = TRUE;
     const FILE_PERMISSION = 0777;
     /** @var bool Cấu hình trạng thái Debug, TRUE nếu cấu hình Debug được bật */
     private $DEBUG = FALSE;
-    /**
-     * @var null|string Cấu hình Level lưu Log
-     * @see https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels
-     */
+    /** @var null|string Cấu hình Level lưu Log theo tiêu chuẩn RFC 5424 */
     private $globalLoggerLevel = NULL;
     /** @var null|string Đường dẫn thư mục lưu trữ Log, VD: /your/to/path */
     private $loggerPath = 'logs';
@@ -49,23 +44,10 @@ class Debug implements ProjectInterface, DebugInterface
     private $loggerLineFormat = NULL;
 
     /**
-     * BaseDebug constructor.
+     * Debug constructor.
      */
     public function __construct()
     {
-    }
-
-    /**
-     * Hàm lấy thông tin phiên bản Packages
-     *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 9/27/18 18:32
-     *
-     * @return string Phiên bản hiện tại của Packages, VD: 0.1.1
-     */
-    public function getVersion()
-    {
-        return self::VERSION;
     }
 
     /**
@@ -89,11 +71,13 @@ class Debug implements ProjectInterface, DebugInterface
      *
      * @param bool $debug TRUE nếu xác định lưu log, FALSE hoặc các giá trị khác sẽ không lưu log
      *
-     * @return mixed|void
+     * @return $this
      */
     public function setDebugStatus($debug = FALSE)
     {
         $this->DEBUG = $debug;
+
+        return $this;
     }
 
     /**
@@ -119,12 +103,15 @@ class Debug implements ProjectInterface, DebugInterface
      *
      * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels
      * @see   https://tools.ietf.org/html/rfc5424
+     * @return $this
      */
     public function setGlobalLoggerLevel($globalLoggerLevel = NULL)
     {
         if (!empty($globalLoggerLevel) && is_string($globalLoggerLevel)) {
             $this->globalLoggerLevel = strtolower($globalLoggerLevel);
         }
+
+        return $this;
     }
 
     /**
@@ -161,13 +148,15 @@ class Debug implements ProjectInterface, DebugInterface
      *
      * @param string $logger_path Đường dẫn tới thư mục lưu log, VD: /your/to/path
      *
-     * @return mixed|void
+     * @return $this
      */
     public function setLoggerPath($logger_path = '')
     {
         if (!empty($logger_path)) {
             $this->loggerPath = trim($logger_path);
         }
+
+        return $this;
     }
 
     /**
@@ -178,13 +167,15 @@ class Debug implements ProjectInterface, DebugInterface
      *
      * @param string $sub_path Đường dẫn tới thư mục lưu log, VD: /your/to/sub-path
      *
-     * @return mixed|void
+     * @return $this
      */
     public function setLoggerSubPath($sub_path = '')
     {
         if (!empty($sub_path)) {
             $this->loggerSubPath = trim($sub_path);
         }
+
+        return $this;
     }
 
     /**
@@ -208,13 +199,15 @@ class Debug implements ProjectInterface, DebugInterface
      *
      * @param string $loggerFilename Filename cần lưu log, VD: app.log, Log-2018-10-17.log
      *
-     * @return mixed|void
+     * @return $this
      */
     public function setLoggerFilename($loggerFilename = '')
     {
         if (!empty($loggerFilename)) {
             $this->loggerFilename = trim($loggerFilename);
         }
+
+        return $this;
     }
 
     /**
@@ -240,12 +233,15 @@ class Debug implements ProjectInterface, DebugInterface
      *
      * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see   https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
+     * @return $this
      */
     public function setLoggerDateFormat($loggerDateFormat = NULL)
     {
         if (!empty($loggerDateFormat) && is_string($loggerDateFormat)) {
             $this->loggerDateFormat = $loggerDateFormat;
         }
+
+        return $this;
     }
 
     /**
@@ -272,12 +268,15 @@ class Debug implements ProjectInterface, DebugInterface
      *
      * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see   https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
+     * @return $this
      */
     public function setLoggerLineFormat($loggerLineFormat = NULL)
     {
         if (!empty($loggerLineFormat) && is_string($loggerLineFormat)) {
             $this->loggerLineFormat = $loggerLineFormat;
         }
+
+        return $this;
     }
 
     /**
@@ -305,17 +304,11 @@ class Debug implements ProjectInterface, DebugInterface
             }
             try {
                 $loggerSubPath = trim($this->loggerSubPath);
-                if (!empty($loggerSubPath)) {
-                    $loggerSubPath = Utils::slugify($loggerSubPath);
-                } else {
-                    $loggerSubPath = 'Default-Sub-Path';
-                }
+                $loggerSubPath = !empty($loggerSubPath) ? Utils::slugify($loggerSubPath) : 'Default-Sub-Path';
                 if (empty($this->loggerFilename)) {
                     $this->loggerFilename = 'Log-' . date('Y-m-d') . '.log';
                 }
-                $listLevel = [
-                    'debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency'
-                ];
+                $listLevel = ['debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency'];
                 if (
                     // Tồn tại Global Logger Level
                     isset($this->globalLoggerLevel) &&
@@ -376,6 +369,9 @@ class Debug implements ProjectInterface, DebugInterface
             }
             catch (\Exception $e) {
                 $message = 'Error File: ' . $e->getFile() . ' - Line: ' . $e->getLine() . ' - Code: ' . $e->getCode() . ' - Message: ' . $e->getMessage();
+                if (function_exists('log_message')) {
+                    log_message('error', $message);
+                }
 
                 return $message;
             }

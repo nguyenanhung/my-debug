@@ -6,13 +6,13 @@
  * Time: 17:11
  */
 
-namespace nguyenanhung\MyDebug\Interfaces;
+namespace nguyenanhung\MyDebug;
 
 /**
  * Interface DebugInterface
  *
  * @category  Interface
- * @package   nguyenanhung\MyDebug\Interfaces
+ * @package   nguyenanhung\MyDebug
  * @author    713uk13m <dev@nguyenanhung.com>
  * @copyright 713uk13m <dev@nguyenanhung.com>
  */
@@ -36,7 +36,7 @@ interface DebugInterface
      *
      * @param bool $debug TRUE nếu xác định lưu log, FALSE hoặc các giá trị khác sẽ không lưu log
      *
-     * @return mixed|void
+     * @return $this
      */
     public function setDebugStatus($debug = FALSE);
 
@@ -60,6 +60,7 @@ interface DebugInterface
      *
      * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels
      * @see   https://tools.ietf.org/html/rfc5424
+     * @return $this
      */
     public function setGlobalLoggerLevel($globalLoggerLevel = NULL);
 
@@ -91,7 +92,7 @@ interface DebugInterface
      *
      * @param string $logger_path Đường dẫn tới thư mục lưu log, VD: /your/to/path
      *
-     * @return mixed|void
+     * @return $this
      */
     public function setLoggerPath($logger_path = '');
 
@@ -103,7 +104,7 @@ interface DebugInterface
      *
      * @param string $sub_path Đường dẫn tới thư mục lưu log, VD: /your/to/sub-path
      *
-     * @return mixed|void
+     * @return $this
      */
     public function setLoggerSubPath($sub_path = '');
 
@@ -125,7 +126,7 @@ interface DebugInterface
      *
      * @param string $loggerFilename Filename cần lưu log, VD: app.log, Log-2018-10-17.log
      *
-     * @return mixed|void
+     * @return $this
      */
     public function setLoggerFilename($loggerFilename = '');
 
@@ -149,6 +150,7 @@ interface DebugInterface
      *
      * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see   https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
+     * @return $this
      */
     public function setLoggerDateFormat($loggerDateFormat = NULL);
 
@@ -173,6 +175,7 @@ interface DebugInterface
      *
      * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see   https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
+     * @return $this
      */
     public function setLoggerLineFormat($loggerLineFormat = NULL);
 

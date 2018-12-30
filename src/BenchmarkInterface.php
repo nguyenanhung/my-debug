@@ -7,13 +7,13 @@
  * Time: 11:04
  */
 
-namespace nguyenanhung\MyDebug\Interfaces;
+namespace nguyenanhung\MyDebug;
 
 /**
  * Interface BenchmarkInterface
  *
  * @category  Interface
- * @package   nguyenanhung\MyDebug\Interfaces
+ * @package   nguyenanhung\MyDebug
  * @author    713uk13m <dev@nguyenanhung.com>
  * @copyright 713uk13m <dev@nguyenanhung.com>
  */

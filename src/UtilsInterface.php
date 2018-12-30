@@ -6,13 +6,13 @@
  * Time: 17:10
  */
 
-namespace nguyenanhung\MyDebug\Interfaces;
+namespace nguyenanhung\MyDebug;
 
 /**
  * Interface UtilsInterface
  *
  * @category  Interface
- * @package   nguyenanhung\MyDebug\Interfaces
+ * @package   nguyenanhung\MyDebug
  * @author    713uk13m <dev@nguyenanhung.com>
  * @copyright 713uk13m <dev@nguyenanhung.com>
  */

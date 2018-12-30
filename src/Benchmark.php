@@ -9,9 +9,6 @@
 
 namespace nguyenanhung\MyDebug;
 
-use nguyenanhung\MyDebug\Interfaces\ProjectInterface;
-use nguyenanhung\MyDebug\Interfaces\BenchmarkInterface;
-
 /**
  * Class Benchmark
  *
@@ -26,24 +23,13 @@ use nguyenanhung\MyDebug\Interfaces\BenchmarkInterface;
  */
 class Benchmark implements ProjectInterface, BenchmarkInterface
 {
+    use Version;
+
     /**
      * Benchmark constructor.
      */
     public function __construct()
     {
-    }
-
-    /**
-     * Function getVersion
-     *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/13/18 10:49
-     *
-     * @return mixed|string
-     */
-    public function getVersion()
-    {
-        return self::VERSION;
     }
     /***************************** SIMPLE BENCHMARKING BY CI *****************************/
     /**

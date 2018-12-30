@@ -7,19 +7,18 @@
  * Time: 20:27
  */
 
-namespace nguyenanhung\MyDebug\Interfaces;
+namespace nguyenanhung\MyDebug;
 
 /**
  * Interface ProjectInterface
  *
- * @category  Interface
- * @package   nguyenanhung\MyDebug\Interfaces
+ * @package   nguyenanhung\MyDebug
  * @author    713uk13m <dev@nguyenanhung.com>
  * @copyright 713uk13m <dev@nguyenanhung.com>
  */
 interface ProjectInterface
 {
-    const VERSION = '0.1.2.12';
+    const VERSION = '0.1.3';
 
     /**
      * Hàm lấy thông tin phiên bản Packages
