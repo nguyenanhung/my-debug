@@ -205,6 +205,8 @@ class Debug implements ProjectInterface, DebugInterface
     {
         if (!empty($loggerFilename)) {
             $this->loggerFilename = trim($loggerFilename);
+        } else {
+            $this->loggerFilename = 'Log-' . date('Y-m-d') . '.log';
         }
 
         return $this;
@@ -239,6 +241,8 @@ class Debug implements ProjectInterface, DebugInterface
     {
         if (!empty($loggerDateFormat) && is_string($loggerDateFormat)) {
             $this->loggerDateFormat = $loggerDateFormat;
+        } else {
+            $this->loggerDateFormat = "Y-m-d H:i:s u";
         }
 
         return $this;
@@ -274,6 +278,8 @@ class Debug implements ProjectInterface, DebugInterface
     {
         if (!empty($loggerLineFormat) && is_string($loggerLineFormat)) {
             $this->loggerLineFormat = $loggerLineFormat;
+        } else {
+            $this->loggerLineFormat = "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
         }
 
         return $this;
@@ -300,6 +306,11 @@ class Debug implements ProjectInterface, DebugInterface
         $level = strtolower(trim($level));
         if ($this->DEBUG == TRUE) {
             if (!class_exists('\Monolog\Logger')) {
+                if (function_exists('log_message')) {
+                    $errorMsg = 'Không tồn tại class Monolog';
+                    log_message('error', $errorMsg);
+                }
+
                 return FALSE;
             }
             try {
@@ -308,7 +319,7 @@ class Debug implements ProjectInterface, DebugInterface
                 if (empty($this->loggerFilename)) {
                     $this->loggerFilename = 'Log-' . date('Y-m-d') . '.log';
                 }
-                $listLevel = ['debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency'];
+                $listLevel = array('debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency');
                 if (
                     // Tồn tại Global Logger Level
                     isset($this->globalLoggerLevel) &&
@@ -351,8 +362,8 @@ class Debug implements ProjectInterface, DebugInterface
                         $keyLevel = \Monolog\Logger::WARNING;
                 }
                 $loggerFilename = $this->loggerPath . DIRECTORY_SEPARATOR . $loggerSubPath . DIRECTORY_SEPARATOR . $this->loggerFilename;
-                $dateFormat     = $this->loggerDateFormat ? $this->loggerDateFormat : "Y-m-d H:i:s u";
-                $output         = $this->loggerLineFormat ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
+                $dateFormat     = !empty($this->loggerDateFormat) ? $this->loggerDateFormat : "Y-m-d H:i:s u";
+                $output         = !empty($this->loggerLineFormat) ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
                 $formatter      = new \Monolog\Formatter\LineFormatter($output, $dateFormat);
                 $stream         = new \Monolog\Handler\StreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
                 $stream->setFormatter($formatter);
@@ -368,12 +379,12 @@ class Debug implements ProjectInterface, DebugInterface
                 }
             }
             catch (\Exception $e) {
-                $message = 'Error File: ' . $e->getFile() . ' - Line: ' . $e->getLine() . ' - Code: ' . $e->getCode() . ' - Message: ' . $e->getMessage();
                 if (function_exists('log_message')) {
+                    $message = 'Error File: ' . $e->getFile() . ' - Line: ' . $e->getLine() . ' - Code: ' . $e->getCode() . ' - Message: ' . $e->getMessage();
                     log_message('error', $message);
                 }
 
-                return $message;
+                return FALSE;
             }
         }
 

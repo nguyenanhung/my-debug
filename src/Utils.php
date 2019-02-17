@@ -47,6 +47,11 @@ class Utils implements ProjectInterface, UtilsInterface
     public static function slugify($str = '')
     {
         if (!class_exists('\Cocur\Slugify\Slugify')) {
+            if (function_exists('log_message')) {
+                $message = 'Không tồn tại class Slugify';
+                log_message('error', $message);
+            }
+
             return self::convert_vi_to_en($str);
         }
         try {
@@ -55,6 +60,11 @@ class Utils implements ProjectInterface, UtilsInterface
             return $slugify->slugify($str);
         }
         catch (\Exception $e) {
+            if (function_exists('log_message')) {
+                $message = 'Error Code: ' . $e->getCode() . ' - File: ' . $e->getFile() . ' - Line: ' . $e->getLine() . ' - Message: ' . $e->getMessage();
+                log_message('error', $message);
+            }
+
             return self::convert_vi_to_en($str);
         }
     }
