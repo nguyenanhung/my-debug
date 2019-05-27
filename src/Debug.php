@@ -8,6 +8,10 @@
 
 namespace nguyenanhung\MyDebug;
 
+use Monolog\Logger;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\StreamHandler;
+
 /**
  * Class Debug
  *
@@ -53,10 +57,10 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy trạng thái Debug
      *
+     * @return bool|mixed
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:52
      *
-     * @return bool|mixed
      */
     public function getDebugStatus()
     {
@@ -66,12 +70,12 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm cấu hình trạng thái Debug
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/17/18 09:52
-     *
      * @param bool $debug TRUE nếu xác định lưu log, FALSE hoặc các giá trị khác sẽ không lưu log
      *
      * @return $this
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 09:52
+     *
      */
     public function setDebugStatus($debug = FALSE)
     {
@@ -83,10 +87,10 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm get Level lưu log cho toàn hệ thống
      *
+     * @return mixed|null|string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:53
      *
-     * @return mixed|null|string
      */
     public function getGlobalLoggerLevel()
     {
@@ -96,14 +100,14 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm cấu hình level Debug
      *
+     * @param null|string $globalLoggerLevel Level Debug được cấu hình theo chuẩn RFC 5424
+     *
+     * @return $this
+     * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels
+     * @see   https://tools.ietf.org/html/rfc5424
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:53
      *
-     * @param null|string $globalLoggerLevel Level Debug được cấu hình theo chuẩn RFC 5424
-     *
-     * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels
-     * @see   https://tools.ietf.org/html/rfc5424
-     * @return $this
      */
     public function setGlobalLoggerLevel($globalLoggerLevel = NULL)
     {
@@ -117,10 +121,10 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy thư mục lưu log - main Path
      *
+     * @return mixed|null|string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:55
      *
-     * @return mixed|null|string
      */
     public function getLoggerPath()
     {
@@ -130,10 +134,10 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy thư mục lưu log - sub Path
      *
+     * @return mixed|null|string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:56
      *
-     * @return mixed|null|string
      */
     public function getLoggerSubPath()
     {
@@ -143,12 +147,12 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm cấu hình thư mục lưu log - main Path
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/17/18 09:56
-     *
      * @param string $logger_path Đường dẫn tới thư mục lưu log, VD: /your/to/path
      *
      * @return $this
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 09:56
+     *
      */
     public function setLoggerPath($logger_path = '')
     {
@@ -162,12 +166,12 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm cấu hình thư mục lưu log - sub Path
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/17/18 09:57
-     *
      * @param string $sub_path Đường dẫn tới thư mục lưu log, VD: /your/to/sub-path
      *
      * @return $this
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 09:57
+     *
      */
     public function setLoggerSubPath($sub_path = '')
     {
@@ -181,10 +185,10 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy tên file Log
      *
+     * @return mixed|string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:57
      *
-     * @return mixed|string
      */
     public function getLoggerFilename()
     {
@@ -194,12 +198,12 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm cấu hình file lưu trữ Log
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/17/18 09:57
-     *
      * @param string $loggerFilename Filename cần lưu log, VD: app.log, Log-2018-10-17.log
      *
      * @return $this
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 09:57
+     *
      */
     public function setLoggerFilename($loggerFilename = '')
     {
@@ -215,10 +219,10 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy Date Format hiện tại
      *
+     * @return null|string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:58
      *
-     * @return null|string
      */
     public function getLoggerDateFormat()
     {
@@ -228,14 +232,14 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm quy định Date Format cho file Log
      *
+     * @param null $loggerDateFormat Logger Date Format, VD: Y-m-d H:i:s u
+     *
+     * @return $this
+     * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
+     * @see   https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:59
      *
-     * @param null $loggerDateFormat Logger Date Format, VD: Y-m-d H:i:s u
-     *
-     * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
-     * @see   https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
-     * @return $this
      */
     public function setLoggerDateFormat($loggerDateFormat = NULL)
     {
@@ -251,10 +255,10 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy thông tin về format dòng ghi log
      *
+     * @return null|string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:59
      *
-     * @return null|string
      */
     public function getLoggerLineFormat()
     {
@@ -264,15 +268,15 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm cấu hình thông tin về format dòng ghi log
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/17/18 10:00
-     *
      * @param null $loggerLineFormat Line Format Input, example: [%datetime%] %channel%.%level_name%: %message%
      *                               %context% %extra%\n
      *
+     * @return $this
      * @see   https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see   https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
-     * @return $this
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 10:00
+     *
      */
     public function setLoggerLineFormat($loggerLineFormat = NULL)
     {
@@ -288,18 +292,18 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm ghi log cho hệ thống
      *
-     * @author  : 713uk13m <dev@nguyenanhung.com>
-     * @time    : 10/6/18 23:35
-     *
      * @param string $level   Level Debug: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY
      * @param string $name    Log Name: log, etc...
      * @param string $msg     Log Message write to Log
      * @param array  $context Log Context aka Log Message Array format
      *
-     * @example log('info', 'test', 'Log Test', [])
-     *
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @example log('info', 'test', 'Log Test', [])
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:35
+     *
      */
     public function log($level = '', $name = 'log', $msg = 'My Message', $context = [])
     {
@@ -335,39 +339,39 @@ class Debug implements ProjectInterface, DebugInterface
                 }
                 switch ($useLevel) {
                     case 'debug':
-                        $keyLevel = \Monolog\Logger::DEBUG;
+                        $keyLevel = Logger::DEBUG;
                         break;
                     case 'info':
-                        $keyLevel = \Monolog\Logger::INFO;
+                        $keyLevel = Logger::INFO;
                         break;
                     case 'notice':
-                        $keyLevel = \Monolog\Logger::NOTICE;
+                        $keyLevel = Logger::NOTICE;
                         break;
                     case 'warning':
-                        $keyLevel = \Monolog\Logger::WARNING;
+                        $keyLevel = Logger::WARNING;
                         break;
                     case 'error':
-                        $keyLevel = \Monolog\Logger::ERROR;
+                        $keyLevel = Logger::ERROR;
                         break;
                     case 'critical':
-                        $keyLevel = \Monolog\Logger::CRITICAL;
+                        $keyLevel = Logger::CRITICAL;
                         break;
                     case 'alert':
-                        $keyLevel = \Monolog\Logger::ALERT;
+                        $keyLevel = Logger::ALERT;
                         break;
                     case 'emergency':
-                        $keyLevel = \Monolog\Logger::EMERGENCY;
+                        $keyLevel = Logger::EMERGENCY;
                         break;
                     default:
-                        $keyLevel = \Monolog\Logger::WARNING;
+                        $keyLevel = Logger::WARNING;
                 }
                 $loggerFilename = $this->loggerPath . DIRECTORY_SEPARATOR . $loggerSubPath . DIRECTORY_SEPARATOR . $this->loggerFilename;
                 $dateFormat     = !empty($this->loggerDateFormat) ? $this->loggerDateFormat : "Y-m-d H:i:s u";
                 $output         = !empty($this->loggerLineFormat) ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
-                $formatter      = new \Monolog\Formatter\LineFormatter($output, $dateFormat);
-                $stream         = new \Monolog\Handler\StreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
+                $formatter      = new LineFormatter($output, $dateFormat);
+                $stream         = new StreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
                 $stream->setFormatter($formatter);
-                $logger = new \Monolog\Logger(trim($name));
+                $logger = new Logger(trim($name));
                 $logger->pushHandler($stream);
                 if (empty($msg)) {
                     $msg = 'My Log Message is Empty';
@@ -394,17 +398,17 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function debug
      *
-     * @example DEBUG (100): Detailed debug information.
-     *
-     * @author  : 713uk13m <dev@nguyenanhung.com>
-     * @time    : 10/6/18 23:33
-     *
      * @param string $name    Log Name: log, etc...
      * @param string $msg     Log Message write to Log
      * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @example DEBUG (100): Detailed debug information.
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:33
+     *
      */
     public function debug($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -414,17 +418,17 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function info
      *
-     * @example INFO (200): Interesting events. Examples: User logs in, SQL logs.
-     *
-     * @author  : 713uk13m <dev@nguyenanhung.com>
-     * @time    : 10/6/18 23:33
-     *
      * @param string $name    Log Name: log, etc...
      * @param string $msg     Log Message write to Log
      * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @example INFO (200): Interesting events. Examples: User logs in, SQL logs.
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:33
+     *
      */
     public function info($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -434,17 +438,17 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function notice
      *
-     * @example NOTICE (250): Normal but significant events.
-     *
-     * @author  : 713uk13m <dev@nguyenanhung.com>
-     * @time    : 10/6/18 23:37
-     *
      * @param string $name    Log Name: log, etc...
      * @param string $msg     Log Message write to Log
      * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @example NOTICE (250): Normal but significant events.
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:37
+     *
      */
     public function notice($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -454,18 +458,18 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function warning
      *
-     * @example : WARNING (300): Exceptional occurrences that are not errors. - Use of deprecated APIs, poor use of an
-     *          API, undesirable things that are not necessarily wrong.
-     *
-     * @author  : 713uk13m <dev@nguyenanhung.com>
-     * @time    : 10/6/18 23:37
-     *
      * @param string $name    Log Name: log, etc...
      * @param string $msg     Log Message write to Log
      * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @example : WARNING (300): Exceptional occurrences that are not errors. - Use of deprecated APIs, poor use of an
+     *          API, undesirable things that are not necessarily wrong.
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:37
+     *
      */
     public function warning($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -475,18 +479,18 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function error
      *
-     * @example ERROR (400): Runtime errors that do not require immediate action but should typically be logged and
-     *          monitored.
-     *
-     * @author  : 713uk13m <dev@nguyenanhung.com>
-     * @time    : 10/6/18 23:37
-     *
      * @param string $name    Log Name: log, etc...
      * @param string $msg     Log Message write to Log
      * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @example ERROR (400): Runtime errors that do not require immediate action but should typically be logged and
+     *          monitored.
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:37
+     *
      */
     public function error($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -496,17 +500,17 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function critical
      *
-     * @example : CRITICAL (500): Critical conditions. - Application component unavailable, unexpected exception.
-     *
-     * @author  : 713uk13m <dev@nguyenanhung.com>
-     * @time    : 10/6/18 23:38
-     *
      * @param string $name    Log Name: log, etc...
      * @param string $msg     Log Message write to Log
      * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @example : CRITICAL (500): Critical conditions. - Application component unavailable, unexpected exception.
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:38
+     *
      */
     public function critical($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -516,18 +520,18 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function alert
      *
-     * @example : ALERT (550): Action must be taken immediately. - Entire website down, database unavailable, etc. This
-     *          should trigger the SMS alerts and wake you up.
-     *
-     * @author  : 713uk13m <dev@nguyenanhung.com>
-     * @time    : 10/6/18 23:38
-     *
      * @param string $name    Log Name: log, etc...
      * @param string $msg     Log Message write to Log
      * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @example : ALERT (550): Action must be taken immediately. - Entire website down, database unavailable, etc. This
+     *          should trigger the SMS alerts and wake you up.
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:38
+     *
      */
     public function alert($name = 'log', $msg = 'My Message', $context = [])
     {
@@ -537,17 +541,17 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Function emergency
      *
-     * @example EMERGENCY (600): Emergency: system is unusable.
-     *
-     * @author  : 713uk13m <dev@nguyenanhung.com>
-     * @time    : 10/6/18 23:38
-     *
      * @param string $name    Log Name: log, etc...
      * @param string $msg     Log Message write to Log
      * @param array  $context Log Context aka Log Message Array format
      *
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @example EMERGENCY (600): Emergency: system is unusable.
+     *
+     * @author  : 713uk13m <dev@nguyenanhung.com>
+     * @time    : 10/6/18 23:38
+     *
      */
     public function emergency($name = 'log', $msg = 'My Message', $context = [])
     {

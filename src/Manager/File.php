@@ -45,10 +45,10 @@ class File extends Filesystem
     /**
      * Hàm lấy thông tin phiên bản Packages
      *
+     * @return string Phiên bản hiện tại của Packages, VD: 0.1.1
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 9/27/18 18:32
      *
-     * @return string Phiên bản hiện tại của Packages, VD: 0.1.1
      */
     public function getVersion()
     {
@@ -58,16 +58,16 @@ class File extends Filesystem
     /**
      * Hàm quét thư mục và list ra danh sách các file con
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/17/18 10:19
-     *
      * @param string     $path    Đường dẫn thư mục cần quét, VD: /your/to/path
      * @param null|array $include Mảng dữ liệu chứa các thuộc tính cần quét
      * @param null|array $exclude Mảng dữ liệu chứa các thuộc tính bỏ qua không quét
      *
+     * @return \Iterator
      * @see   https://github.com/theseer/DirectoryScanner/blob/master/samples/sample.php
      *
-     * @return \Iterator
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 10:19
+     *
      */
     public function directoryScanner($path = '', $include = NULL, $exclude = NULL)
     {
@@ -89,10 +89,11 @@ class File extends Filesystem
     /**
      * Function setInclude
      *
+     * @param array $include
+     *
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 10:23
      *
-     * @param array $include
      */
     public function setInclude($include = [])
     {
@@ -102,10 +103,11 @@ class File extends Filesystem
     /**
      * Function setExclude
      *
+     * @param array $exclude
+     *
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 10:23
      *
-     * @param array $exclude
      */
     public function setExclude($exclude = [])
     {
@@ -115,14 +117,14 @@ class File extends Filesystem
     /**
      * Hàm xóa các file Log được chỉ định
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/17/18 10:21
-     *
      * @param string $path     Thư mục cần quét và xóa
      * @param int    $dayToDel Số ngày cần giữ lại file
      *
      * @return array Mảng thông tin về các file đã xóa
      * @throws \Exception
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 10:21
+     *
      */
     public function cleanLog($path = '', $dayToDel = 3)
     {
@@ -153,9 +155,6 @@ class File extends Filesystem
     /**
      * Hàm quét thư mục và zip toàn bộ các file thỏa mãn điều kiện
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/17/18 10:51
-     *
      * @param string $scanPath Thư mục cần quét file và zip
      * @param int    $dayToZip Số ngày bỏ qua không zipm mặc định = 3
      * @param string $zipPath  Thư mục lưu trữ file Zip
@@ -172,6 +171,9 @@ class File extends Filesystem
      *
      *               'listFile' => Mảng dữ liệu chứa danh sách file đã nén, trống biến này nghĩa là ko tìm thấy file nào
      * @throws \Exception
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/17/18 10:51
+     *
      */
     public function scanAndZip($scanPath = '', $dayToZip = 3, $zipPath = '')
     {

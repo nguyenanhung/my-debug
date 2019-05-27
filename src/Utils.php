@@ -8,6 +8,7 @@
 
 namespace nguyenanhung\MyDebug;
 
+use Cocur\Slugify\Slugify;
 use nguyenanhung\MyDebug\Repository\DataRepository;
 
 /**
@@ -25,24 +26,17 @@ class Utils implements ProjectInterface, UtilsInterface
     use Version;
 
     /**
-     * Utils constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Function slugify
      *
      * Hàm chuyển đổi ký tự từ tiếng Việt,
      * và các ký tự đặc biệt sang ký tự không dấu
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/9/18 00:31
-     *
      * @param string $str Chuỗi ký tự đầu vào
      *
      * @return mixed|null|string Đầu ra rà 1 chuỗi ký tự
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/9/18 00:31
+     *
      */
     public static function slugify($str = '')
     {
@@ -55,7 +49,7 @@ class Utils implements ProjectInterface, UtilsInterface
             return self::convert_vi_to_en($str);
         }
         try {
-            $slugify = new \Cocur\Slugify\Slugify();
+            $slugify = new Slugify();
 
             return $slugify->slugify($str);
         }
@@ -77,12 +71,12 @@ class Utils implements ProjectInterface, UtilsInterface
      *
      * Sử dụng trong trường hợp class slugify nó không chạy
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/13/18 01:17
-     *
      * @param string $str Chuỗi ký tự đầu vào
      *
      * @return mixed|string Đầu ra rà 1 chuỗi ký tự
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 10/13/18 01:17
+     *
      */
     public static function convert_vi_to_en($str = '')
     {
