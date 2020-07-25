@@ -8,6 +8,7 @@
 
 namespace nguyenanhung\MyDebug;
 
+use Exception;
 use Cocur\Slugify\Slugify;
 use nguyenanhung\MyDebug\Repository\DataRepository;
 
@@ -53,10 +54,10 @@ class Utils implements ProjectInterface, UtilsInterface
 
             return $slugify->slugify($str);
         }
-        catch (\Exception $e) {
+        catch (Exception $e) {
             if (function_exists('log_message')) {
-                $message = 'Error Code: ' . $e->getCode() . ' - File: ' . $e->getFile() . ' - Line: ' . $e->getLine() . ' - Message: ' . $e->getMessage();
-                log_message('error', $message);
+                log_message('error', 'Error Message: ' . $e->getMessage());
+                log_message('error', 'Error TraceAsString: ' . $e->getTraceAsString());
             }
 
             return self::convert_vi_to_en($str);
