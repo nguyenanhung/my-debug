@@ -8,6 +8,7 @@
 
 namespace nguyenanhung\MyDebug;
 
+use Exception;
 use Monolog\Logger;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
@@ -382,10 +383,10 @@ class Debug implements ProjectInterface, DebugInterface
                     return $logger->$level($msg . json_encode($context));
                 }
             }
-            catch (\Exception $e) {
+            catch (Exception $e) {
                 if (function_exists('log_message')) {
-                    $message = 'Error File: ' . $e->getFile() . ' - Line: ' . $e->getLine() . ' - Code: ' . $e->getCode() . ' - Message: ' . $e->getMessage();
-                    log_message('error', $message);
+                    log_message('error', 'Error Message: ' . $e->getMessage());
+                    log_message('error', 'Error TraceAsString: ' . $e->getTraceAsString());
                 }
 
                 return FALSE;

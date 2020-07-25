@@ -9,6 +9,8 @@
 
 namespace nguyenanhung\MyDebug\Manager;
 
+use SplFileInfo;
+use DateTime;
 use Symfony\Component\Filesystem\Filesystem;
 use TheSeer\DirectoryScanner\DirectoryScanner;
 use Alchemy\Zippy\Zippy;
@@ -133,11 +135,11 @@ class File extends Filesystem
         $result['time']     = date('Y-m-d H:i:s');
         $result['listFile'] = [];
         foreach ($getDir as $fileName) {
-            $SplFileInfo = new \SplFileInfo($fileName);
+            $SplFileInfo = new SplFileInfo($fileName);
             $filename    = $SplFileInfo->getPathname();
             $format      = 'YmdHis';
             // Lấy thời gian xác định xóa fileName
-            $dateTime   = new \DateTime("-" . $dayToDel . " days");
+            $dateTime   = new DateTime("-" . $dayToDel . " days");
             $deleteTime = $dateTime->format($format);
             // Lấy modifyTime của file
             $getfileTime = filemtime($filename);
@@ -188,7 +190,7 @@ class File extends Filesystem
         $zipPathFilename = $zipPath . date('Y-m-d-H-i-s') . '-archive.zip';
         // Lấy thời gian xác định sẽ Zip file
         $format                = 'YmdHis';
-        $dateTime              = new \DateTime("-" . $dayToZip . " days");
+        $dateTime              = new DateTime("-" . $dayToZip . " days");
         $zipTime               = $dateTime->format($format);
         $result                = [];
         $result['time']        = date('Y-m-d H:i:s');
@@ -197,7 +199,7 @@ class File extends Filesystem
         $result['zipFilePath'] = $zipPathFilename;
         $result['listFile']    = [];
         foreach ($getDir as $fileName) {
-            $SplFileInfo = new \SplFileInfo($fileName);
+            $SplFileInfo = new SplFileInfo($fileName);
             $filename    = $SplFileInfo->getPathname();
             // Lấy modifyTime của file
             $getfileTime = filemtime($filename);
