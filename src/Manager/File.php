@@ -9,6 +9,7 @@
 
 namespace nguyenanhung\MyDebug\Manager;
 
+use Exception;
 use SplFileInfo;
 use DateTime;
 use Symfony\Component\Filesystem\Filesystem;
@@ -119,39 +120,69 @@ class File extends Filesystem
     /**
      * Hàm xóa các file Log được chỉ định
      *
-     * @param string $path     Thư mục cần quét và xóa
-     * @param int    $dayToDel Số ngày cần giữ lại file
+     * @param string $path        Thư mục cần quét và xóa
+     * @param int    $dayToDelete Số ngày cần giữ lại file
      *
-     * @return array Mảng thông tin về các file đã xóa
-     * @throws \Exception
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/17/18 10:21
-     *
+     * @return array|bool Array nếu trả về mảng dữ liệu cần delete, false nếu có lỗi xảy ra
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 07/30/2020 59:36
      */
-    public function cleanLog($path = '', $dayToDel = 3)
+    public function cleanLog($path = '', $dayToDelete = 3)
     {
-        $getDir             = $this->directoryScanner($path, $this->scanInclude, $this->scanExclude);
-        $result             = [];
-        $result['time']     = date('Y-m-d H:i:s');
-        $result['listFile'] = [];
-        foreach ($getDir as $fileName) {
-            $SplFileInfo = new SplFileInfo($fileName);
-            $filename    = $SplFileInfo->getPathname();
-            $format      = 'YmdHis';
-            // Lấy thời gian xác định xóa fileName
-            $dateTime   = new DateTime("-" . $dayToDel . " days");
-            $deleteTime = $dateTime->format($format);
-            // Lấy modifyTime của file
-            $getfileTime = filemtime($filename);
-            $fileTime    = date($format, $getfileTime);
-            if ($fileTime < $deleteTime) {
-                $this->chmod($filename, 0777);
-                $this->remove($filename);
-                $result['listFile'][] .= "Delete file: " . $filename;
+        try {
+            $getDir             = $this->directoryScanner($path, $this->scanInclude, $this->scanExclude);
+            $result             = [];
+            $result['time']     = date('Y-m-d H:i:s');
+            $result['listFile'] = [];
+            foreach ($getDir as $fileName) {
+                $SplFileInfo = new SplFileInfo($fileName);
+                $filename    = $SplFileInfo->getPathname();
+                $format      = 'YmdHis';
+                // Lấy thời gian xác định xóa fileName
+                $dateTime   = new DateTime("-" . $dayToDelete . " days");
+                $deleteTime = $dateTime->format($format);
+                // Lấy modifyTime của file
+                $getfileTime = filemtime($filename);
+                $fileTime    = date($format, $getfileTime);
+                if ($fileTime < $deleteTime) {
+                    $this->chmod($filename, 0777);
+                    $this->remove($filename);
+                    $result['listFile'][] .= "Delete file: " . $filename;
+                }
             }
-        }
 
-        return $result;
+            return $result;
+        }
+        catch (Exception $e) {
+            if (function_exists('log_message')) {
+                log_message('error', 'Error Message: ' . $e->getMessage());
+                log_message('error', 'Error Trace As String: ' . $e->getTraceAsString());
+            }
+
+            return FALSE;
+        }
+    }
+
+    /**
+     * Hàm quét và xoá các file Log từ 1 mảng chỉ định
+     *
+     * @param array $listFolder  Mảng chứa dữ liệu các folder cần quét
+     * @param int   $dayToDelete Số ngày cần lưu giữ
+     *
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 07/30/2020 03:15
+     */
+    public function scanAndCleanLog($listFolder = array(), $dayToDelete = 3)
+    {
+        if (empty($listFolder)) {
+            echo "Không có mảng dữ liệu cần quét";
+        }
+        foreach ($listFolder as $folder) {
+            echo "=========|| DELETE FOLDER LOG: " . $folder . " ||=========" . PHP_EOL;
+            echo $this->cleanLog($folder, $dayToDelete) . PHP_EOL;
+        }
     }
 
     /**
