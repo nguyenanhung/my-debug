@@ -195,7 +195,7 @@ interface DebugInterface
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      */
-    public function log($level = '', $name = 'log', $msg = 'My Message', $context = []);
+    public function log($level = '', $name = 'log', $msg = 'My Message', $context = array());
 
     /**
      * Function debug
@@ -212,7 +212,7 @@ interface DebugInterface
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      */
-    public function debug($name = 'log', $msg = 'My Message', $context = []);
+    public function debug($name = 'log', $msg = 'My Message', $context = array());
 
     /**
      * Function info
@@ -229,7 +229,7 @@ interface DebugInterface
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      */
-    public function info($name = 'log', $msg = 'My Message', $context = []);
+    public function info($name = 'log', $msg = 'My Message', $context = array());
 
     /**
      * Function notice
@@ -246,7 +246,7 @@ interface DebugInterface
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      */
-    public function notice($name = 'log', $msg = 'My Message', $context = []);
+    public function notice($name = 'log', $msg = 'My Message', $context = array());
 
     /**
      * Function warning
@@ -264,7 +264,7 @@ interface DebugInterface
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      */
-    public function warning($name = 'log', $msg = 'My Message', $context = []);
+    public function warning($name = 'log', $msg = 'My Message', $context = array());
 
     /**
      * Function error
@@ -282,7 +282,7 @@ interface DebugInterface
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      */
-    public function error($name = 'log', $msg = 'My Message', $context = []);
+    public function error($name = 'log', $msg = 'My Message', $context = array());
 
     /**
      * Function critical
@@ -299,7 +299,7 @@ interface DebugInterface
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      */
-    public function critical($name = 'log', $msg = 'My Message', $context = []);
+    public function critical($name = 'log', $msg = 'My Message', $context = array());
 
     /**
      * Function alert
@@ -317,7 +317,7 @@ interface DebugInterface
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      */
-    public function alert($name = 'log', $msg = 'My Message', $context = []);
+    public function alert($name = 'log', $msg = 'My Message', $context = array());
 
     /**
      * Function emergency
@@ -334,5 +334,5 @@ interface DebugInterface
      * @return mixed TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy
      *               ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      */
-    public function emergency($name = 'log', $msg = 'My Message', $context = []);
+    public function emergency($name = 'log', $msg = 'My Message', $context = array());
 }
