@@ -43,7 +43,7 @@ class DataRepository implements ProjectInterface
             return require $path;
         }
 
-        return [];
+        return array();
     }
 
     /**
@@ -62,6 +62,6 @@ class DataRepository implements ProjectInterface
             return require $filename;
         }
 
-        return [];
+        return array();
     }
 }

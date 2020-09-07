@@ -306,7 +306,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @time    : 10/6/18 23:35
      *
      */
-    public function log($level = '', $name = 'log', $msg = 'My Message', $context = [])
+    public function log($level = '', $name = 'log', $msg = 'My Message', $context = array())
     {
         $level = strtolower(trim($level));
         if ($this->DEBUG == TRUE) {
@@ -411,7 +411,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @time    : 10/6/18 23:33
      *
      */
-    public function debug($name = 'log', $msg = 'My Message', $context = [])
+    public function debug($name = 'log', $msg = 'My Message', $context = array())
     {
         return $this->log('debug', $name, $msg, $context);
     }
@@ -431,7 +431,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @time    : 10/6/18 23:33
      *
      */
-    public function info($name = 'log', $msg = 'My Message', $context = [])
+    public function info($name = 'log', $msg = 'My Message', $context = array())
     {
         return $this->log('info', $name, $msg, $context);
     }
@@ -451,7 +451,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @time    : 10/6/18 23:37
      *
      */
-    public function notice($name = 'log', $msg = 'My Message', $context = [])
+    public function notice($name = 'log', $msg = 'My Message', $context = array())
     {
         return $this->log('notice', $name, $msg, $context);
     }
@@ -472,7 +472,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @time    : 10/6/18 23:37
      *
      */
-    public function warning($name = 'log', $msg = 'My Message', $context = [])
+    public function warning($name = 'log', $msg = 'My Message', $context = array())
     {
         return $this->log('warning', $name, $msg, $context);
     }
@@ -493,7 +493,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @time    : 10/6/18 23:37
      *
      */
-    public function error($name = 'log', $msg = 'My Message', $context = [])
+    public function error($name = 'log', $msg = 'My Message', $context = array())
     {
         return $this->log('error', $name, $msg, $context);
     }
@@ -513,7 +513,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @time    : 10/6/18 23:38
      *
      */
-    public function critical($name = 'log', $msg = 'My Message', $context = [])
+    public function critical($name = 'log', $msg = 'My Message', $context = array())
     {
         return $this->log('critical', $name, $msg, $context);
     }
@@ -534,7 +534,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @time    : 10/6/18 23:38
      *
      */
-    public function alert($name = 'log', $msg = 'My Message', $context = [])
+    public function alert($name = 'log', $msg = 'My Message', $context = array())
     {
         return $this->log('alert', $name, $msg, $context);
     }
@@ -554,7 +554,7 @@ class Debug implements ProjectInterface, DebugInterface
      * @time    : 10/6/18 23:38
      *
      */
-    public function emergency($name = 'log', $msg = 'My Message', $context = [])
+    public function emergency($name = 'log', $msg = 'My Message', $context = array())
     {
         return $this->log('emergency', $name, $msg, $context);
     }

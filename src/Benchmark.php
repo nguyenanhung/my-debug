@@ -37,7 +37,7 @@ class Benchmark implements ProjectInterface, BenchmarkInterface
      *
      * @var    array
      */
-    public $marker = [];
+    public $marker = array();
 
     /**
      * Set a benchmark marker

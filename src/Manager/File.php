@@ -98,7 +98,7 @@ class File extends Filesystem
      * @time  : 10/17/18 10:23
      *
      */
-    public function setInclude($include = [])
+    public function setInclude($include = array())
     {
         $this->scanInclude = $include;
     }
@@ -112,7 +112,7 @@ class File extends Filesystem
      * @time  : 10/17/18 10:23
      *
      */
-    public function setExclude($exclude = [])
+    public function setExclude($exclude = array())
     {
         $this->scanExclude = $exclude;
     }
@@ -132,9 +132,9 @@ class File extends Filesystem
     {
         try {
             $getDir             = $this->directoryScanner($path, $this->scanInclude, $this->scanExclude);
-            $result             = [];
+            $result             = array();
             $result['time']     = date('Y-m-d H:i:s');
-            $result['listFile'] = [];
+            $result['listFile'] = array();
             foreach ($getDir as $fileName) {
                 $SplFileInfo = new SplFileInfo($fileName);
                 $filename    = $SplFileInfo->getPathname();
@@ -223,12 +223,12 @@ class File extends Filesystem
         $format                = 'YmdHis';
         $dateTime              = new DateTime("-" . $dayToZip . " days");
         $zipTime               = $dateTime->format($format);
-        $result                = [];
+        $result                = array();
         $result['time']        = date('Y-m-d H:i:s');
         $result['timeToZip']   = $dateTime->format('Y-m-d H:i:s');
         $result['zipPath']     = $zipPath;
         $result['zipFilePath'] = $zipPathFilename;
-        $result['listFile']    = [];
+        $result['listFile']    = array();
         foreach ($getDir as $fileName) {
             $SplFileInfo = new SplFileInfo($fileName);
             $filename    = $SplFileInfo->getPathname();
