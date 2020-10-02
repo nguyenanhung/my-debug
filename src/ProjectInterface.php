@@ -18,7 +18,7 @@ namespace nguyenanhung\MyDebug;
  */
 interface ProjectInterface
 {
-    const VERSION = '1.0.5';
+    const VERSION = '2.0.0';
 
     /**
      * Hàm lấy thông tin phiên bản Packages
