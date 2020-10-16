@@ -21,17 +21,20 @@ namespace nguyenanhung\MyDebug;
  * @since      2018-10-17
  * @version    0.1.2.5
  */
-class Benchmark implements ProjectInterface, BenchmarkInterface
+class Benchmark implements ProjectInterface
 {
     use Version;
 
     /**
      * Benchmark constructor.
+     *
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
      */
     public function __construct()
     {
     }
-    /***************************** SIMPLE BENCHMARKING BY CI *****************************/
+
     /**
      * List of all benchmark markers
      *
@@ -45,7 +48,7 @@ class Benchmark implements ProjectInterface, BenchmarkInterface
      * Multiple calls to this function can be made so that several
      * execution points can be timed.
      *
-     * @param    string $name Marker name
+     * @param string $name Marker name
      *
      * @return    void
      */
@@ -64,9 +67,9 @@ class Benchmark implements ProjectInterface, BenchmarkInterface
      * execution time to be shown in a template. The output class will
      * swap the real value for this variable.
      *
-     * @param    string $point1   A particular marked point
-     * @param    string $point2   A particular marked point
-     * @param    int    $decimals Number of decimal places
+     * @param string $point1   A particular marked point
+     * @param string $point2   A particular marked point
+     * @param int    $decimals Number of decimal places
      *
      * @return    string    Calculated elapsed time on success,
      *            an '{elapsed_string}' if $point1 is empty
@@ -99,8 +102,6 @@ class Benchmark implements ProjectInterface, BenchmarkInterface
      */
     public function memory_usage()
     {
-        $memory = round(memory_get_usage() / 1024 / 1024, 2) . 'MB';
-
-        return $memory;
+        return round(memory_get_usage() / 1024 / 1024, 2) . 'MB';
     }
 }
