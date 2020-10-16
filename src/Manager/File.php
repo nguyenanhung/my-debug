@@ -144,8 +144,8 @@ class File extends Filesystem
                 $dateTime   = new DateTime("-" . $dayToDelete . " days");
                 $deleteTime = $dateTime->format($format);
                 // Lấy modifyTime của file
-                $getfileTime = filemtime($filename);
-                $fileTime    = date($format, $getfileTime);
+                $getFileTime = filemtime($filename);
+                $fileTime    = date($format, $getFileTime);
                 if ($fileTime < $deleteTime) {
                     $this->chmod($filename, 0777);
                     $this->remove($filename);
@@ -234,8 +234,8 @@ class File extends Filesystem
             $SplFileInfo = new SplFileInfo($fileName);
             $filename    = $SplFileInfo->getPathname();
             // Lấy modifyTime của file
-            $getfileTime = filemtime($filename);
-            $fileTime    = date($format, $getfileTime);
+            $getFileTime = filemtime($filename);
+            $fileTime    = date($format, $getFileTime);
             if ($fileTime < $zipTime) {
                 if (!file_exists($zipPath)) {
                     $this->mkdir($zipPath);
