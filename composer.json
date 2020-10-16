@@ -29,6 +29,7 @@
         "alchemy/zippy": "^0.4"
     },
     "require-dev": {
+        "ext-zip": "*",
         "kint-php/kint": "^3.0"
     },
     "suggest": {

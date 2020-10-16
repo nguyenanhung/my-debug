@@ -22,7 +22,7 @@ use nguyenanhung\MyDebug\Repository\DataRepository;
  * @since      2018-10-17
  * @version    0.1.2.5
  */
-class Utils implements ProjectInterface, UtilsInterface
+class Utils implements ProjectInterface
 {
     use Version;
 
