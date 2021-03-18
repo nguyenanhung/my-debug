@@ -26,11 +26,12 @@ use Monolog\Handler\StreamHandler;
  * @author     713uk13m <dev@nguyenanhung.com>
  * @copyright  713uk13m <dev@nguyenanhung.com>
  * @since      2018-10-17
- * @version    0.1.2.5
+ * @version    2.0.2
  */
 class Debug implements ProjectInterface, DebugInterface
 {
     use Version;
+
     const LOG_BUBBLE      = TRUE;
     const FILE_PERMISSION = 0777;
     /** @var bool Cấu hình trạng thái Debug, TRUE nếu cấu hình Debug được bật */
@@ -336,6 +337,7 @@ class Debug implements ProjectInterface, DebugInterface
                     // If valid globalLoggerLevel -> use globalLoggerLevel
                     $useLevel = strtolower($this->globalLoggerLevel);
                 } else {
+                    // Default Level is INFO
                     $useLevel = in_array($level, $listLevel) ? trim($level) : trim('info');
                 }
                 switch ($useLevel) {
