@@ -15,6 +15,6 @@ use nguyenanhung\MyDebug\Utils;
 $utils = new Utils();
 $str   = 'Nguyễn An Hưng';
 
-d($utils->getVersion());
-d($utils::slugify($str));
-d($utils::convert_vi_to_en($str));
+dump($utils->getVersion());
+dump($utils::slugify($str));
+dump($utils::convert_vi_to_en($str));
