@@ -38,12 +38,12 @@ echo "\n setLoggerSubPath: " . $debug->getLoggerSubPath() . "\n";
 echo "\n setLoggerFilename: " . $debug->getLoggerFilename() . "\n";
 echo "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
-d($debug->debug($name, $msg . ' - DEBUG', $context));
-d($debug->info($name, $msg . ' - INFO', $context));
-d($debug->notice($name, $msg . ' - NOTICE', $context));
-d($debug->warning($name, $msg . ' - WARNING', $context));
-d($debug->error($name, $msg . ' - ERROR', $context));
-d($debug->critical($name, $msg . ' - CRITICAL', $context));
-d($debug->alert($name, $msg . ' - ALERT', $context));
-d($debug->emergency($name, $msg . ' - EMERGENCY', $context));
+dump($debug->debug($name, $msg . ' - DEBUG', $context));
+dump($debug->info($name, $msg . ' - INFO', $context));
+dump($debug->notice($name, $msg . ' - NOTICE', $context));
+dump($debug->warning($name, $msg . ' - WARNING', $context));
+dump($debug->error($name, $msg . ' - ERROR', $context));
+dump($debug->critical($name, $msg . ' - CRITICAL', $context));
+dump($debug->alert($name, $msg . ' - ALERT', $context));
+dump($debug->emergency($name, $msg . ' - EMERGENCY', $context));
 
