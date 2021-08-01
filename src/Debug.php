@@ -59,7 +59,7 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy trạng thái Debug
      *
-     * @return bool|mixed
+     * @return bool
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:52
      *
@@ -89,7 +89,7 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm get Level lưu log cho toàn hệ thống
      *
-     * @return mixed|null|string
+     * @return null|string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:53
      *
@@ -123,7 +123,7 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy thư mục lưu log - main Path
      *
-     * @return mixed|null|string
+     * @return null|string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:55
      *
@@ -136,7 +136,7 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy thư mục lưu log - sub Path
      *
-     * @return mixed|null|string
+     * @return null|string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:56
      *
@@ -187,7 +187,7 @@ class Debug implements ProjectInterface, DebugInterface
     /**
      * Hàm lấy tên file Log
      *
-     * @return mixed|string
+     * @return string|null
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:57
      *
