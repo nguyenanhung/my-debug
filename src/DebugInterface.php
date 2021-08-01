@@ -114,7 +114,7 @@ interface DebugInterface
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/17/18 09:57
      *
-     * @return mixed|string
+     * @return mixed|string|null
      */
     public function getLoggerFilename();
 
