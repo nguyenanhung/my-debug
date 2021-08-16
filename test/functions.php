@@ -9,10 +9,11 @@ if (!function_exists('dump')) {
     /**
      * Function dump
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/7/18 04:36
-     *
      * @param string $str
+     *
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/17/2021 54:19
      */
     function dump($str = '')
     {
@@ -26,13 +27,13 @@ if (!function_exists('testLogPath')) {
     /**
      * Function testLogPath
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/7/18 04:36
-     *
      * @return string
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/17/2021 54:17
      */
     function testLogPath()
     {
-        return __DIR__ . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR;
+        return __DIR__ . '/../storage/logs/';
     }
 }

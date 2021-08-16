@@ -26,7 +26,6 @@
         "symfony/filesystem": "^5.3 || ^4.4"
     },
     "suggest": {
-        "ext-curl": "Needed to support cURL",
         "ext-json": "Needed to support JSON",
         "ext-iconv": "Needed to support ICONV",
         "ext-mbstring": "Needed to support MbString",
