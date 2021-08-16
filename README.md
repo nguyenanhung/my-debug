@@ -8,7 +8,23 @@
 
 # My Debug
 
-## Debug
+1 thư viện nhỏ hỗ trợ việc ghi log, benchmark ứng dụng PHP. Được customize lại cho phù hợp mục đích sử dụng
+
+## Dependents
+
+Thư viện có sử dụng các gói sau đây
+
+- [x] monolog/monolog `^2.3`
+- [x] cocur/slugify `^4.0`
+- [x] theseer/directoryscanner `^1.3`
+- [x] symfony/filesystem `^5.3 || ^4.4`
+
+## Usage
+
+Tham khảo hướng dẫn triển khai tại đây và trong thư mục `test/`
+
+### Debug
+
 ```php
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -29,7 +45,7 @@ $context     = [
 // Call
 $debug = new Debug();
 $debug->setDebugStatus(TRUE);
-$debug->setGlobalLoggerLevel(NULL);
+$debug->setGlobalLoggerLevel('info');
 $debug->setLoggerPath($logPath);
 $debug->setLoggerSubPath($logSubPath);
 $debug->setLoggerFilename($logFilename);
@@ -52,7 +68,8 @@ dump($debug->alert($name, $msg . ' - ALERT', $context));
 dump($debug->emergency($name, $msg . ' - EMERGENCY', $context));
 ```
 
-## Benchmark
+### Benchmark
+
 ```php
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -80,7 +97,8 @@ dump($benchmark->memory_usage());
 /***************************** SIMPLE BENCHMARKING BY CI *****************************/
 ```
 
-## Manage File
+### Manage File
+
 ```php
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -95,10 +113,11 @@ dump($file->getVersion());
 
 $path = testLogPath();
 
-dump($file->scanAndZip($path, 3));
+dump($file->cleanLog($path, 7));
 ```
 
-## Utils
+### Utils
+
 ```php
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -115,6 +134,7 @@ dump($utils::convert_vi_to_en($str));
 ```
 
 ## Support
+
 If any question & request, please contact following information
 
 | Name        | Email                | Skype            | Facebook      |
