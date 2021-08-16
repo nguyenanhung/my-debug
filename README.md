@@ -128,9 +128,9 @@ use nguyenanhung\MyDebug\Utils;
 $utils = new Utils();
 $str   = 'Nguyễn An Hưng';
 
-dump($utils->getVersion());
-dump($utils::slugify($str));
-dump($utils::convert_vi_to_en($str));
+dump($utils->getVersion()); // show "2.0.5"
+dump($utils::slugify($str)); // show "nguyen-an-hung"
+dump($utils::convert_vi_to_en($str)); // show "nguyen-an-hung"
 ```
 
 ## Support
