@@ -119,7 +119,7 @@ GitHub.sublime-settings
 
 ## Composer
 /vendor/
-# composer.lock
+composer.lock
 storage/*
 storage/logs/*
 storage/cache/*
