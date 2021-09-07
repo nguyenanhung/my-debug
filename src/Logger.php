@@ -2,22 +2,71 @@
 /**
  * Created by PhpStorm.
  * User: 713uk13m <dev@nguyenanhung.com>
- * Date: 9/30/18
- * Time: 17:11
+ * Date: 9/27/18
+ * Time: 18:31
  */
 
 namespace nguyenanhung\MyDebug;
 
+use Exception;
+use Monolog\Logger as MonoLogger;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\StreamHandler;
+
 /**
- * Interface DebugInterface
+ * Class Logger
  *
- * @category  Interface
- * @package   nguyenanhung\MyDebug
- * @author    713uk13m <dev@nguyenanhung.com>
- * @copyright 713uk13m <dev@nguyenanhung.com>
+ * Class Logger là 1 Wrapper class customize lại Monolog để tiện sử dụng
+ *
+ * Mọi logic trong class này có thể không đúng với rules của Monolog nhưng vẫn đảm bảo được việc ghi nhận log
+ *
+ * @category          Class
+ * @package           nguyenanhung\MyDebug
+ * @author            713uk13m <dev@nguyenanhung.com>
+ * @copyright         713uk13m <dev@nguyenanhung.com>
+ * @since             2018-10-17
+ * @last_updated      2021-08-17
+ * @version           2.0.5
  */
-interface DebugInterface
+class Logger implements Project
 {
+    use Version;
+
+    const LOG_BUBBLE = true;
+
+    const FILE_PERMISSION = 0777;
+
+    /** @var bool Cấu hình trạng thái Debug, TRUE nếu cấu hình Debug được bật */
+    private $DEBUG = false;
+
+    /** @var null|string Cấu hình Level lưu Log theo tiêu chuẩn RFC 5424 */
+    private $globalLoggerLevel = null;
+
+    /** @var null|string Đường dẫn thư mục lưu trữ Log, VD: /your/to/path */
+    private $loggerPath = 'logs';
+
+    /** @var null|string Tương tự với $loggerPath, mặc định dùng để lưu tên class phát sinh log */
+    private $loggerSubPath = null;
+
+    /** @var null|string Filename lưu log, khuyến nghị theo chuẩn Log-Y-m-d.log, VD: Log-2018-10-17.log */
+    private $loggerFilename = null;
+
+    /** @var null|string Logger Date Format, VD: Y-m-d H:i:s u */
+    private $loggerDateFormat = null;
+
+    /** @var null|string Logger Line Format, VD: "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n" */
+    private $loggerLineFormat = null;
+
+    /**
+     * Logger constructor.
+     *
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     */
+    public function __construct()
+    {
+    }
+
     /**
      * Function getDebugStatus - Hàm lấy trạng thái Debug
      *
@@ -26,7 +75,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 59:07
      */
-    public function getDebugStatus();
+    public function getDebugStatus()
+    {
+        return $this->DEBUG;
+    }
 
     /**
      * Function setDebugStatus - Hàm cấu hình trạng thái Debug
@@ -38,7 +90,12 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 59:17
      */
-    public function setDebugStatus($debug = FALSE);
+    public function setDebugStatus($debug = false)
+    {
+        $this->DEBUG = $debug;
+
+        return $this;
+    }
 
     /**
      * Function getGlobalLoggerLevel - Hàm get Level lưu log cho toàn hệ thống
@@ -48,7 +105,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 59:49
      */
-    public function getGlobalLoggerLevel();
+    public function getGlobalLoggerLevel()
+    {
+        return $this->globalLoggerLevel;
+    }
 
     /**
      * Function setGlobalLoggerLevel - Hàm cấu hình level Debug
@@ -63,7 +123,14 @@ interface DebugInterface
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels
      * @see      https://tools.ietf.org/html/rfc5424
      */
-    public function setGlobalLoggerLevel($globalLoggerLevel = NULL);
+    public function setGlobalLoggerLevel($globalLoggerLevel = null)
+    {
+        if (!empty($globalLoggerLevel) && is_string($globalLoggerLevel)) {
+            $this->globalLoggerLevel = strtolower($globalLoggerLevel);
+        }
+
+        return $this;
+    }
 
     /**
      * Function getLoggerPath - Hàm lấy thư mục lưu log - main Path
@@ -73,7 +140,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 01:17
      */
-    public function getLoggerPath();
+    public function getLoggerPath()
+    {
+        return $this->loggerPath;
+    }
 
     /**
      * Function getLoggerSubPath - Hàm lấy thư mục lưu log - sub Path
@@ -83,7 +153,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 01:26
      */
-    public function getLoggerSubPath();
+    public function getLoggerSubPath()
+    {
+        return $this->loggerSubPath;
+    }
 
     /**
      * Function setLoggerPath - Hàm cấu hình thư mục lưu log - main Path
@@ -95,7 +168,14 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 01:36
      */
-    public function setLoggerPath($loggerPath = '');
+    public function setLoggerPath($loggerPath = '')
+    {
+        if (!empty($loggerPath)) {
+            $this->loggerPath = trim($loggerPath);
+        }
+
+        return $this;
+    }
 
     /**
      * Function setLoggerSubPath - Hàm cấu hình thư mục lưu log - sub Path
@@ -107,7 +187,14 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 02:19
      */
-    public function setLoggerSubPath($loggerSubPath = '');
+    public function setLoggerSubPath($loggerSubPath = '')
+    {
+        if (!empty($loggerSubPath)) {
+            $this->loggerSubPath = trim($loggerSubPath);
+        }
+
+        return $this;
+    }
 
     /**
      * Function getLoggerFilename - Hàm lấy tên file Log nơi Log được ghi nhận
@@ -117,7 +204,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 02:47
      */
-    public function getLoggerFilename();
+    public function getLoggerFilename()
+    {
+        return $this->loggerFilename;
+    }
 
     /**
      * Function setLoggerFilename - Hàm cấu hình file lưu trữ Log
@@ -129,7 +219,16 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 03:20
      */
-    public function setLoggerFilename($loggerFilename = '');
+    public function setLoggerFilename($loggerFilename = '')
+    {
+        if (!empty($loggerFilename)) {
+            $this->loggerFilename = trim($loggerFilename);
+        } else {
+            $this->loggerFilename = 'Log-' . date('Y-m-d') . '.log';
+        }
+
+        return $this;
+    }
 
     /**
      * Function getLoggerDateFormat - Hàm lấy Date Format hiện tại
@@ -139,7 +238,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 03:50
      */
-    public function getLoggerDateFormat();
+    public function getLoggerDateFormat()
+    {
+        return $this->loggerDateFormat;
+    }
 
     /**
      * Function setLoggerDateFormat - Hàm quy định Date Format cho file Log
@@ -154,7 +256,16 @@ interface DebugInterface
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see      https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
      */
-    public function setLoggerDateFormat($loggerDateFormat = NULL);
+    public function setLoggerDateFormat($loggerDateFormat = null)
+    {
+        if (!empty($loggerDateFormat) && is_string($loggerDateFormat)) {
+            $this->loggerDateFormat = $loggerDateFormat;
+        } else {
+            $this->loggerDateFormat = "Y-m-d H:i:s u";
+        }
+
+        return $this;
+    }
 
     /**
      * Function getLoggerLineFormat - Hàm lấy thông tin về format dòng ghi log
@@ -164,7 +275,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 04:30
      */
-    public function getLoggerLineFormat();
+    public function getLoggerLineFormat()
+    {
+        return $this->loggerLineFormat;
+    }
 
     /**
      * Function setLoggerLineFormat - Hàm cấu hình thông tin về format dòng ghi log
@@ -179,7 +293,16 @@ interface DebugInterface
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see      https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
      */
-    public function setLoggerLineFormat($loggerLineFormat = NULL);
+    public function setLoggerLineFormat($loggerLineFormat = null)
+    {
+        if (!empty($loggerLineFormat) && is_string($loggerLineFormat)) {
+            $this->loggerLineFormat = $loggerLineFormat;
+        } else {
+            $this->loggerLineFormat = "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
+        }
+
+        return $this;
+    }
 
     /**
      * Function log - Hàm ghi log cho hệ thống
@@ -197,7 +320,95 @@ interface DebugInterface
      *
      * @example  log('info', 'test', 'Log Test', [])
      */
-    public function log($level = '', $name = 'log', $msg = 'My Message', $context = array());
+    public function log($level = '', $name = 'log', $msg = 'My Message', $context = array())
+    {
+        $level = strtolower(trim($level));
+        if ($this->DEBUG == true) {
+            if (!class_exists('\Monolog\Logger')) {
+                if (function_exists('log_message')) {
+                    $errorMsg = 'Không tồn tại class Monolog';
+                    log_message('error', $errorMsg);
+                }
+
+                return false;
+            }
+            try {
+                $loggerSubPath = trim($this->loggerSubPath);
+                $loggerSubPath = !empty($loggerSubPath) ? Utils::slugify($loggerSubPath) : 'Default-Sub-Path';
+                if (empty($this->loggerFilename)) {
+                    $this->loggerFilename = 'Log-' . date('Y-m-d') . '.log';
+                }
+                $listLevel = array('debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency');
+                if (
+                    // Tồn tại Global Logger Level
+                    isset($this->globalLoggerLevel) &&
+                    // Là 1 string
+                    is_string($this->globalLoggerLevel) &&
+                    // Và thuộc list Level được quy định
+                    in_array($this->globalLoggerLevel, $listLevel)
+                ) {
+                    // If valid globalLoggerLevel -> use globalLoggerLevel
+                    $useLevel = strtolower($this->globalLoggerLevel);
+                } else {
+                    // Default Level is INFO
+                    $useLevel = in_array($level, $listLevel) ? trim($level) : trim('info');
+                }
+                switch ($useLevel) {
+                    case 'debug':
+                        $keyLevel = MonoLogger::DEBUG;
+                        break;
+                    case 'info':
+                        $keyLevel = MonoLogger::INFO;
+                        break;
+                    case 'notice':
+                        $keyLevel = MonoLogger::NOTICE;
+                        break;
+                    case 'warning':
+                        $keyLevel = MonoLogger::WARNING;
+                        break;
+                    case 'error':
+                        $keyLevel = MonoLogger::ERROR;
+                        break;
+                    case 'critical':
+                        $keyLevel = MonoLogger::CRITICAL;
+                        break;
+                    case 'alert':
+                        $keyLevel = MonoLogger::ALERT;
+                        break;
+                    case 'emergency':
+                        $keyLevel = MonoLogger::EMERGENCY;
+                        break;
+                    default:
+                        $keyLevel = MonoLogger::WARNING;
+                }
+                $loggerFilename = $this->loggerPath . DIRECTORY_SEPARATOR . $loggerSubPath . DIRECTORY_SEPARATOR . $this->loggerFilename;
+                $dateFormat     = !empty($this->loggerDateFormat) ? $this->loggerDateFormat : "Y-m-d H:i:s u";
+                $output         = !empty($this->loggerLineFormat) ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
+                $formatter      = new LineFormatter($output, $dateFormat);
+                $stream         = new StreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
+                $stream->setFormatter($formatter);
+                $logger = new MonoLogger(ucfirst(trim($name)));
+                $logger->pushHandler($stream);
+                if (empty($msg)) {
+                    $msg = 'My Log Message is Empty';
+                }
+                if (is_array($context)) {
+                    return $logger->$level($msg, $context);
+                } else {
+                    return $logger->$level($msg . json_encode($context));
+                }
+            } catch (Exception $e) {
+                if (function_exists('log_message')) {
+                    log_message('error', 'Error Message: ' . $e->getMessage());
+                    log_message('error', 'Error TraceAsString: ' . $e->getTraceAsString());
+                }
+
+                return false;
+            }
+        }
+
+        return null;
+    }
 
     /**
      * Function debug - Ghi log ở chế đô DEBUG (100): Detailed debug information.
@@ -212,7 +423,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function debug($name = 'log', $msg = 'My Message', $context = array());
+    public function debug($name = 'log', $msg = 'My Message', $context = array())
+    {
+        return $this->log('debug', $name, $msg, $context);
+    }
 
     /**
      * Function info - INFO (200): Interesting events. Examples: User logs in, SQL logs.
@@ -227,7 +441,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function info($name = 'log', $msg = 'My Message', $context = array());
+    public function info($name = 'log', $msg = 'My Message', $context = array())
+    {
+        return $this->log('info', $name, $msg, $context);
+    }
 
     /**
      * Function notice - NOTICE (250): Normal but significant events.
@@ -242,7 +459,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function notice($name = 'log', $msg = 'My Message', $context = array());
+    public function notice($name = 'log', $msg = 'My Message', $context = array())
+    {
+        return $this->log('notice', $name, $msg, $context);
+    }
 
     /**
      * Function warning - WARNING (300): Exceptional occurrences that are not errors. - Use of deprecated APIs, poor use of an API, undesirable things that are not necessarily wrong.
@@ -257,7 +477,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function warning($name = 'log', $msg = 'My Message', $context = array());
+    public function warning($name = 'log', $msg = 'My Message', $context = array())
+    {
+        return $this->log('warning', $name, $msg, $context);
+    }
 
     /**
      * Function error - ERROR (400): Runtime errors that do not require immediate action but should typically be logged and monitored.
@@ -272,7 +495,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function error($name = 'log', $msg = 'My Message', $context = array());
+    public function error($name = 'log', $msg = 'My Message', $context = array())
+    {
+        return $this->log('error', $name, $msg, $context);
+    }
 
     /**
      * Function critical - CRITICAL (500): Critical conditions. - Application component unavailable, unexpected exception.
@@ -287,7 +513,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function critical($name = 'log', $msg = 'My Message', $context = array());
+    public function critical($name = 'log', $msg = 'My Message', $context = array())
+    {
+        return $this->log('critical', $name, $msg, $context);
+    }
 
     /**
      * Function alert - ALERT (550): Action must be taken immediately. - Entire website down, database unavailable, etc. This should trigger the SMS alerts and wake you up.
@@ -302,7 +531,10 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function alert($name = 'log', $msg = 'My Message', $context = array());
+    public function alert($name = 'log', $msg = 'My Message', $context = array())
+    {
+        return $this->log('alert', $name, $msg, $context);
+    }
 
     /**
      * Function emergency - EMERGENCY (600): Emergency: system is unusable.
@@ -317,5 +549,8 @@ interface DebugInterface
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function emergency($name = 'log', $msg = 'My Message', $context = array());
+    public function emergency($name = 'log', $msg = 'My Message', $context = array())
+    {
+        return $this->log('emergency', $name, $msg, $context);
+    }
 }

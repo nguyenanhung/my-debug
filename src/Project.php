@@ -10,15 +10,15 @@
 namespace nguyenanhung\MyDebug;
 
 /**
- * Interface ProjectInterface
+ * Interface Project
  *
  * @package   nguyenanhung\MyDebug
  * @author    713uk13m <dev@nguyenanhung.com>
  * @copyright 713uk13m <dev@nguyenanhung.com>
  */
-interface ProjectInterface
+interface Project
 {
-    const VERSION = '2.0.5';
+    const VERSION = '3.0.0';
 
     /**
      * Hàm lấy thông tin phiên bản Packages
