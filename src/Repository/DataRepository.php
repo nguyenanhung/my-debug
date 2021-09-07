@@ -9,7 +9,7 @@
 
 namespace nguyenanhung\MyDebug\Repository;
 
-use nguyenanhung\MyDebug\ProjectInterface;
+use nguyenanhung\MyDebug\Project;
 use nguyenanhung\MyDebug\Version;
 
 /**
@@ -20,9 +20,10 @@ use nguyenanhung\MyDebug\Version;
  * @author    713uk13m <dev@nguyenanhung.com>
  * @copyright 713uk13m <dev@nguyenanhung.com>
  */
-class DataRepository implements ProjectInterface
+class DataRepository implements Project
 {
     use Version;
+
     const CONFIG_PATH = 'config';
     const CONFIG_EXT  = '.php';
 

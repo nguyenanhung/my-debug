@@ -35,11 +35,15 @@ class File extends Filesystem
 
     /** @var null|array Mảng dữ liệu chứa các thuộc tính cần quét */
     private $scanInclude = ['*.log', '*.txt'];
+
     /** @var null|array Mảng dữ liệu chứa các thuộc tính bỏ qua không quét */
     private $scanExclude = ['*/Zip-Archive/*.zip'];
 
     /**
      * File constructor.
+     *
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
      */
     public function __construct()
     {

@@ -22,7 +22,7 @@ use nguyenanhung\MyDebug\Repository\DataRepository;
  * @since      2018-10-17
  * @version    0.1.2.5
  */
-class Utils implements ProjectInterface
+class Utils implements Project
 {
     use Version;
 
@@ -53,8 +53,7 @@ class Utils implements ProjectInterface
             $slugify = new Slugify();
 
             return $slugify->slugify($str);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             if (function_exists('log_message')) {
                 log_message('error', 'Error Message: ' . $e->getMessage());
                 log_message('error', 'Error TraceAsString: ' . $e->getTraceAsString());

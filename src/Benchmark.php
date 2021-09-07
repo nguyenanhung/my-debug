@@ -21,7 +21,7 @@ namespace nguyenanhung\MyDebug;
  * @since      2018-10-17
  * @version    0.1.2.5
  */
-class Benchmark implements ProjectInterface
+class Benchmark implements Project
 {
     use Version;
 
