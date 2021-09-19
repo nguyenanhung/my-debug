@@ -39,23 +39,23 @@ class Logger implements Project
     /** @var bool Cấu hình trạng thái Debug, TRUE nếu cấu hình Debug được bật */
     private $DEBUG = false;
 
-    /** @var null|string Cấu hình Level lưu Log theo tiêu chuẩn RFC 5424 */
-    private $globalLoggerLevel = null;
+    /** @var string|null Cấu hình Level lưu Log theo tiêu chuẩn RFC 5424 */
+    private $globalLoggerLevel;
 
-    /** @var null|string Đường dẫn thư mục lưu trữ Log, VD: /your/to/path */
+    /** @var string|null Đường dẫn thư mục lưu trữ Log, VD: /your/to/path */
     private $loggerPath = 'logs';
 
-    /** @var null|string Tương tự với $loggerPath, mặc định dùng để lưu tên class phát sinh log */
-    private $loggerSubPath = null;
+    /** @var string|null Tương tự với $loggerPath, mặc định dùng để lưu tên class phát sinh log */
+    private $loggerSubPath;
 
-    /** @var null|string Filename lưu log, khuyến nghị theo chuẩn Log-Y-m-d.log, VD: Log-2018-10-17.log */
-    private $loggerFilename = null;
+    /** @var string|null Filename lưu log, khuyến nghị theo chuẩn Log-Y-m-d.log, VD: Log-2018-10-17.log */
+    private $loggerFilename;
 
-    /** @var null|string Logger Date Format, VD: Y-m-d H:i:s u */
-    private $loggerDateFormat = null;
+    /** @var string|null Logger Date Format, VD: Y-m-d H:i:s u */
+    private $loggerDateFormat;
 
-    /** @var null|string Logger Line Format, VD: "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n" */
-    private $loggerLineFormat = null;
+    /** @var string|null Logger Line Format, VD: "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n" */
+    private $loggerLineFormat;
 
     /**
      * Logger constructor.
@@ -75,7 +75,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 59:07
      */
-    public function getDebugStatus()
+    public function getDebugStatus(): bool
     {
         return $this->DEBUG;
     }
@@ -90,7 +90,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 59:17
      */
-    public function setDebugStatus($debug = false)
+    public function setDebugStatus(bool $debug = false): Logger
     {
         $this->DEBUG = $debug;
 
@@ -123,7 +123,7 @@ class Logger implements Project
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels
      * @see      https://tools.ietf.org/html/rfc5424
      */
-    public function setGlobalLoggerLevel($globalLoggerLevel = null)
+    public function setGlobalLoggerLevel(string $globalLoggerLevel = null): Logger
     {
         if (!empty($globalLoggerLevel) && is_string($globalLoggerLevel)) {
             $this->globalLoggerLevel = strtolower($globalLoggerLevel);
@@ -168,7 +168,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 01:36
      */
-    public function setLoggerPath($loggerPath = '')
+    public function setLoggerPath(string $loggerPath = ''): Logger
     {
         if (!empty($loggerPath)) {
             $this->loggerPath = trim($loggerPath);
@@ -187,7 +187,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 02:19
      */
-    public function setLoggerSubPath($loggerSubPath = '')
+    public function setLoggerSubPath(string $loggerSubPath = ''): Logger
     {
         if (!empty($loggerSubPath)) {
             $this->loggerSubPath = trim($loggerSubPath);
@@ -219,7 +219,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 03:20
      */
-    public function setLoggerFilename($loggerFilename = '')
+    public function setLoggerFilename(string $loggerFilename = ''): Logger
     {
         if (!empty($loggerFilename)) {
             $this->loggerFilename = trim($loggerFilename);
@@ -246,7 +246,7 @@ class Logger implements Project
     /**
      * Function setLoggerDateFormat - Hàm quy định Date Format cho file Log
      *
-     * @param null $loggerDateFormat Logger Date Format, VD: Y-m-d H:i:s u
+     * @param string|null $loggerDateFormat Logger Date Format, VD: Y-m-d H:i:s u
      *
      * @return $this
      * @author   : 713uk13m <dev@nguyenanhung.com>
@@ -256,7 +256,7 @@ class Logger implements Project
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see      https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
      */
-    public function setLoggerDateFormat($loggerDateFormat = null)
+    public function setLoggerDateFormat(string $loggerDateFormat = null): Logger
     {
         if (!empty($loggerDateFormat) && is_string($loggerDateFormat)) {
             $this->loggerDateFormat = $loggerDateFormat;
@@ -293,7 +293,7 @@ class Logger implements Project
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see      https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
      */
-    public function setLoggerLineFormat($loggerLineFormat = null)
+    public function setLoggerLineFormat($loggerLineFormat = null): Logger
     {
         if (!empty($loggerLineFormat) && is_string($loggerLineFormat)) {
             $this->loggerLineFormat = $loggerLineFormat;
@@ -320,11 +320,11 @@ class Logger implements Project
      *
      * @example  log('info', 'test', 'Log Test', [])
      */
-    public function log($level = '', $name = 'log', $msg = 'My Message', $context = array())
+    public function log(string $level = '', string $name = 'log', string $msg = 'My Message', array $context = array())
     {
         $level = strtolower(trim($level));
-        if ($this->DEBUG == true) {
-            if (!class_exists('\Monolog\Logger')) {
+        if ($this->DEBUG === true) {
+            if (!class_exists(MonoLogger::class)) {
                 if (function_exists('log_message')) {
                     $errorMsg = 'Không tồn tại class Monolog';
                     log_message('error', $errorMsg);
@@ -345,7 +345,7 @@ class Logger implements Project
                     // Là 1 string
                     is_string($this->globalLoggerLevel) &&
                     // Và thuộc list Level được quy định
-                    in_array($this->globalLoggerLevel, $listLevel)
+                    in_array($this->globalLoggerLevel, $listLevel, true)
                 ) {
                     // If valid globalLoggerLevel -> use globalLoggerLevel
                     $useLevel = strtolower($this->globalLoggerLevel);
@@ -394,9 +394,9 @@ class Logger implements Project
                 }
                 if (is_array($context)) {
                     return $logger->$level($msg, $context);
-                } else {
-                    return $logger->$level($msg . json_encode($context));
                 }
+
+                return $logger->$level($msg . json_encode($context));
             } catch (Exception $e) {
                 if (function_exists('log_message')) {
                     log_message('error', 'Error Message: ' . $e->getMessage());
@@ -423,7 +423,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function debug($name = 'log', $msg = 'My Message', $context = array())
+    public function debug(string $name = 'log', string $msg = 'My Message', array $context = array())
     {
         return $this->log('debug', $name, $msg, $context);
     }
@@ -441,7 +441,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function info($name = 'log', $msg = 'My Message', $context = array())
+    public function info(string $name = 'log', string $msg = 'My Message', array $context = array())
     {
         return $this->log('info', $name, $msg, $context);
     }
@@ -459,7 +459,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function notice($name = 'log', $msg = 'My Message', $context = array())
+    public function notice(string $name = 'log', string $msg = 'My Message', array $context = array())
     {
         return $this->log('notice', $name, $msg, $context);
     }
@@ -477,7 +477,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function warning($name = 'log', $msg = 'My Message', $context = array())
+    public function warning(string $name = 'log', string $msg = 'My Message', array $context = array())
     {
         return $this->log('warning', $name, $msg, $context);
     }
@@ -495,7 +495,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function error($name = 'log', $msg = 'My Message', $context = array())
+    public function error(string $name = 'log', string $msg = 'My Message', array $context = array())
     {
         return $this->log('error', $name, $msg, $context);
     }
@@ -513,7 +513,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function critical($name = 'log', $msg = 'My Message', $context = array())
+    public function critical(string $name = 'log', string $msg = 'My Message', array $context = array())
     {
         return $this->log('critical', $name, $msg, $context);
     }
@@ -531,7 +531,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function alert($name = 'log', $msg = 'My Message', $context = array())
+    public function alert(string $name = 'log', string $msg = 'My Message', array $context = array())
     {
         return $this->log('alert', $name, $msg, $context);
     }
@@ -549,7 +549,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function emergency($name = 'log', $msg = 'My Message', $context = array())
+    public function emergency(string $name = 'log', string $msg = 'My Message', array $context = array())
     {
         return $this->log('emergency', $name, $msg, $context);
     }
