@@ -23,14 +23,14 @@ Thư viện có sử dụng các gói sau đây
 
 Tham khảo hướng dẫn triển khai tại đây và trong thư mục `test/`
 
-### Debug
+### Debug & Logger
 
 ```php
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/functions.php';
 
-use nguyenanhung\MyDebug\Debug;
+use nguyenanhung\MyDebug\Logger;
 
 // Test Content
 $logPath     = testLogPath();
@@ -43,7 +43,7 @@ $context     = [
     'email' => 'dev@nguyenanhung.com'
 ];
 // Call
-$debug = new Debug();
+$debug = new Logger();
 $debug->setDebugStatus(TRUE);
 $debug->setGlobalLoggerLevel('info');
 $debug->setLoggerPath($logPath);
