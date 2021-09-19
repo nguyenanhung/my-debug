@@ -15,7 +15,7 @@ use nguyenanhung\MyDebug\Benchmark;
 $benchmark = new Benchmark();
 /***************************** SIMPLE BENCHMARKING BY CI *****************************/
 $benchmark->mark('code_start');
-$mathFunctions = ["abs", "acos", "asin", "atan", "floor", "exp", "sin", "tan", "pi", "is_finite", "is_nan","sqrt"];
+$mathFunctions = ["abs", "acos", "asin", "atan", "floor"];
 $count         = 10;
 for ($i = 0; $i < $count; $i++) {
     foreach ($mathFunctions as $key => $function) {
