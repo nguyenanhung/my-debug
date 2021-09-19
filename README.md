@@ -85,10 +85,10 @@ $mathFunctions = ["abs", "acos", "asin", "atan", "bindec", "floor", "exp", "sin"
 $count         = 9999;
 for ($i = 0; $i < $count; $i++) {
     foreach ($mathFunctions as $key => $function) {
-        call_user_func_array($function, [$i]);
+        $function($i);
         echo ($key + 1) . " -> " . $function . "\n";
     }
-}
+}q
 $benchmark->mark('code_end');
 
 dump($benchmark->getVersion());

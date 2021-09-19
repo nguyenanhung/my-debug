@@ -19,13 +19,14 @@ $logFilename = 'Log-' . date('Y-m-d') . '.log';
 $name        = 'Test';
 $msg         = 'Test Log lan 2';
 $context     = [
-    'name'  => 'Nguyen An Hung',
-    'email' => 'dev@nguyenanhung.com'
+    'name'    => 'Nguyen An Hung',
+    'email'   => 'dev@nguyenanhung.com',
+    'website' => 'https://nguyenanhung.com',
 ];
 // Call
 $logger = new Logger();
 $logger->setDebugStatus(true);
-$logger->setGlobalLoggerLevel(null);
+$logger->setGlobalLoggerLevel();
 $logger->setLoggerPath($logPath);
 $logger->setLoggerSubPath($logSubPath);
 $logger->setLoggerFilename($logFilename);

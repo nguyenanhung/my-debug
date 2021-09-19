@@ -9,7 +9,7 @@ if (!function_exists('dump')) {
     /**
      * Function dump
      *
-     * @param string $str
+     * @param mixed $str
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
@@ -32,7 +32,7 @@ if (!function_exists('testLogPath')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 54:17
      */
-    function testLogPath()
+    function testLogPath(): string
     {
         return __DIR__ . '/../storage/logs/';
     }

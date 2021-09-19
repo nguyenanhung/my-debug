@@ -19,4 +19,4 @@ dump($file->getVersion());
 
 $path = testLogPath();
 
-dump($file->scanAndZip($path, 3));
+
