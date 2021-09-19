@@ -10,6 +10,7 @@
 namespace nguyenanhung\MyDebug\Manager;
 
 use Exception;
+use Iterator;
 use SplFileInfo;
 use DateTime;
 use Symfony\Component\Filesystem\Filesystem;
@@ -31,7 +32,7 @@ use TheSeer\DirectoryScanner\DirectoryScanner;
  */
 class File extends Filesystem
 {
-    const VERSION = '1.0.0';
+    const VERSION = '3.0.1';
 
     /** @var null|array Mảng dữ liệu chứa các thuộc tính cần quét */
     private $scanInclude = ['*.log', '*.txt'];
@@ -57,7 +58,7 @@ class File extends Filesystem
      * @time  : 9/27/18 18:32
      *
      */
-    public function getVersion()
+    public function getVersion(): string
     {
         return self::VERSION;
     }
@@ -66,8 +67,8 @@ class File extends Filesystem
      * Hàm quét thư mục và list ra danh sách các file con
      *
      * @param string     $path    Đường dẫn thư mục cần quét, VD: /your/to/path
-     * @param null|array $include Mảng dữ liệu chứa các thuộc tính cần quét
-     * @param null|array $exclude Mảng dữ liệu chứa các thuộc tính bỏ qua không quét
+     * @param array|null $include Mảng dữ liệu chứa các thuộc tính cần quét
+     * @param array|null $exclude Mảng dữ liệu chứa các thuộc tính bỏ qua không quét
      *
      * @return \Iterator
      * @see   https://github.com/theseer/DirectoryScanner/blob/master/samples/sample.php
@@ -76,7 +77,7 @@ class File extends Filesystem
      * @time  : 10/17/18 10:19
      *
      */
-    public function directoryScanner($path = '', $include = NULL, $exclude = NULL)
+    public function directoryScanner(string $path = '', array $include = null, array $exclude = null): Iterator
     {
         $scanner = new DirectoryScanner();
         if (is_array($include) && !empty($include)) {
@@ -102,7 +103,7 @@ class File extends Filesystem
      * @time  : 10/17/18 10:23
      *
      */
-    public function setInclude($include = array())
+    public function setInclude(array $include = array())
     {
         $this->scanInclude = $include;
     }
@@ -116,7 +117,7 @@ class File extends Filesystem
      * @time  : 10/17/18 10:23
      *
      */
-    public function setExclude($exclude = array())
+    public function setExclude(array $exclude = array())
     {
         $this->scanExclude = $exclude;
     }
@@ -132,7 +133,7 @@ class File extends Filesystem
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 07/30/2020 59:36
      */
-    public function cleanLog($path = '', $dayToDelete = 3)
+    public function cleanLog(string $path = '', int $dayToDelete = 3)
     {
         try {
             $getDir             = $this->directoryScanner($path, $this->scanInclude, $this->scanExclude);
@@ -157,14 +158,13 @@ class File extends Filesystem
             }
 
             return $result;
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             if (function_exists('log_message')) {
                 log_message('error', 'Error Message: ' . $e->getMessage());
                 log_message('error', 'Error Trace As String: ' . $e->getTraceAsString());
             }
 
-            return FALSE;
+            return false;
         }
     }
 
@@ -178,7 +178,7 @@ class File extends Filesystem
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 07/30/2020 03:15
      */
-    public function scanAndCleanLog($listFolder = array(), $dayToDelete = 3)
+    public function scanAndCleanLog(array $listFolder = array(), int $dayToDelete = 3)
     {
         if (empty($listFolder)) {
             echo "Không có mảng dữ liệu cần quét";

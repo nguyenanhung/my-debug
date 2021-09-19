@@ -39,9 +39,9 @@ class Utils implements Project
      * @time  : 10/9/18 00:31
      *
      */
-    public static function slugify($str = '')
+    public static function slugify(string $str = '')
     {
-        if (!class_exists('\Cocur\Slugify\Slugify')) {
+        if (!class_exists(Slugify::class)) {
             if (function_exists('log_message')) {
                 $message = 'Không tồn tại class Slugify';
                 log_message('error', $message);
@@ -78,15 +78,17 @@ class Utils implements Project
      * @time  : 10/13/18 01:17
      *
      */
-    public static function convert_vi_to_en($str = '')
+    public static function convert_vi_to_en(string $str = '')
     {
         $str  = trim($str);
         $str  = function_exists('mb_strtolower') ? mb_strtolower($str) : strtolower($str);
         $data = DataRepository::getData('convert_vi_to_en');
         if (!empty($str)) {
-            $str = str_replace($data['vn_array'], $data['en_array'], $str);
-            $str = str_replace($data['special_array'], $data['separator'], $str);
-            $str = str_replace(' ', $data['separator'], $str);
+            $str = str_replace(
+                array($data['vn_array'], $data['special_array'], ' '),
+                array($data['en_array'], $data['separator'], $data['separator']),
+                $str
+            );
             while (strpos($str, '--') > 0) {
                 $str = str_replace('--', $data['separator'], $str);
             }

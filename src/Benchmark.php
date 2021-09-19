@@ -52,7 +52,7 @@ class Benchmark implements Project
      *
      * @return    void
      */
-    public function mark($name)
+    public function mark(string $name)
     {
         $this->marker[$name] = microtime(TRUE);
     }
@@ -75,7 +75,7 @@ class Benchmark implements Project
      *            an '{elapsed_string}' if $point1 is empty
      *            or an empty string if $point1 is not found.
      */
-    public function elapsed_time($point1 = '', $point2 = '', $decimals = 4)
+    public function elapsed_time(string $point1 = '', string $point2 = '', int $decimals = 4): string
     {
         if ($point1 === '') {
             return '{elapsed_time}';
@@ -100,7 +100,7 @@ class Benchmark implements Project
      *
      * @return string
      */
-    public function memory_usage()
+    public function memory_usage(): string
     {
         return round(memory_get_usage() / 1024 / 1024, 2) . 'MB';
     }
