@@ -32,7 +32,7 @@ use TheSeer\DirectoryScanner\DirectoryScanner;
  */
 class File extends Filesystem
 {
-    const VERSION = '3.0.1';
+    const VERSION = '3.0.2';
 
     /** @var null|array Mảng dữ liệu chứa các thuộc tính cần quét */
     private $scanInclude = ['*.log', '*.txt'];
