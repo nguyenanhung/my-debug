@@ -88,7 +88,7 @@ for ($i = 0; $i < $count; $i++) {
         $function($i);
         echo ($key + 1) . " -> " . $function . "\n";
     }
-}
+}q
 $benchmark->mark('code_end');
 
 dump($benchmark->getVersion());
