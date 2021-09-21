@@ -9,11 +9,11 @@ if (!function_exists('dump')) {
     /**
      * Function dump
      *
-     * @param mixed $str
+     * @param string $str
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/17/2021 54:19
+     * @time     : 09/22/2021 11:38
      */
     function dump($str = '')
     {
@@ -30,7 +30,7 @@ if (!function_exists('testLogPath')) {
      * @return string
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 08/17/2021 54:17
+     * @time     : 09/22/2021 11:28
      */
     function testLogPath()
     {
