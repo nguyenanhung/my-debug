@@ -25,7 +25,7 @@ for ($i = 0; $i < $count; $i++) {
 }
 $benchmark->mark('code_end');
 
-dump($benchmark->getVersion());
+
 dump($benchmark->elapsed_time('code_start', 'code_end'));
 dump($benchmark->memory_usage());
 /***************************** SIMPLE BENCHMARKING BY CI *****************************/
