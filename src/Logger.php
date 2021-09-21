@@ -10,8 +10,8 @@ namespace nguyenanhung\MyDebug;
 
 use Exception;
 use Monolog\Logger as MonoLogger;
-use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter as MonoLineFormatter;
+use Monolog\Handler\StreamHandler as MonoStreamHandler;
 
 /**
  * Class Logger
@@ -75,7 +75,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 59:07
      */
-    public function getDebugStatus(): bool
+    public function getDebugStatus()
     {
         return $this->DEBUG;
     }
@@ -90,7 +90,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 59:17
      */
-    public function setDebugStatus(bool $debug = false): Logger
+    public function setDebugStatus($debug = false)
     {
         $this->DEBUG = $debug;
 
@@ -123,7 +123,7 @@ class Logger implements Project
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels
      * @see      https://tools.ietf.org/html/rfc5424
      */
-    public function setGlobalLoggerLevel(string $globalLoggerLevel = null): Logger
+    public function setGlobalLoggerLevel($globalLoggerLevel = null)
     {
         if (!empty($globalLoggerLevel) && is_string($globalLoggerLevel)) {
             $this->globalLoggerLevel = strtolower($globalLoggerLevel);
@@ -168,7 +168,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 01:36
      */
-    public function setLoggerPath(string $loggerPath = ''): Logger
+    public function setLoggerPath($loggerPath = '')
     {
         if (!empty($loggerPath)) {
             $this->loggerPath = trim($loggerPath);
@@ -187,7 +187,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 02:19
      */
-    public function setLoggerSubPath(string $loggerSubPath = ''): Logger
+    public function setLoggerSubPath($loggerSubPath = '')
     {
         if (!empty($loggerSubPath)) {
             $this->loggerSubPath = trim($loggerSubPath);
@@ -219,7 +219,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 03:20
      */
-    public function setLoggerFilename(string $loggerFilename = ''): Logger
+    public function setLoggerFilename($loggerFilename = '')
     {
         if (!empty($loggerFilename)) {
             $this->loggerFilename = trim($loggerFilename);
@@ -256,7 +256,7 @@ class Logger implements Project
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see      https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
      */
-    public function setLoggerDateFormat(string $loggerDateFormat = null): Logger
+    public function setLoggerDateFormat($loggerDateFormat = null)
     {
         if (!empty($loggerDateFormat) && is_string($loggerDateFormat)) {
             $this->loggerDateFormat = $loggerDateFormat;
@@ -293,7 +293,7 @@ class Logger implements Project
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see      https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
      */
-    public function setLoggerLineFormat($loggerLineFormat = null): Logger
+    public function setLoggerLineFormat($loggerLineFormat = null)
     {
         if (!empty($loggerLineFormat) && is_string($loggerLineFormat)) {
             $this->loggerLineFormat = $loggerLineFormat;
@@ -307,10 +307,10 @@ class Logger implements Project
     /**
      * Function log - Hàm ghi log cho hệ thống
      *
-     * @param string $level   Level Debug: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY
-     * @param string $name    Log Name: log, etc...
-     * @param string $msg     Log Message write to Log
-     * @param array  $context Log Context aka Log Message Array format
+     * @param string       $level   Level Debug: DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY
+     * @param string       $name    Log Name: log, etc...
+     * @param string       $msg     Log Message write to Log
+     * @param array|string $context Log Context aka Log Message Array format
      *
      * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
@@ -320,8 +320,11 @@ class Logger implements Project
      *
      * @example  log('info', 'test', 'Log Test', [])
      */
-    public function log(string $level = '', string $name = 'log', string $msg = 'My Message', array $context = array())
+    public function log($level = '', $name = 'log', $msg = 'My Message', $context = array())
     {
+        if (!is_array($context)) {
+            $context = array($context);
+        }
         $level = strtolower(trim($level));
         if ($this->DEBUG === true) {
             if (!class_exists(MonoLogger::class)) {
@@ -384,8 +387,8 @@ class Logger implements Project
                 $loggerFilename = $this->loggerPath . DIRECTORY_SEPARATOR . $loggerSubPath . DIRECTORY_SEPARATOR . $this->loggerFilename;
                 $dateFormat     = !empty($this->loggerDateFormat) ? $this->loggerDateFormat : "Y-m-d H:i:s u";
                 $output         = !empty($this->loggerLineFormat) ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
-                $formatter      = new LineFormatter($output, $dateFormat);
-                $stream         = new StreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
+                $formatter      = new MonoLineFormatter($output, $dateFormat);
+                $stream         = new MonoStreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
                 $stream->setFormatter($formatter);
                 $logger = new MonoLogger(ucfirst(trim($name)));
                 $logger->pushHandler($stream);
@@ -397,6 +400,7 @@ class Logger implements Project
                 }
 
                 return $logger->$level($msg . json_encode($context));
+
             } catch (Exception $e) {
                 if (function_exists('log_message')) {
                     log_message('error', 'Error Message: ' . $e->getMessage());
@@ -413,9 +417,9 @@ class Logger implements Project
     /**
      * Function debug - Ghi log ở chế đô DEBUG (100): Detailed debug information.
      *
-     * @param string $name    Log Name: log, etc...
-     * @param string $msg     Log Message write to Log
-     * @param array  $context Log Context aka Log Message Array format
+     * @param string       $name    Log Name: log, etc...
+     * @param string       $msg     Log Message write to Log
+     * @param array|string $context Log Context aka Log Message Array format
      *
      * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
@@ -423,17 +427,21 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function debug(string $name = 'log', string $msg = 'My Message', array $context = array())
+    public function debug($name = 'log', $msg = 'My Message', $context = array())
     {
+        if (!is_array($context)) {
+            $context = array($context);
+        }
+
         return $this->log('debug', $name, $msg, $context);
     }
 
     /**
      * Function info - INFO (200): Interesting events. Examples: User logs in, SQL logs.
      *
-     * @param string $name    Log Name: log, etc...
-     * @param string $msg     Log Message write to Log
-     * @param array  $context Log Context aka Log Message Array format
+     * @param string       $name    Log Name: log, etc...
+     * @param string       $msg     Log Message write to Log
+     * @param array|string $context Log Context aka Log Message Array format
      *
      * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
@@ -441,17 +449,21 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function info(string $name = 'log', string $msg = 'My Message', array $context = array())
+    public function info($name = 'log', $msg = 'My Message', $context = array())
     {
+        if (!is_array($context)) {
+            $context = array($context);
+        }
+
         return $this->log('info', $name, $msg, $context);
     }
 
     /**
      * Function notice - NOTICE (250): Normal but significant events.
      *
-     * @param string $name    Log Name: log, etc...
-     * @param string $msg     Log Message write to Log
-     * @param array  $context Log Context aka Log Message Array format
+     * @param string       $name    Log Name: log, etc...
+     * @param string       $msg     Log Message write to Log
+     * @param array|string $context Log Context aka Log Message Array format
      *
      * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
@@ -459,17 +471,21 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function notice(string $name = 'log', string $msg = 'My Message', array $context = array())
+    public function notice($name = 'log', $msg = 'My Message', $context = array())
     {
+        if (!is_array($context)) {
+            $context = array($context);
+        }
+
         return $this->log('notice', $name, $msg, $context);
     }
 
     /**
      * Function warning - WARNING (300): Exceptional occurrences that are not errors. - Use of deprecated APIs, poor use of an API, undesirable things that are not necessarily wrong.
      *
-     * @param string $name    Log Name: log, etc...
-     * @param string $msg     Log Message write to Log
-     * @param array  $context Log Context aka Log Message Array format
+     * @param string       $name    Log Name: log, etc...
+     * @param string       $msg     Log Message write to Log
+     * @param array|string $context Log Context aka Log Message Array format
      *
      * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
@@ -477,17 +493,21 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function warning(string $name = 'log', string $msg = 'My Message', array $context = array())
+    public function warning($name = 'log', $msg = 'My Message', $context = array())
     {
+        if (!is_array($context)) {
+            $context = array($context);
+        }
+
         return $this->log('warning', $name, $msg, $context);
     }
 
     /**
      * Function error - ERROR (400): Runtime errors that do not require immediate action but should typically be logged and monitored.
      *
-     * @param string $name    Log Name: log, etc...
-     * @param string $msg     Log Message write to Log
-     * @param array  $context Log Context aka Log Message Array format
+     * @param string       $name    Log Name: log, etc...
+     * @param string       $msg     Log Message write to Log
+     * @param array|string $context Log Context aka Log Message Array format
      *
      * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
@@ -495,17 +515,21 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function error(string $name = 'log', string $msg = 'My Message', array $context = array())
+    public function error($name = 'log', $msg = 'My Message', $context = array())
     {
+        if (!is_array($context)) {
+            $context = array($context);
+        }
+
         return $this->log('error', $name, $msg, $context);
     }
 
     /**
      * Function critical - CRITICAL (500): Critical conditions. - Application component unavailable, unexpected exception.
      *
-     * @param string $name    Log Name: log, etc...
-     * @param string $msg     Log Message write to Log
-     * @param array  $context Log Context aka Log Message Array format
+     * @param string       $name    Log Name: log, etc...
+     * @param string       $msg     Log Message write to Log
+     * @param array|string $context Log Context aka Log Message Array format
      *
      * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
@@ -513,17 +537,21 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function critical(string $name = 'log', string $msg = 'My Message', array $context = array())
+    public function critical($name = 'log', $msg = 'My Message', $context = array())
     {
+        if (!is_array($context)) {
+            $context = array($context);
+        }
+
         return $this->log('critical', $name, $msg, $context);
     }
 
     /**
      * Function alert - ALERT (550): Action must be taken immediately. - Entire website down, database unavailable, etc. This should trigger the SMS alerts and wake you up.
      *
-     * @param string $name    Log Name: log, etc...
-     * @param string $msg     Log Message write to Log
-     * @param array  $context Log Context aka Log Message Array format
+     * @param string       $name    Log Name: log, etc...
+     * @param string       $msg     Log Message write to Log
+     * @param array|string $context Log Context aka Log Message Array format
      *
      * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
@@ -531,17 +559,21 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function alert(string $name = 'log', string $msg = 'My Message', array $context = array())
+    public function alert($name = 'log', $msg = 'My Message', $context = array())
     {
+        if (!is_array($context)) {
+            $context = array($context);
+        }
+
         return $this->log('alert', $name, $msg, $context);
     }
 
     /**
      * Function emergency - EMERGENCY (600): Emergency: system is unusable.
      *
-     * @param string $name    Log Name: log, etc...
-     * @param string $msg     Log Message write to Log
-     * @param array  $context Log Context aka Log Message Array format
+     * @param string       $name    Log Name: log, etc...
+     * @param string       $msg     Log Message write to Log
+     * @param array|string $context Log Context aka Log Message Array format
      *
      * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
@@ -549,8 +581,12 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function emergency(string $name = 'log', string $msg = 'My Message', array $context = array())
+    public function emergency($name = 'log', $msg = 'My Message', $context = array())
     {
+        if (!is_array($context)) {
+            $context = array($context);
+        }
+
         return $this->log('emergency', $name, $msg, $context);
     }
 }

@@ -39,7 +39,7 @@ class Utils implements Project
      * @time  : 10/9/18 00:31
      *
      */
-    public static function slugify(string $str = '')
+    public static function slugify($str = '')
     {
         if (!class_exists(Slugify::class)) {
             if (function_exists('log_message')) {
@@ -78,7 +78,7 @@ class Utils implements Project
      * @time  : 10/13/18 01:17
      *
      */
-    public static function convert_vi_to_en(string $str = '')
+    public static function convert_vi_to_en($str = '')
     {
         $str  = trim($str);
         $str  = function_exists('mb_strtolower') ? mb_strtolower($str) : strtolower($str);

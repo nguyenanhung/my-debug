@@ -10,7 +10,6 @@
 namespace nguyenanhung\MyDebug\Manager;
 
 use Exception;
-use Iterator;
 use SplFileInfo;
 use DateTime;
 use Symfony\Component\Filesystem\Filesystem;
@@ -58,7 +57,7 @@ class File extends Filesystem
      * @time  : 9/27/18 18:32
      *
      */
-    public function getVersion(): string
+    public function getVersion()
     {
         return self::VERSION;
     }
@@ -77,7 +76,7 @@ class File extends Filesystem
      * @time  : 10/17/18 10:19
      *
      */
-    public function directoryScanner(string $path = '', array $include = null, array $exclude = null): Iterator
+    public function directoryScanner($path = '', $include = null, $exclude = null)
     {
         $scanner = new DirectoryScanner();
         if (is_array($include) && !empty($include)) {
@@ -133,7 +132,7 @@ class File extends Filesystem
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 07/30/2020 59:36
      */
-    public function cleanLog(string $path = '', int $dayToDelete = 3)
+    public function cleanLog($path = '', $dayToDelete = 3)
     {
         try {
             $getDir             = $this->directoryScanner($path, $this->scanInclude, $this->scanExclude);
@@ -178,7 +177,7 @@ class File extends Filesystem
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 07/30/2020 03:15
      */
-    public function scanAndCleanLog(array $listFolder = array(), int $dayToDelete = 3)
+    public function scanAndCleanLog($listFolder = array(), $dayToDelete = 3)
     {
         if (empty($listFolder)) {
             echo "Không có mảng dữ liệu cần quét";
