@@ -19,5 +19,4 @@ namespace nguyenanhung\MyDebug;
  */
 class Debug extends Logger
 {
-
 }

@@ -22,10 +22,9 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "nguyenanhung/benchmark": "^1.0",
+        "nguyenanhung/filesystem-helper": "^1.0",
         "monolog/monolog": "^2.0 || ^1.26",
-        "cocur/slugify": "^4.0 || ^3.0",
-        "theseer/directoryscanner": "^1.3",
-        "symfony/filesystem": "^5.3 || ^4.4 || ^3.4"
+        "cocur/slugify": "^4.0 || ^3.0"
     },
     "suggest": {
         "ext-json": "Needed to support JSON",

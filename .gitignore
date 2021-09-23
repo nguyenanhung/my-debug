@@ -123,6 +123,7 @@ composer.lock
 storage/*
 storage/logs/*
 storage/cache/*
+!storage/.gitkeep
 !storage/.htaccess
 !storage/index.html
 !storage/logs/.htaccess
