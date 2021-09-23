@@ -26,6 +26,9 @@
         "monolog/monolog": "^2.0 || ^1.26",
         "cocur/slugify": "^4.0 || ^3.0"
     },
+    "require-dev": {
+        "kint-php/kint": ">=3.0"
+    },
     "suggest": {
         "ext-json": "Needed to support JSON",
         "ext-iconv": "Needed to support ICONV",

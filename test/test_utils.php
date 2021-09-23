@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/functions.php';
 
 /**
  * Project vn-telco-detect.
@@ -15,6 +14,6 @@ use nguyenanhung\MyDebug\Utils;
 $utils = new Utils();
 $str   = 'Nguyễn An Hưng';
 
-dump($utils->getVersion());
-dump($utils::slugify($str));
-dump($utils::convert_vi_to_en($str));
+d($utils->getVersion());
+d($utils::slugify($str));
+d($utils::convert_vi_to_en($str));

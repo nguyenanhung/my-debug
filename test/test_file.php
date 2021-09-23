@@ -15,8 +15,8 @@ use nguyenanhung\MyDebug\Manager\File;
 $file = new File();
 $file->setExclude(['*.zip']);
 $file->setInclude(['*.log']);
-dump($file->getVersion());
+d($file->getVersion());
 
-$path = testLogPath();
+
 
 
