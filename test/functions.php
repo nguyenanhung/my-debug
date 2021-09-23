@@ -34,6 +34,6 @@ if (!function_exists('testLogPath')) {
      */
     function testLogPath()
     {
-        return __DIR__ . '/../storage/logs/';
+        return __DIR__ . '/../tmp/';
     }
 }
