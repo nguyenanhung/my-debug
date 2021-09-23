@@ -38,7 +38,7 @@ require_once __DIR__ . '/functions.php';
 use nguyenanhung\MyDebug\Logger;
 
 // Test Content
-$logPath     = testLogPath();
+$logPath     = __DIR__.'/tmp';
 $logSubPath  = 'tests-debug-2';
 $logFilename = 'Log-' . date('Y-m-d') . '.log';
 $name        = 'Test';
@@ -63,14 +63,14 @@ echo "\n setLoggerSubPath: " . $debug->getLoggerSubPath() . "\n";
 echo "\n setLoggerFilename: " . $debug->getLoggerFilename() . "\n";
 echo "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
-dump($debug->debug($name, $msg . ' - DEBUG', $context));
-dump($debug->info($name, $msg . ' - INFO', $context));
-dump($debug->notice($name, $msg . ' - NOTICE', $context));
-dump($debug->warning($name, $msg . ' - WARNING', $context));
-dump($debug->error($name, $msg . ' - ERROR', $context));
-dump($debug->critical($name, $msg . ' - CRITICAL', $context));
-dump($debug->alert($name, $msg . ' - ALERT', $context));
-dump($debug->emergency($name, $msg . ' - EMERGENCY', $context));
+d($debug->debug($name, $msg . ' - DEBUG', $context));
+d($debug->info($name, $msg . ' - INFO', $context));
+d($debug->notice($name, $msg . ' - NOTICE', $context));
+d($debug->warning($name, $msg . ' - WARNING', $context));
+d($debug->error($name, $msg . ' - ERROR', $context));
+d($debug->critical($name, $msg . ' - CRITICAL', $context));
+d($debug->alert($name, $msg . ' - ALERT', $context));
+d($debug->emergency($name, $msg . ' - EMERGENCY', $context));
 ```
 
 ### Benchmark
@@ -93,12 +93,12 @@ for ($i = 0; $i < $count; $i++) {
         $function($i);
         echo ($key + 1) . " -> " . $function . "\n";
     }
-}q
+}
 $benchmark->mark('code_end');
 
-dump($benchmark->getVersion());
-dump($benchmark->elapsed_time('code_start', 'code_end'));
-dump($benchmark->memory_usage());
+
+d($benchmark->elapsed_time('code_start', 'code_end'));
+d($benchmark->memory_usage());
 /***************************** SIMPLE BENCHMARKING BY CI *****************************/
 ```
 
@@ -114,11 +114,8 @@ use nguyenanhung\MyDebug\Manager\File;
 $file = new File();
 $file->setExclude(['*.zip']);
 $file->setInclude(['*.log']);
-dump($file->getVersion());
-
-$path = testLogPath();
-
-dump($file->cleanLog($path, 7));
+d($file->getVersion());
+d($file->cleanLog(__DIR__.'/tmp', 7));
 ```
 
 ### Utils
@@ -133,9 +130,9 @@ use nguyenanhung\MyDebug\Utils;
 $utils = new Utils();
 $str   = 'Nguyễn An Hưng';
 
-dump($utils->getVersion()); // show "2.0.5"
-dump($utils::slugify($str)); // show "nguyen-an-hung"
-dump($utils::convert_vi_to_en($str)); // show "nguyen-an-hung"
+d($utils->getVersion()); // show "2.0.5"
+d($utils::slugify($str)); // show "nguyen-an-hung"
+d($utils::convert_vi_to_en($str)); // show "nguyen-an-hung"
 ```
 
 ## Support
