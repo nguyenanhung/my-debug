@@ -18,13 +18,13 @@
         }
     ],
     "require": {
-        "php": "^5.6 || ^7.0 || ^8.0",
+        "php": "^7.0 || ^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "nguyenanhung/benchmark": "^1.0",
-        "nguyenanhung/filesystem-helper": "^1.0",
+        "nguyenanhung/benchmark": "^2.0 || ^1.0",
+        "nguyenanhung/filesystem-helper": "^2.0 || ^1.0",
         "monolog/monolog": "^2.0 || ^1.26",
-        "cocur/slugify": "^4.0 || ^3.0"
+        "cocur/slugify": "^4.0"
     },
     "require-dev": {
         "kint-php/kint": ">=3.0"

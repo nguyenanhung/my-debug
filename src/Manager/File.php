@@ -23,7 +23,7 @@ use nguyenanhung\Libraries\Filesystem\Filesystem;
  * @author     713uk13m <dev@nguyenanhung.com>
  * @copyright  713uk13m <dev@nguyenanhung.com>
  * @since      2021-09-24
- * @version    3.0.4
+ * @version    3.0.5
  */
 class File extends Filesystem
 {

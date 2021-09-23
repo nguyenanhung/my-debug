@@ -13,9 +13,11 @@ namespace nguyenanhung\MyDebug;
 /**
  * Class Debug - Polyfill
  *
- * @package   nguyenanhung\MyDebug
- * @author    713uk13m <dev@nguyenanhung.com>
- * @copyright 713uk13m <dev@nguyenanhung.com>
+ * @package    nguyenanhung\MyDebug
+ * @author     713uk13m <dev@nguyenanhung.com>
+ * @copyright  713uk13m <dev@nguyenanhung.com>
+ * @since      2021-09-24
+ * @version    3.0.5
  */
 class Debug extends Logger
 {
