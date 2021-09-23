@@ -10,6 +10,11 @@
 
 1 thư viện nhỏ hỗ trợ việc ghi log, benchmark ứng dụng PHP. Được customize lại cho phù hợp mục đích sử dụng
 
+## Version
+
+- [x] V1.x support all PHP version `>=5.6`
+- [x] V2.x support all PHP version `>=7.0`
+
 ## Dependents
 
 Thư viện có sử dụng các gói sau đây
