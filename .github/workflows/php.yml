@@ -1,5 +1,5 @@
-# GitHub Action for HungNG My Debug
-name: Testing HungNG My Debug
+# GitHub Action for PHP Package Debug & Logging by HungNG
+name: Testing PHP Package Debug & Logging by HungNG
 on: [ push, pull_request ]
 jobs:
     build:
