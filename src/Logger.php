@@ -24,9 +24,9 @@ use Monolog\Handler\StreamHandler as MonoStreamHandler;
  * @package           nguyenanhung\MyDebug
  * @author            713uk13m <dev@nguyenanhung.com>
  * @copyright         713uk13m <dev@nguyenanhung.com>
- * @since             2018-10-17
- * @last_updated      2021-08-17
- * @version           2.0.5
+ * @since             2021-09-24
+ * @since             2021-09-24
+ * @version           3.0.5
  */
 class Logger implements Project
 {
@@ -75,7 +75,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 59:07
      */
-    public function getDebugStatus()
+    public function getDebugStatus(): bool
     {
         return $this->DEBUG;
     }
@@ -90,7 +90,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 59:17
      */
-    public function setDebugStatus($debug = false)
+    public function setDebugStatus(bool $debug = false): Logger
     {
         $this->DEBUG = $debug;
 
@@ -123,7 +123,7 @@ class Logger implements Project
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels
      * @see      https://tools.ietf.org/html/rfc5424
      */
-    public function setGlobalLoggerLevel($globalLoggerLevel = null)
+    public function setGlobalLoggerLevel(string $globalLoggerLevel = null): Logger
     {
         if (!empty($globalLoggerLevel) && is_string($globalLoggerLevel)) {
             $this->globalLoggerLevel = strtolower($globalLoggerLevel);
@@ -168,7 +168,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 01:36
      */
-    public function setLoggerPath($loggerPath = '')
+    public function setLoggerPath(string $loggerPath = ''): Logger
     {
         if (!empty($loggerPath)) {
             $this->loggerPath = trim($loggerPath);
@@ -187,7 +187,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 02:19
      */
-    public function setLoggerSubPath($loggerSubPath = '')
+    public function setLoggerSubPath(string $loggerSubPath = ''): Logger
     {
         if (!empty($loggerSubPath)) {
             $this->loggerSubPath = trim($loggerSubPath);
@@ -219,7 +219,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 03:20
      */
-    public function setLoggerFilename($loggerFilename = '')
+    public function setLoggerFilename(string $loggerFilename = ''): Logger
     {
         if (!empty($loggerFilename)) {
             $this->loggerFilename = trim($loggerFilename);
@@ -256,7 +256,7 @@ class Logger implements Project
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see      https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
      */
-    public function setLoggerDateFormat($loggerDateFormat = null)
+    public function setLoggerDateFormat(string $loggerDateFormat = null): Logger
     {
         if (!empty($loggerDateFormat) && is_string($loggerDateFormat)) {
             $this->loggerDateFormat = $loggerDateFormat;
@@ -283,7 +283,7 @@ class Logger implements Project
     /**
      * Function setLoggerLineFormat - Hàm cấu hình thông tin về format dòng ghi log
      *
-     * @param null $loggerLineFormat Line Format Input, example: [%datetime%] %channel%.%level_name%: %message% %context% %extra%\n
+     * @param string|null $loggerLineFormat Line Format Input, example: [%datetime%] %channel%.%level_name%: %message% %context% %extra%\n
      *
      * @return $this
      * @author   : 713uk13m <dev@nguyenanhung.com>
@@ -293,7 +293,7 @@ class Logger implements Project
      * @see      https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#customizing-the-log-format
      * @see      https://github.com/Seldaek/monolog/blob/master/src/Monolog/Formatter/LineFormatter.php
      */
-    public function setLoggerLineFormat($loggerLineFormat = null)
+    public function setLoggerLineFormat(string $loggerLineFormat = null): Logger
     {
         if (!empty($loggerLineFormat) && is_string($loggerLineFormat)) {
             $this->loggerLineFormat = $loggerLineFormat;
@@ -320,7 +320,7 @@ class Logger implements Project
      *
      * @example  log('info', 'test', 'Log Test', [])
      */
-    public function log($level = '', $name = 'log', $msg = 'My Message', $context = array())
+    public function log(string $level = '', string $name = 'log', string $msg = 'My Message', $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -427,7 +427,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function debug($name = 'log', $msg = 'My Message', $context = array())
+    public function debug(string $name = 'log', string $msg = 'My Message', $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -449,7 +449,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function info($name = 'log', $msg = 'My Message', $context = array())
+    public function info(string $name = 'log', string $msg = 'My Message', $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -471,7 +471,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function notice($name = 'log', $msg = 'My Message', $context = array())
+    public function notice(string $name = 'log', string $msg = 'My Message', $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -493,7 +493,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function warning($name = 'log', $msg = 'My Message', $context = array())
+    public function warning(string $name = 'log', string $msg = 'My Message', $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -515,7 +515,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function error($name = 'log', $msg = 'My Message', $context = array())
+    public function error(string $name = 'log', string $msg = 'My Message', $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -537,7 +537,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function critical($name = 'log', $msg = 'My Message', $context = array())
+    public function critical(string $name = 'log', string $msg = 'My Message', $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -559,7 +559,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function alert($name = 'log', $msg = 'My Message', $context = array())
+    public function alert(string $name = 'log', string $msg = 'My Message', $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -581,7 +581,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function emergency($name = 'log', $msg = 'My Message', $context = array())
+    public function emergency(string $name = 'log', string $msg = 'My Message', $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);

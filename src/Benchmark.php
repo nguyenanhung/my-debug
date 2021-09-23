@@ -20,8 +20,8 @@ use nguyenanhung\Bear\Benchmark\Benchmark as BearBenchmark;
  * @package    nguyenanhung\MyDebug
  * @author     713uk13m <dev@nguyenanhung.com>
  * @copyright  713uk13m <dev@nguyenanhung.com>
- * @since      2018-10-17
- * @version    0.1.2.5
+ * @since      2021-09-24
+ * @version    3.0.5
  */
 class Benchmark extends BearBenchmark
 {

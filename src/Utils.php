@@ -19,8 +19,8 @@ use nguyenanhung\MyDebug\Repository\DataRepository;
  * @package    nguyenanhung\MyDebug
  * @author     713uk13m <dev@nguyenanhung.com>
  * @copyright  713uk13m <dev@nguyenanhung.com>
- * @since      2018-10-17
- * @version    0.1.2.5
+ * @since      2021-09-24
+ * @version    3.0.5
  */
 class Utils implements Project
 {
@@ -34,12 +34,12 @@ class Utils implements Project
      *
      * @param string $str Chuỗi ký tự đầu vào
      *
-     * @return mixed|null|string Đầu ra rà 1 chuỗi ký tự
+     * @return array|mixed|string|string[] Đầu ra rà 1 chuỗi ký tự
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/9/18 00:31
      *
      */
-    public static function slugify($str = '')
+    public static function slugify(string $str = '')
     {
         if (!class_exists(Slugify::class)) {
             if (function_exists('log_message')) {
@@ -73,12 +73,12 @@ class Utils implements Project
      *
      * @param string $str Chuỗi ký tự đầu vào
      *
-     * @return mixed|string Đầu ra rà 1 chuỗi ký tự
+     * @return array|mixed|string|string[] Đầu ra rà 1 chuỗi ký tự
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 10/13/18 01:17
      *
      */
-    public static function convert_vi_to_en($str = '')
+    public static function convert_vi_to_en(string $str = '')
     {
         $str  = trim($str);
         $str  = function_exists('mb_strtolower') ? mb_strtolower($str) : strtolower($str);
