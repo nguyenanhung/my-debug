@@ -84,11 +84,9 @@ class Utils implements Project
         $str  = function_exists('mb_strtolower') ? mb_strtolower($str) : strtolower($str);
         $data = DataRepository::getData('convert_vi_to_en');
         if (!empty($str)) {
-            $str = str_replace(
-                array($data['vn_array'], $data['special_array'], ' '),
-                array($data['en_array'], $data['separator'], $data['separator']),
-                $str
-            );
+            $str = str_replace($data['vn_array'], $data['en_array'], $str);
+            $str = str_replace($data['special_array'], $data['separator'], $str);
+            $str = str_replace(' ', $data['separator'], $str);
             while (strpos($str, '--') > 0) {
                 $str = str_replace('--', $data['separator'], $str);
             }
