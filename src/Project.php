@@ -18,7 +18,7 @@ namespace nguyenanhung\MyDebug;
  */
 interface Project
 {
-    const VERSION = '3.0.5';
+    const VERSION = '3.0.6';
 
     /**
      * Hàm lấy thông tin phiên bản Packages
@@ -29,5 +29,5 @@ interface Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 9/27/18 18:32
      */
-    public function getVersion();
+    public function getVersion(): string;
 }

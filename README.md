@@ -132,7 +132,7 @@ $str   = 'Nguyễn An Hưng';
 
 d($utils->getVersion()); // show "2.0.5"
 d($utils::slugify($str)); // show "nguyen-an-hung"
-d($utils::convert_vi_to_en($str)); // show "nguyen-an-hung"
+
 ```
 
 ## Support

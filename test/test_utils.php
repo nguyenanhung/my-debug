@@ -16,4 +16,4 @@ $str   = 'Nguyễn An Hưng';
 
 d($utils->getVersion());
 d($utils::slugify($str));
-d($utils::convert_vi_to_en($str));
+
