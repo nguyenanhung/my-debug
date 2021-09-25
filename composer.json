@@ -23,8 +23,8 @@
         "ext-mbstring": "*",
         "nguyenanhung/benchmark": "^2.0 || ^1.0",
         "nguyenanhung/filesystem-helper": "^2.0 || ^1.0",
-        "monolog/monolog": "^2.0 || ^1.26",
-        "cocur/slugify": "^4.0"
+        "nguyenanhung/slug-helper": "^2.0 || ^1.0",
+        "monolog/monolog": "^2.0 || ^1.26"
     },
     "require-dev": {
         "kint-php/kint": ">=3.0"
