@@ -320,7 +320,7 @@ class Logger implements Project
      *
      * @example  log('info', 'test', 'Log Test', [])
      */
-    public function log(string $level = '', string $name = 'log', string $msg = 'My Message', $context = array())
+    public function log(string $level = '', string $name = 'log', string $msg = 'My Message', array|string $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -356,33 +356,24 @@ class Logger implements Project
                     // Default Level is INFO
                     $useLevel = in_array($level, $listLevel) ? trim($level) : trim('info');
                 }
-                switch ($useLevel) {
-                    case 'debug':
-                        $keyLevel = MonoLogger::DEBUG;
-                        break;
-                    case 'info':
-                        $keyLevel = MonoLogger::INFO;
-                        break;
-                    case 'notice':
-                        $keyLevel = MonoLogger::NOTICE;
-                        break;
-                    case 'warning':
-                        $keyLevel = MonoLogger::WARNING;
-                        break;
-                    case 'error':
-                        $keyLevel = MonoLogger::ERROR;
-                        break;
-                    case 'critical':
-                        $keyLevel = MonoLogger::CRITICAL;
-                        break;
-                    case 'alert':
-                        $keyLevel = MonoLogger::ALERT;
-                        break;
-                    case 'emergency':
-                        $keyLevel = MonoLogger::EMERGENCY;
-                        break;
-                    default:
-                        $keyLevel = MonoLogger::WARNING;
+                if ($useLevel == 'debug') {
+                    $keyLevel = MonoLogger::DEBUG;
+                } elseif ($useLevel == 'info') {
+                    $keyLevel = MonoLogger::INFO;
+                } elseif ($useLevel == 'notice') {
+                    $keyLevel = MonoLogger::NOTICE;
+                } elseif ($useLevel == 'warning') {
+                    $keyLevel = MonoLogger::WARNING;
+                } elseif ($useLevel == 'error') {
+                    $keyLevel = MonoLogger::ERROR;
+                } elseif ($useLevel == 'critical') {
+                    $keyLevel = MonoLogger::CRITICAL;
+                } elseif ($useLevel == 'alert') {
+                    $keyLevel = MonoLogger::ALERT;
+                } elseif ($useLevel == 'emergency') {
+                    $keyLevel = MonoLogger::EMERGENCY;
+                } else {
+                    $keyLevel = MonoLogger::WARNING;
                 }
                 $loggerFilename = $this->loggerPath . DIRECTORY_SEPARATOR . $loggerSubPath . DIRECTORY_SEPARATOR . $this->loggerFilename;
                 $dateFormat     = !empty($this->loggerDateFormat) ? $this->loggerDateFormat : "Y-m-d H:i:s u";
@@ -427,7 +418,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function debug(string $name = 'log', string $msg = 'My Message', $context = array())
+    public function debug(string $name = 'log', string $msg = 'My Message', array|string $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -449,7 +440,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function info(string $name = 'log', string $msg = 'My Message', $context = array())
+    public function info(string $name = 'log', string $msg = 'My Message', array|string $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -471,7 +462,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function notice(string $name = 'log', string $msg = 'My Message', $context = array())
+    public function notice(string $name = 'log', string $msg = 'My Message', array|string $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -493,7 +484,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function warning(string $name = 'log', string $msg = 'My Message', $context = array())
+    public function warning(string $name = 'log', string $msg = 'My Message', array|string $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -515,7 +506,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function error(string $name = 'log', string $msg = 'My Message', $context = array())
+    public function error(string $name = 'log', string $msg = 'My Message', array|string $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -537,7 +528,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function critical(string $name = 'log', string $msg = 'My Message', $context = array())
+    public function critical(string $name = 'log', string $msg = 'My Message', array|string $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -559,7 +550,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function alert(string $name = 'log', string $msg = 'My Message', $context = array())
+    public function alert(string $name = 'log', string $msg = 'My Message', array|string $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -581,7 +572,7 @@ class Logger implements Project
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function emergency(string $name = 'log', string $msg = 'My Message', $context = array())
+    public function emergency(string $name = 'log', string $msg = 'My Message', array|string $context = array())
     {
         if (!is_array($context)) {
             $context = array($context);
