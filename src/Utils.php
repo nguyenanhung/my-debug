@@ -25,9 +25,7 @@ class Utils implements Project
     use Version;
 
     /**
-     * Function slugify
-     *
-     * Hàm chuyển đổi ký tự từ tiếng Việt,
+     * Function slugify - Hàm chuyển đổi ký tự từ tiếng Việt,
      * và các ký tự đặc biệt sang ký tự không dấu
      *
      * @param string $str Chuỗi ký tự đầu vào

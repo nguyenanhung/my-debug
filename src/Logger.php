@@ -32,12 +32,12 @@ class Logger implements Project
 {
     use Version;
 
-    const LOG_BUBBLE = true;
+    public const LOG_BUBBLE = true;
 
-    const FILE_PERMISSION = 0777;
+    public const FILE_PERMISSION = 0777;
 
     /** @var bool Cấu hình trạng thái Debug, TRUE nếu cấu hình Debug được bật */
-    private $DEBUG = false;
+    private bool $DEBUG = false;
 
     /** @var string|null Cấu hình Level lưu Log theo tiêu chuẩn RFC 5424 */
     private $globalLoggerLevel;
