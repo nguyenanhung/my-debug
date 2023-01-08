@@ -57,6 +57,12 @@ class Logger implements Project
     /** @var string|null Logger Line Format, VD: "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n" */
     private $loggerLineFormat;
 
+    /** @var bool Cấu hình logging sử dụng Sentry, TRUE nếu cấu hình Sentry được bật */
+    private $useSentry = false;
+
+    /** @var array $sentry Sentry configure */
+    private $sentry;
+
     /**
      * Logger constructor.
      *
@@ -95,6 +101,66 @@ class Logger implements Project
         $this->DEBUG = $debug;
 
         return $this;
+    }
+
+    /**
+     * Function setUseSentry
+     *
+     * @param bool $useSentry
+     *
+     * @return $this
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/01/2023 54:05
+     */
+    public function setUseSentry(bool $useSentry)
+    {
+        $this->useSentry = $useSentry;
+
+        return $this;
+    }
+
+    /**
+     * Function getUseSentryStatus
+     *
+     * @return bool
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/01/2023 54:28
+     */
+    public function getUseSentryStatus(): bool
+    {
+        return $this->useSentry;
+    }
+
+    /**
+     * Function setSentryConfigure
+     *
+     * @param $sentry
+     *
+     * @return $this
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/01/2023 55:25
+     */
+    public function setSentryConfigure($sentry)
+    {
+        $this->sentry = $sentry;
+
+        return $this;
+    }
+
+    /**
+     * Function getSentryConfigure
+     *
+     * @return array
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/01/2023 55:21
+     */
+    public function getSentryConfigure()
+    {
+        return $this->sentry;
     }
 
     /**
@@ -342,14 +408,10 @@ class Logger implements Project
                     $this->loggerFilename = 'Log-' . date('Y-m-d') . '.log';
                 }
                 $listLevel = array('debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency');
-                if (
-                    // Tồn tại Global Logger Level
-                    isset($this->globalLoggerLevel) &&
-                    // Là 1 string
-                    is_string($this->globalLoggerLevel) &&
-                    // Và thuộc list Level được quy định
-                    in_array($this->globalLoggerLevel, $listLevel, true)
-                ) {
+                if (// Tồn tại Global Logger Level
+                    isset($this->globalLoggerLevel) && // Là 1 string
+                    is_string($this->globalLoggerLevel) && // Và thuộc list Level được quy định
+                    in_array($this->globalLoggerLevel, $listLevel, true)) {
                     // If valid globalLoggerLevel -> use globalLoggerLevel
                     $useLevel = strtolower($this->globalLoggerLevel);
                 } else {
@@ -384,17 +446,27 @@ class Logger implements Project
                     default:
                         $keyLevel = MonoLogger::WARNING;
                 }
-                $loggerFilename = $this->loggerPath . DIRECTORY_SEPARATOR . $loggerSubPath . DIRECTORY_SEPARATOR . $this->loggerFilename;
-                $dateFormat     = !empty($this->loggerDateFormat) ? $this->loggerDateFormat : "Y-m-d H:i:s u";
-                $output         = !empty($this->loggerLineFormat) ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
-                $formatter      = new MonoLineFormatter($output, $dateFormat);
-                $stream         = new MonoStreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
-                $stream->setFormatter($formatter);
-                $logger = new MonoLogger(ucfirst(trim($name)));
-                $logger->pushHandler($stream);
-                if (empty($msg)) {
-                    $msg = 'My Log Message is Empty';
+                $loggerName = ucfirst(trim($name));
+
+                if ($this->useSentry === true && is_array($this->sentry) && isset($this->sentry['dsn'])) {
+                    $client = \Sentry\ClientBuilder::create(['dsn' => $this->sentry['dsn']])->getClient();
+                    $handler = new \Sentry\Monolog\Handler(new \Sentry\State\Hub($client));
+                    $logger = new MonoLogger($loggerName);
+                    $logger->pushHandler($handler);
+                } else {
+                    $loggerFilename = $this->loggerPath . DIRECTORY_SEPARATOR . $loggerSubPath . DIRECTORY_SEPARATOR . $this->loggerFilename;
+                    $dateFormat = !empty($this->loggerDateFormat) ? $this->loggerDateFormat : "Y-m-d H:i:s u";
+                    $output = !empty($this->loggerLineFormat) ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
+                    $formatter = new MonoLineFormatter($output, $dateFormat);
+                    $stream = new MonoStreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
+                    $stream->setFormatter($formatter);
+                    $logger = new MonoLogger($loggerName);
+                    $logger->pushHandler($stream);
                 }
+                if (empty($msg)) {
+                    $msg = 'Input Log Message is Empty';
+                }
+
                 if (is_array($context)) {
                     return $logger->$level($msg, $context);
                 }

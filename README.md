@@ -20,10 +20,14 @@
 
 Thư viện có sử dụng các gói sau đây
 
-- [x] monolog/monolog `^2.3`
-- [x] cocur/slugify `^4.0`
-- [x] theseer/directoryscanner `^1.3`
-- [x] symfony/filesystem `^5.3 || ^4.4`
+- [x] monolog/monolog `^2.0 || ^1.26`
+- [x] nguyenanhung/benchmark `^2.0 || ^1.0`
+- [x] "nguyenanhung/filesystem-helper `^2.0 || ^1.0`
+- [x] nguyenanhung/slug-helper `^2.0 || ^1.0`
+
+Ngoài ra, gói cũng hỗ trợ logging lên service ngoài như Sentry, khi đó cần cài thêm gói `sentry/sdk` như dưới đây
+
+- [x] sentry/sdk `^3.0 || ^2.0`
 
 ## Usage
 
@@ -140,7 +144,7 @@ d($utils::slugify($str)); // show "nguyen-an-hung"
 If any question & request, please contact following information
 
 | Name        | Email                | Skype            | Facebook      |
-| ----------- | -------------------- | ---------------- | ------------- |
+|-------------|----------------------|------------------|---------------|
 | Hung Nguyen | dev@nguyenanhung.com | nguyenanhung5891 | @nguyenanhung |
 
 From Vietnam with Love <3
