@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/func.php';
 
 /**
  * Project vn-telco-detect.
@@ -15,7 +16,7 @@ $benchmark = new Benchmark();
 /***************************** SIMPLE BENCHMARKING BY CI *****************************/
 $benchmark->mark('code_start');
 $mathFunctions = ["abs", "acos", "asin", "atan", "floor"];
-$count         = 10;
+$count = 10;
 for ($i = 0; $i < $count; $i++) {
     foreach ($mathFunctions as $key => $function) {
         $function($i);
@@ -25,6 +26,6 @@ for ($i = 0; $i < $count; $i++) {
 $benchmark->mark('code_end');
 
 
-d($benchmark->elapsed_time('code_start', 'code_end'));
-d($benchmark->memory_usage());
+__show__($benchmark->elapsed_time('code_start', 'code_end'));
+__show__($benchmark->memory_usage());
 /***************************** SIMPLE BENCHMARKING BY CI *****************************/
