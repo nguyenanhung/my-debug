@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/func.php';
 
 /**
  * Project vn-telco-detect.
@@ -14,7 +15,7 @@ use nguyenanhung\MyDebug\Manager\File;
 $file = new File();
 $file->setExclude(['*.zip']);
 $file->setInclude(['*.log']);
-d($file->getVersion());
+__show__($file->getVersion());
 
 
 
