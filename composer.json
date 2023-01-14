@@ -27,8 +27,7 @@
         "monolog/monolog": "^2.0 || ^1.26"
     },
     "require-dev": {
-        "kint-php/kint": ">=3.0",
-        "sentry/sdk": "^3.0 || ^2.0"
+        "kint-php/kint": ">=3.0"
     },
     "suggest": {
         "ext-json": "Needed to support JSON",
