@@ -448,7 +448,7 @@ class Logger implements Project
                 }
                 $loggerName = ucfirst(trim($name));
 
-                if ($this->useSentry === true && is_array($this->sentry) && isset($this->sentry['dsn'])) {
+                if ($this->useSentry === true && is_array($this->sentry) && isset($this->sentry['dsn']) && class_exists('\Sentry\ClientBuilder')) {
                     $client = \Sentry\ClientBuilder::create(['dsn' => $this->sentry['dsn']])->getClient();
                     $handler = new \Sentry\Monolog\Handler(new \Sentry\State\Hub($client));
                     $logger = new MonoLogger($loggerName);
