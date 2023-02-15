@@ -12,18 +12,10 @@
 
 ## Version
 
-- [x] V1.x, V2.x support all PHP version `>=5.6`
+- [x] V1.x support all PHP version `>=5.6`
+- [x] V2.x support all PHP version `>=5.6`
 - [x] V3.x support all PHP version `>=7.0`
 - [x] V4.x support all PHP version `>=8.1`
-
-## Dependents
-
-Thư viện có sử dụng các gói sau đây
-
-- [x] monolog/monolog `^2.0 || ^1.26`
-- [x] nguyenanhung/benchmark `^2.0 || ^1.0`
-- [x] "nguyenanhung/filesystem-helper `^2.0 || ^1.0`
-- [x] nguyenanhung/slug-helper `^2.0 || ^1.0`
 
 Ngoài ra, gói cũng hỗ trợ logging lên service ngoài như Sentry, khi đó cần cài thêm gói `sentry/sdk` như dưới đây
 

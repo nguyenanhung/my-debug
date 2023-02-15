@@ -13,10 +13,13 @@ require __DIR__ . '/func.php';
 use nguyenanhung\MyDebug\Manager\File;
 
 $file = new File();
-$file->setExclude(['*.zip']);
-$file->setInclude(['*.log']);
-__show__($file->getVersion());
+$file->setExclude(array('*.zip'));
+$file->setInclude(array('*.log'));
 
+$path = __DIR__ . '/../tmp';
+$path = realpath($path);
+
+d($file->directoryScanner($path));
 
 
 
