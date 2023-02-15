@@ -37,25 +37,25 @@ class Logger implements Project
     const FILE_PERMISSION = 0777;
 
     /** @var bool Cấu hình trạng thái Debug, TRUE nếu cấu hình Debug được bật */
-    private $DEBUG = false;
+    protected $DEBUG = false;
 
     /** @var string|null Cấu hình Level lưu Log theo tiêu chuẩn RFC 5424 */
-    private $globalLoggerLevel;
+    protected $globalLoggerLevel;
 
     /** @var string|null Đường dẫn thư mục lưu trữ Log, VD: /your/to/path */
-    private $loggerPath = 'logs';
+    protected $loggerPath = 'logs';
 
     /** @var string|null Tương tự với $loggerPath, mặc định dùng để lưu tên class phát sinh log */
-    private $loggerSubPath;
+    protected $loggerSubPath;
 
     /** @var string|null Filename lưu log, khuyến nghị theo chuẩn Log-Y-m-d.log, VD: Log-2018-10-17.log */
-    private $loggerFilename;
+    protected $loggerFilename;
 
     /** @var string|null Logger Date Format, VD: Y-m-d H:i:s u */
-    private $loggerDateFormat;
+    protected $loggerDateFormat;
 
     /** @var string|null Logger Line Format, VD: "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n" */
-    private $loggerLineFormat;
+    protected $loggerLineFormat;
 
     /**
      * Logger constructor.
@@ -342,14 +342,10 @@ class Logger implements Project
                     $this->loggerFilename = 'Log-' . date('Y-m-d') . '.log';
                 }
                 $listLevel = array('debug', 'info', 'notice', 'warning', 'error', 'critical', 'alert', 'emergency');
-                if (
-                    // Tồn tại Global Logger Level
-                    isset($this->globalLoggerLevel) &&
-                    // Là 1 string
-                    is_string($this->globalLoggerLevel) &&
-                    // Và thuộc list Level được quy định
-                    in_array($this->globalLoggerLevel, $listLevel, true)
-                ) {
+                if (// Tồn tại Global Logger Level
+                    isset($this->globalLoggerLevel) && // Là 1 string
+                    is_string($this->globalLoggerLevel) && // Và thuộc list Level được quy định
+                    in_array($this->globalLoggerLevel, $listLevel, true)) {
                     // If valid globalLoggerLevel -> use globalLoggerLevel
                     $useLevel = strtolower($this->globalLoggerLevel);
                 } else {
@@ -385,10 +381,10 @@ class Logger implements Project
                         $keyLevel = MonoLogger::WARNING;
                 }
                 $loggerFilename = $this->loggerPath . DIRECTORY_SEPARATOR . $loggerSubPath . DIRECTORY_SEPARATOR . $this->loggerFilename;
-                $dateFormat     = !empty($this->loggerDateFormat) ? $this->loggerDateFormat : "Y-m-d H:i:s u";
-                $output         = !empty($this->loggerLineFormat) ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
-                $formatter      = new MonoLineFormatter($output, $dateFormat);
-                $stream         = new MonoStreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
+                $dateFormat = !empty($this->loggerDateFormat) ? $this->loggerDateFormat : "Y-m-d H:i:s u";
+                $output = !empty($this->loggerLineFormat) ? $this->loggerLineFormat : "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
+                $formatter = new MonoLineFormatter($output, $dateFormat);
+                $stream = new MonoStreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
                 $stream->setFormatter($formatter);
                 $logger = new MonoLogger(ucfirst(trim($name)));
                 $logger->pushHandler($stream);

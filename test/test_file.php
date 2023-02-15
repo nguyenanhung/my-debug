@@ -14,7 +14,7 @@ use nguyenanhung\MyDebug\Manager\File;
 $file = new File();
 $file->setExclude(['*.zip']);
 $file->setInclude(['*.log']);
-d($file->getVersion());
+
 
 
 
