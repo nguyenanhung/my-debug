@@ -15,9 +15,8 @@ $file = new File();
 $file->setExclude(array('*.zip'));
 $file->setInclude(array('*.log'));
 
-$path = __DIR__.'/../tmp';
+$path = __DIR__ . '/../tmp';
 $path = realpath($path);
-
 
 d($file->directoryScanner($path));
 

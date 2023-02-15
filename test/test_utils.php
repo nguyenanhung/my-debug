@@ -12,7 +12,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use nguyenanhung\MyDebug\Utils;
 
 $utils = new Utils();
-$str   = 'Nguyễn An Hưng';
+$str = 'Nguyễn An Hưng';
 
 d($utils->getVersion());
 d($utils::slugify($str));
