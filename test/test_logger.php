@@ -14,7 +14,8 @@ use nguyenanhung\MyDebug\Logger;
 
 // Test Content
 $logPath = __DIR__ . '/../tmp';
-$logSubPath = 'tests-debug-2';
+$logPath = realpath($logPath);
+$logSubPath = date('Y-m-d');
 $logFilename = 'Log-' . date('Y-m-d') . '.log';
 $name = 'Test';
 $msg = 'Test Log lan 2';
