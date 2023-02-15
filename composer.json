@@ -24,7 +24,7 @@
         "nguyenanhung/benchmark": "^2.0 || ^1.0",
         "nguyenanhung/filesystem-helper": "^2.0 || ^1.0",
         "nguyenanhung/slug-helper": "^2.0 || ^1.0",
-        "monolog/monolog": "^3.2"
+        "monolog/monolog": "^3.0"
     },
     "require-dev": {
         "kint-php/kint": "^4.0 || ^3.0"
