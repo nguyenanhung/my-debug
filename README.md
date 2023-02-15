@@ -12,18 +12,10 @@
 
 ## Version
 
-- [x] V1.x, V2.x support all PHP version `>=5.6`
+- [x] V1.x support all PHP version `>=5.6`
+- [x] V2.x support all PHP version `>=5.6`
 - [x] V3.x support all PHP version `>=7.0`
 - [x] V4.x support all PHP version `>=8.1`
-
-## Dependents
-
-Thư viện có sử dụng các gói sau đây
-
-- [x] monolog/monolog `^3.0`
-- [x] cocur/slugify `^4.0`
-- [x] theseer/directoryscanner `^1.3`
-- [x] symfony/filesystem `^5.3 || ^4.4`
 
 ## Usage
 
@@ -140,7 +132,7 @@ d($utils::slugify($str)); // show "nguyen-an-hung"
 If any question & request, please contact following information
 
 | Name        | Email                | Skype            | Facebook      |
-| ----------- | -------------------- | ---------------- | ------------- |
+|-------------|----------------------|------------------|---------------|
 | Hung Nguyen | dev@nguyenanhung.com | nguyenanhung5891 | @nguyenanhung |
 
 From Vietnam with Love <3
