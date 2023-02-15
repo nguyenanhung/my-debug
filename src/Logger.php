@@ -28,10 +28,8 @@ use Monolog\Handler\StreamHandler as MonoStreamHandler;
  * @last_updated      2021-08-17
  * @version           2.0.5
  */
-class Logger implements Project
+class Logger extends BaseDebug implements Project
 {
-    use Version;
-
     const LOG_BUBBLE = true;
 
     const FILE_PERMISSION = 0777;
@@ -327,7 +325,7 @@ class Logger implements Project
         }
         $level = strtolower(trim($level));
         if ($this->DEBUG === true) {
-            if (!class_exists(MonoLogger::class)) {
+            if (!class_exists('Monolog\Logger')) {
                 if (function_exists('log_message')) {
                     $errorMsg = 'Không tồn tại class Monolog';
                     log_message('error', $errorMsg);
@@ -386,6 +384,7 @@ class Logger implements Project
                 $formatter = new MonoLineFormatter($output, $dateFormat);
                 $stream = new MonoStreamHandler($loggerFilename, $keyLevel, self::LOG_BUBBLE, self::FILE_PERMISSION);
                 $stream->setFormatter($formatter);
+
                 $logger = new MonoLogger(ucfirst(trim($name)));
                 $logger->pushHandler($stream);
                 if (empty($msg)) {
@@ -394,9 +393,7 @@ class Logger implements Project
                 if (is_array($context)) {
                     return $logger->$level($msg, $context);
                 }
-
                 return $logger->$level($msg . json_encode($context));
-
             } catch (Exception $e) {
                 if (function_exists('log_message')) {
                     log_message('error', 'Error Message: ' . $e->getMessage());

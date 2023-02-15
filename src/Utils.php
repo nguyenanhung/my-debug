@@ -20,10 +20,8 @@ use nguyenanhung\Libraries\Slug\SlugUrl;
  * @since      2018-10-17
  * @version    0.1.2.5
  */
-class Utils implements Project
+class Utils extends BaseDebug implements Project
 {
-    use Version;
-
     /**
      * Function slugify
      *
@@ -39,6 +37,8 @@ class Utils implements Project
      */
     public static function slugify($str = '')
     {
-        return (new SlugUrl())->slugify($str);
+        $slug = new SlugUrl();
+
+        return $slug->slugify($str);
     }
 }
