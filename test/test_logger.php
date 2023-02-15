@@ -17,11 +17,11 @@ $logSubPath  = 'tests-debug-2';
 $logFilename = 'Log-' . date('Y-m-d') . '.log';
 $name        = 'Test';
 $msg         = 'Test Log lan 2';
-$context     = [
+$context     = array(
     'name'    => 'Nguyen An Hung',
     'email'   => 'dev@nguyenanhung.com',
-    'website' => 'https://nguyenanhung.com',
-];
+    'website' => 'https://nguyenanhung.com'
+);
 // Call
 $logger = new Logger();
 $logger->setDebugStatus(true);
