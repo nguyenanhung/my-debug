@@ -12,16 +12,17 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use nguyenanhung\MyDebug\Logger;
 
 // Test Content
-$logPath     = __DIR__ . '/../tmp';
-$logSubPath  = 'tests-debug-2';
+$logPath = __DIR__ . '/../tmp';
+$logPath = realpath($logPath);
+$logSubPath = date('Y-m-d');
 $logFilename = 'Log-' . date('Y-m-d') . '.log';
-$name        = 'Test';
-$msg         = 'Test Log lan 2';
-$context     = [
+$name = 'Test';
+$msg = 'Test Log lan 2';
+$context = array(
     'name'    => 'Nguyen An Hung',
     'email'   => 'dev@nguyenanhung.com',
     'website' => 'https://nguyenanhung.com',
-];
+);
 // Call
 $logger = new Logger();
 $logger->setDebugStatus(true);
