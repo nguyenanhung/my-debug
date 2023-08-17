@@ -126,7 +126,7 @@ class Logger implements Project
     public function setGlobalLoggerLevel(string $globalLoggerLevel = null): Logger
     {
         if (!empty($globalLoggerLevel) && is_string($globalLoggerLevel)) {
-            $this->globalLoggerLevel = strtolower($globalLoggerLevel);
+            $this->globalLoggerLevel = mb_strtolower($globalLoggerLevel);
         }
 
         return $this;
@@ -312,7 +312,7 @@ class Logger implements Project
      * @param string       $msg     Log Message write to Log
      * @param array|string $context Log Context aka Log Message Array format
      *
-     * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @return bool TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
@@ -320,12 +320,12 @@ class Logger implements Project
      *
      * @example  log('info', 'test', 'Log Test', [])
      */
-    public function log(string $level = '', string $name = 'log', string $msg = 'My Message', array|string $context = array())
+    public function log(string $level = '', string $name = 'log', string $msg = 'My Message', array|string $context = array()): bool
     {
         if (!is_array($context)) {
             $context = array($context);
         }
-        $level = strtolower(trim($level));
+        $level = mb_strtolower(trim($level));
         if ($this->DEBUG === true) {
             if (!class_exists(MonoLogger::class)) {
                 if (function_exists('log_message')) {
@@ -351,26 +351,26 @@ class Logger implements Project
                     in_array($this->globalLoggerLevel, $listLevel, true)
                 ) {
                     // If valid globalLoggerLevel -> use globalLoggerLevel
-                    $useLevel = strtolower($this->globalLoggerLevel);
+                    $useLevel = mb_strtolower($this->globalLoggerLevel);
                 } else {
                     // Default Level is INFO
                     $useLevel = in_array($level, $listLevel) ? trim($level) : trim('info');
                 }
-                if ($useLevel == 'debug') {
+                if ($useLevel === 'debug') {
                     $keyLevel = MonoLogger::DEBUG;
-                } elseif ($useLevel == 'info') {
+                } elseif ($useLevel === 'info') {
                     $keyLevel = MonoLogger::INFO;
-                } elseif ($useLevel == 'notice') {
+                } elseif ($useLevel === 'notice') {
                     $keyLevel = MonoLogger::NOTICE;
-                } elseif ($useLevel == 'warning') {
+                } elseif ($useLevel === 'warning') {
                     $keyLevel = MonoLogger::WARNING;
-                } elseif ($useLevel == 'error') {
+                } elseif ($useLevel === 'error') {
                     $keyLevel = MonoLogger::ERROR;
-                } elseif ($useLevel == 'critical') {
+                } elseif ($useLevel === 'critical') {
                     $keyLevel = MonoLogger::CRITICAL;
-                } elseif ($useLevel == 'alert') {
+                } elseif ($useLevel === 'alert') {
                     $keyLevel = MonoLogger::ALERT;
-                } elseif ($useLevel == 'emergency') {
+                } elseif ($useLevel === 'emergency') {
                     $keyLevel = MonoLogger::EMERGENCY;
                 } else {
                     $keyLevel = MonoLogger::WARNING;
@@ -402,7 +402,7 @@ class Logger implements Project
             }
         }
 
-        return null;
+        return false;
     }
 
     /**
@@ -412,13 +412,13 @@ class Logger implements Project
      * @param string       $msg     Log Message write to Log
      * @param array|string $context Log Context aka Log Message Array format
      *
-     * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @return bool TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function debug(string $name = 'log', string $msg = 'My Message', array|string $context = array())
+    public function debug(string $name = 'log', string $msg = 'My Message', array|string $context = array()): bool
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -434,13 +434,13 @@ class Logger implements Project
      * @param string       $msg     Log Message write to Log
      * @param array|string $context Log Context aka Log Message Array format
      *
-     * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @return bool TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function info(string $name = 'log', string $msg = 'My Message', array|string $context = array())
+    public function info(string $name = 'log', string $msg = 'My Message', array|string $context = array()): bool
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -456,13 +456,13 @@ class Logger implements Project
      * @param string       $msg     Log Message write to Log
      * @param array|string $context Log Context aka Log Message Array format
      *
-     * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @return bool TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function notice(string $name = 'log', string $msg = 'My Message', array|string $context = array())
+    public function notice(string $name = 'log', string $msg = 'My Message', array|string $context = array()): bool
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -478,13 +478,13 @@ class Logger implements Project
      * @param string       $msg     Log Message write to Log
      * @param array|string $context Log Context aka Log Message Array format
      *
-     * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @return bool TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function warning(string $name = 'log', string $msg = 'My Message', array|string $context = array())
+    public function warning(string $name = 'log', string $msg = 'My Message', array|string $context = array()): bool
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -500,13 +500,13 @@ class Logger implements Project
      * @param string       $msg     Log Message write to Log
      * @param array|string $context Log Context aka Log Message Array format
      *
-     * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @return bool TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function error(string $name = 'log', string $msg = 'My Message', array|string $context = array())
+    public function error(string $name = 'log', string $msg = 'My Message', array|string $context = array()): bool
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -522,13 +522,13 @@ class Logger implements Project
      * @param string       $msg     Log Message write to Log
      * @param array|string $context Log Context aka Log Message Array format
      *
-     * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @return bool TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function critical(string $name = 'log', string $msg = 'My Message', array|string $context = array())
+    public function critical(string $name = 'log', string $msg = 'My Message', array|string $context = array()): bool
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -544,13 +544,13 @@ class Logger implements Project
      * @param string       $msg     Log Message write to Log
      * @param array|string $context Log Context aka Log Message Array format
      *
-     * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @return bool TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function alert(string $name = 'log', string $msg = 'My Message', array|string $context = array())
+    public function alert(string $name = 'log', string $msg = 'My Message', array|string $context = array()): bool
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -566,13 +566,13 @@ class Logger implements Project
      * @param string       $msg     Log Message write to Log
      * @param array|string $context Log Context aka Log Message Array format
      *
-     * @return bool|null TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra, ngoài ra các trường hợp khác sẽ trả về mã Null
+     * @return bool TRUE nếu ghi log thành công, FALSE nếu ghi log thất bại, Message Error nếu có lỗi Exception xảy ra
      *
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/17/2021 07:35
      */
-    public function emergency(string $name = 'log', string $msg = 'My Message', array|string $context = array())
+    public function emergency(string $name = 'log', string $msg = 'My Message', array|string $context = array()): bool
     {
         if (!is_array($context)) {
             $context = array($context);
