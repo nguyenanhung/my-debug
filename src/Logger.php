@@ -192,7 +192,7 @@ class Logger implements Project
     public function setGlobalLoggerLevel(string $globalLoggerLevel = null): Logger
     {
         if (!empty($globalLoggerLevel) && is_string($globalLoggerLevel)) {
-            $this->globalLoggerLevel = strtolower($globalLoggerLevel);
+            $this->globalLoggerLevel = mb_strtolower($globalLoggerLevel);
         }
 
         return $this;
@@ -391,7 +391,7 @@ class Logger implements Project
         if (!is_array($context)) {
             $context = array($context);
         }
-        $level = strtolower(trim($level));
+        $level = mb_strtolower(trim($level));
         if ($this->DEBUG === true) {
             if (!class_exists(MonoLogger::class)) {
                 if (function_exists('log_message')) {
@@ -414,7 +414,7 @@ class Logger implements Project
                     is_string($this->globalLoggerLevel) && // Và thuộc list Level được quy định
                     in_array($this->globalLoggerLevel, $listLevel, true)) {
                     // If valid globalLoggerLevel -> use globalLoggerLevel
-                    $useLevel = strtolower($this->globalLoggerLevel);
+                    $useLevel = mb_strtolower($this->globalLoggerLevel);
                 } else {
                     // Default Level is INFO
                     $useLevel = in_array($level, $listLevel) ? trim($level) : trim('info');
