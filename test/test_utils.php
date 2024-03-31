@@ -13,7 +13,7 @@ require __DIR__ . '/func.php';
 use nguyenanhung\MyDebug\Utils;
 
 $utils = new Utils();
-$str   = 'Nguyễn An Hưng';
+$str = 'Nguyễn An Hưng';
 
 __show__($utils->getVersion());
 __show__($utils::slugify($str));

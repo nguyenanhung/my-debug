@@ -18,10 +18,10 @@ $benchmark->mark('code_start');
 $mathFunctions = ["abs", "acos", "asin", "atan", "floor"];
 $count = 10;
 for ($i = 0; $i < $count; $i++) {
-    foreach ($mathFunctions as $key => $function) {
-        $function($i);
-        echo ($key + 1) . " -> " . $function . "\n";
-    }
+	foreach ($mathFunctions as $key => $function) {
+		$function($i);
+		echo ($key + 1) . " -> " . $function . "\n";
+	}
 }
 $benchmark->mark('code_end');
 
