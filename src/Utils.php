@@ -22,21 +22,21 @@ use nguyenanhung\Libraries\Slug\SlugUrl;
  */
 class Utils implements Project
 {
-    use Version;
+	use Version;
 
-    /**
-     * Function slugify - Hàm chuyển đổi ký tự từ tiếng Việt,
-     * và các ký tự đặc biệt sang ký tự không dấu
-     *
-     * @param string $str Chuỗi ký tự đầu vào
-     *
-     * @return string Đầu ra rà 1 chuỗi ký tự
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 10/9/18 00:31
-     *
-     */
-    public static function slugify(string $str = ''): string
-    {
-        return (new SlugUrl())->slugify($str);
-    }
+	/**
+	 * Function slugify - Hàm chuyển đổi ký tự từ tiếng Việt,
+	 * và các ký tự đặc biệt sang ký tự không dấu
+	 *
+	 * @param string $str Chuỗi ký tự đầu vào
+	 *
+	 * @return string Đầu ra rà 1 chuỗi ký tự
+	 * @author: 713uk13m <dev@nguyenanhung.com>
+	 * @time  : 10/9/18 00:31
+	 *
+	 */
+	public static function slugify(string $str = ''): string
+	{
+		return (new SlugUrl())->slugify($str);
+	}
 }
