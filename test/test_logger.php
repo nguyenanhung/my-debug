@@ -2,14 +2,6 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/func.php';
 
-/**
- * Project vn-telco-detect.
- * Created by PhpStorm.
- * User: 713uk13m <dev@nguyenanhung.com>
- * Date: 9/18/18
- * Time: 17:30
- */
-
 use nguyenanhung\MyDebug\Logger;
 
 // Test Content
@@ -48,4 +40,3 @@ __show__($logger->error($name, $msg . ' - ERROR', $context));
 __show__($logger->critical($name, $msg . ' - CRITICAL', $context));
 __show__($logger->alert($name, $msg . ' - ALERT', $context));
 __show__($logger->emergency($name, $msg . ' - EMERGENCY', $context));
-

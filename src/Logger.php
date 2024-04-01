@@ -329,11 +329,7 @@ class Logger implements Project
 		$level = mb_strtolower(trim($level));
 		if ($this->DEBUG === true) {
 			if (!class_exists(MonoLogger::class)) {
-				if (function_exists('log_message')) {
-					$errorMsg = 'Không tồn tại class Monolog';
-					log_message('error', $errorMsg);
-				}
-
+				Utils::log_message('error', 'Class Monolog not exists');
 				return false;
 			}
 			try {
@@ -388,20 +384,13 @@ class Logger implements Project
 					$msg = 'My Log Message is Empty';
 				}
 
-				if (is_array($context)) {
-					$contextData = $context;
-				} else {
-					$contextData = [$context];
-				}
+				$contextData = is_array($context) ? $context : [$context];
 				$logger->$level($msg, $contextData);
 
 				return true;
 			} catch (Exception $e) {
-				if (function_exists('log_message')) {
-					log_message('error', 'Error Message: ' . $e->getMessage());
-					log_message('error', 'Error TraceAsString: ' . $e->getTraceAsString());
-				}
-
+				Utils::log_message('error', 'Error Message: ' . $e->getMessage());
+				Utils::log_message('error', 'Error TraceAsString: ' . $e->getTraceAsString());
 				return false;
 			}
 		}

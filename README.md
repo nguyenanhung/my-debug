@@ -30,44 +30,46 @@ Tham khảo hướng dẫn triển khai tại đây và trong thư mục `test/`
 ```php
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/functions.php';
+require __DIR__ . '/func.php';
 
 use nguyenanhung\MyDebug\Logger;
 
 // Test Content
-$logPath     = __DIR__.'/tmp';
-$logSubPath  = 'tests-debug-2';
+$logPath = __DIR__ . '/../tmp';
+$logPath = realpath($logPath);
+$logSubPath = date('Y-m-d');
 $logFilename = 'Log-' . date('Y-m-d') . '.log';
-$name        = 'Test';
-$msg         = 'Test Log lan 2';
-$context     = [
-    'name'  => 'Nguyen An Hung',
-    'email' => 'dev@nguyenanhung.com'
+$name = 'Test';
+$msg = 'Test Log lan 2';
+$context = [
+	'name' => 'Nguyen An Hung',
+	'email' => 'dev@nguyenanhung.com',
+	'website' => 'https://nguyenanhung.com',
 ];
 // Call
-$debug = new Logger();
-$debug->setDebugStatus(TRUE);
-$debug->setGlobalLoggerLevel('info');
-$debug->setLoggerPath($logPath);
-$debug->setLoggerSubPath($logSubPath);
-$debug->setLoggerFilename($logFilename);
-$debug->__construct();
+$logger = new Logger();
+$logger->setDebugStatus(true);
+$logger->setGlobalLoggerLevel();
+$logger->setLoggerPath($logPath);
+$logger->setLoggerSubPath($logSubPath);
+$logger->setLoggerFilename($logFilename);
+$logger->__construct();
 echo "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-echo "\n getVersion: " . $debug->getVersion() . "\n";
-echo "\n setDebugStatus: " . $debug->getDebugStatus() . "\n";
-echo "\n setLoggerPath: " . $debug->getLoggerPath() . "\n";
-echo "\n setLoggerSubPath: " . $debug->getLoggerSubPath() . "\n";
-echo "\n setLoggerFilename: " . $debug->getLoggerFilename() . "\n";
+echo "\n getVersion: " . $logger->getVersion() . "\n";
+echo "\n setDebugStatus: " . $logger->getDebugStatus() . "\n";
+echo "\n setLoggerPath: " . $logger->getLoggerPath() . "\n";
+echo "\n setLoggerSubPath: " . $logger->getLoggerSubPath() . "\n";
+echo "\n setLoggerFilename: " . $logger->getLoggerFilename() . "\n";
 echo "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
-d($debug->debug($name, $msg . ' - DEBUG', $context));
-d($debug->info($name, $msg . ' - INFO', $context));
-d($debug->notice($name, $msg . ' - NOTICE', $context));
-d($debug->warning($name, $msg . ' - WARNING', $context));
-d($debug->error($name, $msg . ' - ERROR', $context));
-d($debug->critical($name, $msg . ' - CRITICAL', $context));
-d($debug->alert($name, $msg . ' - ALERT', $context));
-d($debug->emergency($name, $msg . ' - EMERGENCY', $context));
+__show__($logger->debug($name, $msg . ' - DEBUG', $context));
+__show__($logger->info($name, $msg . ' - INFO', $context));
+__show__($logger->notice($name, $msg . ' - NOTICE', $context));
+__show__($logger->warning($name, $msg . ' - WARNING', $context));
+__show__($logger->error($name, $msg . ' - ERROR', $context));
+__show__($logger->critical($name, $msg . ' - CRITICAL', $context));
+__show__($logger->alert($name, $msg . ' - ALERT', $context));
+__show__($logger->emergency($name, $msg . ' - EMERGENCY', $context));
 ```
 
 ### Benchmark
@@ -75,27 +77,24 @@ d($debug->emergency($name, $msg . ' - EMERGENCY', $context));
 ```php
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/functions.php';
+require __DIR__ . '/func.php';
 
 use nguyenanhung\MyDebug\Benchmark;
 
 $benchmark = new Benchmark();
-/***************************** SIMPLE BENCHMARKING BY CI *****************************/
 $benchmark->mark('code_start');
-$mathFunctions = array("abs", "acos", "asin", "atan", "floor", "exp", "sin", "tan", "pi", "is_finite", "is_nan", "sqrt");
-$count         = 9999;
+$mathFunctions = ["abs", "acos", "asin", "atan", "floor"];
+$count = 10;
 for ($i = 0; $i < $count; $i++) {
-    foreach ($mathFunctions as $key => $function) {
-        $function($i);
-        echo ($key + 1) . " -> " . $function . "\n";
-    }
+	foreach ($mathFunctions as $key => $function) {
+		$function($i);
+		echo ($key + 1) . " -> " . $function . "\n";
+	}
 }
 $benchmark->mark('code_end');
 
-
-d($benchmark->elapsed_time('code_start', 'code_end'));
-d($benchmark->memory_usage());
-/***************************** SIMPLE BENCHMARKING BY CI *****************************/
+__show__($benchmark->elapsed_time('code_start', 'code_end'));
+__show__($benchmark->memory_usage());
 ```
 
 ### Manage File
@@ -103,15 +102,18 @@ d($benchmark->memory_usage());
 ```php
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/functions.php';
+require __DIR__ . '/func.php';
 
 use nguyenanhung\MyDebug\Manager\File;
 
 $file = new File();
-$file->setExclude(['*.zip']);
-$file->setInclude(['*.log']);
-d($file->getVersion());
-d($file->cleanLog(__DIR__.'/tmp', 7));
+$file->setExclude(array('*.zip'));
+$file->setInclude(array('*.log'));
+
+$path = __DIR__ . '/../tmp';
+$path = realpath($path);
+
+__show__($file->directoryScanner($path));
 ```
 
 ### Utils
@@ -119,16 +121,15 @@ d($file->cleanLog(__DIR__.'/tmp', 7));
 ```php
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/functions.php';
+require __DIR__ . '/func.php';
 
 use nguyenanhung\MyDebug\Utils;
 
 $utils = new Utils();
-$str   = 'Nguyễn An Hưng';
+$str = 'Nguyễn An Hưng';
 
-d($utils->getVersion()); // show "2.0.5"
-d($utils::slugify($str)); // show "nguyen-an-hung"
-
+__show__($utils->getVersion());
+__show__($utils::slugify($str));
 ```
 
 ## Support

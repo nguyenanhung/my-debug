@@ -41,4 +41,28 @@ class Utils implements Project
 	{
 		return (new SlugUrl())->slugify($str);
 	}
+
+	/**
+	 * Function log_message - Call to function log_message if function exists
+	 *
+	 * @param string $name
+	 * @param mixed $message
+	 * @return void
+	 */
+	public static function log_message(string $name = '', mixed $message = ''): void
+	{
+		if (empty($name)) {
+			$name = 'error';
+		}
+		if (function_exists('log_message') && !empty($message)) {
+			if (!is_string($message)) {
+				$message = json_encode(
+					[
+						$message
+					]
+				);
+			}
+			log_message($name, $message);
+		}
+	}
 }
