@@ -30,7 +30,7 @@ class Utils implements Project
 	 * Hàm chuyển đổi ký tự từ tiếng Việt,
 	 * và các ký tự đặc biệt sang ký tự không dấu
 	 *
-	 * @param string $str Chuỗi ký tự đầu vào
+	 * @param  string  $str  Chuỗi ký tự đầu vào
 	 *
 	 * @return string Đầu ra rà 1 chuỗi ký tự
 	 * @author: 713uk13m <dev@nguyenanhung.com>
@@ -45,8 +45,8 @@ class Utils implements Project
 	/**
 	 * Function log_message - Call to function log_message if function exists
 	 *
-	 * @param string $name
-	 * @param mixed $message
+	 * @param  string  $name
+	 * @param  mixed  $message
 	 * @return void
 	 */
 	public static function log_message(string $name = '', mixed $message = ''): void
@@ -54,8 +54,8 @@ class Utils implements Project
 		if (empty($name)) {
 			$name = 'error';
 		}
-		if (function_exists('log_message') && !empty($message)) {
-			if (!is_string($message)) {
+		if (function_exists('log_message') && ! empty($message)) {
+			if ( ! is_string($message)) {
 				$message = json_encode(
 					[
 						$message

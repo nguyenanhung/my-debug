@@ -1,5 +1,6 @@
 <?php
-if (!function_exists('__show__')) {
+
+if ( ! function_exists('__show__')) {
 	function __show__($s): void
 	{
 		echo "<pre>";
