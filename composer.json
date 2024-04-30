@@ -23,7 +23,7 @@
         "ext-mbstring": "*",
         "nguyenanhung/benchmark": "^2.0 || ^1.0",
         "nguyenanhung/filesystem-helper": "^2.0 || ^1.0",
-        "nguyenanhung/slug-helper": "^2.0 || ^1.0",
+        "nguyenanhung/slug-helper": "^3.0 || ^2.0 || ^1.0",
         "monolog/monolog": "^3.0"
     },
     "require-dev": {
