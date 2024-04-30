@@ -13,9 +13,9 @@ $logFilename = 'Log-' . date('Y-m-d') . '.log';
 $name = 'Test';
 $msg = 'Test Log lan 2';
 $context = [
-	'name' => 'Nguyen An Hung',
-	'email' => 'dev@nguyenanhung.com',
-	'website' => 'https://nguyenanhung.com',
+    'name' => 'Nguyen An Hung',
+    'email' => 'dev@nguyenanhung.com',
+    'website' => 'https://nguyenanhung.com',
 ];
 // Call
 $logger = new Logger();

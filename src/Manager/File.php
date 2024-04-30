@@ -9,7 +9,7 @@
 
 namespace nguyenanhung\MyDebug\Manager;
 
-use nguyenanhung\Libraries\Filesystem\Filesystem;
+use nguyenanhung\Libraries\Filesystem\Filesystem as BaseFilesystem;
 
 /**
  * Class File
@@ -25,6 +25,6 @@ use nguyenanhung\Libraries\Filesystem\Filesystem;
  * @since      2021-09-24
  * @version    3.0.5
  */
-class File extends Filesystem
+class File extends BaseFilesystem
 {
 }

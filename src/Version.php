@@ -18,16 +18,16 @@ namespace nguyenanhung\MyDebug;
  */
 trait Version
 {
-	/**
-	 * Function getVersion
-	 *
-	 * @return string
-	 * @author   : 713uk13m <dev@nguyenanhung.com>
-	 * @copyright: 713uk13m <dev@nguyenanhung.com>
-	 * @time     : 09/07/2021 29:16
-	 */
-	public function getVersion(): string
-	{
-		return self::VERSION;
-	}
+    /**
+     * Function getVersion
+     *
+     * @return string
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 09/07/2021 29:16
+     */
+    public function getVersion(): string
+    {
+        return self::VERSION;
+    }
 }
