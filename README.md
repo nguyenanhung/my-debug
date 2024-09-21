@@ -1,10 +1,9 @@
-[![Latest Stable Version](https://poser.pugx.org/nguyenanhung/my-debug/v)](https://packagist.org/packages/nguyenanhung/my-debug)
-[![Latest Unstable Version](https://poser.pugx.org/nguyenanhung/my-debug/v/unstable)](https://packagist.org/packages/nguyenanhung/my-debug)
-[![License](https://poser.pugx.org/nguyenanhung/my-debug/license)](https://packagist.org/packages/nguyenanhung/my-debug)
-[![PHP Version Require](http://poser.pugx.org/nguyenanhung/my-debug/require/php)](https://packagist.org/packages/nguyenanhung/my-debug)
-[![Total Downloads](https://poser.pugx.org/nguyenanhung/my-debug/downloads)](https://packagist.org/packages/nguyenanhung/my-debug)
-[![Monthly Downloads](https://poser.pugx.org/nguyenanhung/my-debug/d/monthly)](https://packagist.org/packages/nguyenanhung/my-debug)
-[![Daily Downloads](https://poser.pugx.org/nguyenanhung/my-debug/d/daily)](https://packagist.org/packages/nguyenanhung/my-debug)
+[![Latest Stable Version](https://img.shields.io/packagist/v/nguyenanhung/my-debug.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/my-debug)
+[![Total Downloads](https://img.shields.io/packagist/dt/nguyenanhung/my-debug.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/my-debug)
+[![Daily Downloads](https://img.shields.io/packagist/dd/nguyenanhung/my-debug.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/my-debug)
+[![Monthly Downloads](https://img.shields.io/packagist/dm/nguyenanhung/my-debug.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/my-debug)
+[![License](https://img.shields.io/packagist/l/nguyenanhung/my-debug.svg?style=flat-square)](https://packagist.org/packages/nguyenanhung/my-debug)
+[![PHP Version Require](https://img.shields.io/packagist/dependency-v/nguyenanhung/my-debug/php)](https://packagist.org/packages/nguyenanhung/my-debug)
 
 # My Debug
 
